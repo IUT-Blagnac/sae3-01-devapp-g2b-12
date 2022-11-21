@@ -29,7 +29,7 @@ ifdef::env-github[]
 endif::[]
 
 // /!\ A MODIFIER !!!
-:baseURL: https://github.com/IUT-Blagnac/sae3-01-G2B-12
+:baseURL: https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12
 
 // Tags
 image:{baseURL}/actions/workflows/blank.yml/badge.svg[Bidon] 
