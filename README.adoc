@@ -51,11 +51,11 @@ toc::[]
 
 Projet est réalisé par::
 
-- https://github.com/janeDoe[Jane Doe]
-- https://github.com/johnSmith[John Smith]
-...
+- https://github.com/PattateDouce[Rémy Guibert]
+- https://github.com/Falettiattendre[Léo Falléti]
+- https://github.com/ludovic-estival [Ludovic Estival]
 
-Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
+Tuteur/tutrice enseignant(e) de l'équipe:: mailto:teste@irit.fr[OT]
 
 == Contexte général
 
