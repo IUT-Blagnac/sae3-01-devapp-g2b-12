@@ -52,7 +52,7 @@ toc::[]
 Projet est réalisé par::
 
 - https://github.com/PattateDouce[Rémy Guibert]
-- https://github.com/Falettiattendre[Léo Falléti]
+- https://github.com/Falettiattendre[Léo Faletti]
 - https://github.com/ludovic-estival [Ludovic Estival]
 
 Tuteur/tutrice enseignant(e) de l'équipe:: mailto:teste@irit.fr[OT]
