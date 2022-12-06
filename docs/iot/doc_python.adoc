@@ -1,0 +1,28 @@
+= Documentation technique de l'application Python
+:toc: macro
+:numbered:
+:toc-title: Sommaire
+
+toc::[]
+
+== Equipe
+
+Documentation rédigée par :
+
+* Rémy GUIBERT
+
+== Configuration
+
+=== Appareil(s)
+
+=== Donnée(s)
+
+=== Valeur(s) max
+
+=== Fréquence
+
+== Utilisation
+
+=== Erreur
+
+=== Nominale
