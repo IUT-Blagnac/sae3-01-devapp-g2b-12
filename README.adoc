@@ -1,106 +1,99 @@
-= SAÉ 3.01 2022-2023
-:icons: font
-:models: models
-:experimental:
-:incremental:
-:numbered:
+//----------------------------------------
+
+// Table of content
 :toc: macro
-:window: _blank
-:correction!:
+:toc-title: Sommaire
+:numbered:
 
-// Useful definitions
-:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
-:icongit: icon:git[]
-:git: http://git-scm.com/[{icongit}]
-:plantuml: https://plantuml.com/fr/[plantUML]
-:vscode: https://code.visualstudio.com/[VS Code]
-
-ifndef::env-github[:icons: font]
-// Specific to GitHub
-ifdef::env-github[]
-:correction:
-:!toc-title:
-:caution-caption: :fire:
-:important-caption: :exclamation:
-:note-caption: :paperclip:
+// Icons
 :tip-caption: :bulb:
+:note-caption: :paperclip:
 :warning-caption: :warning:
-:icongit: Git
-endif::[]
+:important-caption: :exclamation:
+:caution-caption: :fire:
 
-// /!\ A MODIFIER !!!
 :baseURL: https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12
 
+//----------------------------------------
+
+= SAÉ 3.01 2022-2023
+
 // Tags
-image:{baseURL}/actions/workflows/build.yml/badge.svg[Build] 
-image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests] 
-image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License: MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
-//---------------------------------------------------------------
+image:{baseURL}/actions/workflows/build.yml/badge.svg[Build]
+image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
+image:{baseURL}/actions/workflows/quality.yml/badge.svg[Quality]
+image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 
-TIP: Pensez à mettre à jour les infos dans ce fichier pour que les badges pointent sur les résultats effectifs de vos intégrations continue ou sur la bonne licence logicielle.
+TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
-WARNING: Ce dépôt présente le projet à développer dans le cadre de la SAÉ 3.01 du BUT1 Informatique de l'IUT de Blagnac.
-
-Ce fichier `README.adoc` (dont vous lisez sûrement le rendu HTML automatiquement effectué par GitHUb), fait partie du dépôt initial cloné à partir du lien GitHub classroom qui vous a été donné en cours (https://classroom.github.com/a/OUF7gxEa).
-Vous trouverez le dépôt "template" qui a servi de base ici : https://github.com/IUT-Blagnac/sae3-01-template. En complément du cours Moodle de la SAE 3.01 (cf. <<liensUtiles>>), ce dépôt template vous permet d'accéder à des exemples d'https://github.com/IUT-Blagnac/sae3-01-template/issues[issues], de https://github.com/IUT-Blagnac/sae3-01-template/releases[releases], ou d'autres artefacts à venir.
+- Version courante : {baseURL}/releases/tag/v0.1[v0.1]
+- Lien vers les User Stories et Issues https://github.com/orgs/IUT-Blagnac/projects/23[ici], reste 100 %
 
 toc::[]
 
-== Equipe
+== Équipe
 
-Projet est réalisé par::
+Projet réalisé par :
 
 - https://github.com/PattateDouce[Rémy Guibert]
 - https://github.com/Falettiattendre[Léo Faletti]
 - https://github.com/ludovic-estival[Ludovic Estival]
 
-Tuteur/tutrice enseignant(e) de l'équipe:: mailto:teste@irit.fr[OT]
 
-== Contexte général
+== Hiérarchie du dépôt
 
-TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
+- `.gitignore` => fichier des éléments à ne pas pousser (en général) sur le dépôt
+- `.github` => répertoire qui contient des éléments de gestion de projet :
+** `ISSUE_TEMPLATE` => repertoire qui contient quelques templates pour les issues :
+*** `us.yml` => template pour les User Stories
+*** `bug.yml` => template pour les issues de bug report
+** `workflows` => repertoire qui contient les actions à lancer à chaque push sur le repo :
+*** `build.yml` => script pour build l'application
+*** `tests.yml` => script pour tester l'application
+- `app` => répertoire contenant le code des applications :
+** `java` => code de l'application Java
+** `php` => code du site web
+** `python` => code de l'application Python
+- `docs` => répertoire contenant les documentations :
+** `bd` => document en lien avec la base de données
+** `java` => documentation utilisateur et technique de l'application Java
+** `moa` => documents de la MOA
+** `python` => documentation technique de l'application Python
 
-=== Dépôt initial
 
-Ce dépôt initial a été créé pour que tous les groupes de 2ème année aient les mêmes informations de départ.
+== Applications 
 
-Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pas utiles :
+=== IOT
 
-- `.gitignore` => un fichier minimaliste des éléments à ne pas pousser en général sur vos dépôts (utiliser la commande `git add -f` pour forcer l'ajout d'un fichier Jar qui ne bougera plus, pour archive par exemple).
-- `.github` => le répertoire qui contient des éléments de gestion de projet :
-** `workflows` => le repertoire qui contient les actions à lancer à chaque push sur votre repo. 
-*** `build.yml` => un script pour build l'application
-*** `tests.yml` => un script pour tester l'application
-** `ISSUE_TEMPLATE` => le repertoire qui contient quelques templates pour vos issues.
-*** `us.yml` => Exemple de template pour les User Stories
-*** `bug.yml` => Exemple de template pour les issues de bug report
+Cette application donne les informations des capteurs de votre entrepôt via des graphiques.
 
-TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-vous en pour en ajouter.
+Vous pouvez configurer plusieurs choses :
 
-[[liensUtiles]]
-=== Liens utiles
+- quels capteurs doivent être pris en comptes,
+- quelles données seront affichées,
+- pour chaque donnée, le seuil d'alerte,
+- et la fréquence à laquelle les données sont actualisées
 
-- Le https://webetud.iut-blagnac.fr/course/view.php?id=841[cours Moodle] sur la SAE
-- Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
-- Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
+Pour exécuter cette application il vous faut deux fichiers :
 
-TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
+- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar]
 
-== Réalisations 
+- un fichier Python qui recouillera les données des capteurs : {baseURL}/raw/master/app/python/main.py[main.py]
 
-TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
-== Gestion de projet & Qualité
+=== Site web
 
-Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
-Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
+Le dossier racine du site web se trouve dans le réportoire `{baseURL}/tree/master/app/php/[app/php]`
 
-De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
+Tous les fichiers et répertoires du dossier racine doivent être téléversés sur le serveur hébergera votre site web.
 
-- Version courante : {baseURL}/releases/tag/v0.1[v0.1]
-- Lien vers la doc technique
-- Lien vers la doc utilisateur
-- Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant
-- Tests unitaires et plans de test
-- Indicateurs de qualité du code (dette technique)
-- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
+== Documentations
+
+=== IOT
+
+- Documentation utilisateur de l'application Java {baseURL}/blob/master/docs/java/java_user.adoc[ici]
+
+- Documentation technique de l'application Java {baseURL}/blob/master/docs/java/java_tech.adoc[ici]
+
+- Documentation technique du programme Python {baseURL}/blob/master/docs/python/python_tech.adoc[ici]
