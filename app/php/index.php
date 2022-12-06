@@ -6,11 +6,11 @@
   <title>Accueil</title>
   <link rel="stylesheet" href="style1.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="script.js"></script>
 </head>
 
 <body>
 
+<!-- A ENLEVER -->
   <nav>
     <div class="haut">
       <img src="img/logo.png" alt="logo" width="5%" height="5%" class="item">
@@ -32,6 +32,8 @@
       <input type="button" value="CONNEXION " class="item">
     </div>
   </nav>
+<!-- -->
+
 
   <div class="baseline">
     <h1>Bienvenue sur LéguMania!</h1>
