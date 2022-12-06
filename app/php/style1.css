@@ -1,0 +1,112 @@
+html{
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
+/* --- NAVIGATION --- */
+
+nav{
+    display: flex;
+    flex-direction: column;
+    background-color: #e9e7e7;
+}
+
+nav .haut{
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+}
+
+nav .haut .item{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+nav .haut .img-panier{
+    margin-left: 4%;
+}
+
+nav .bas .item{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+
+nav .bas a{
+    text-decoration: none;
+    color:#13a527;
+    font-size: 20px;
+}
+
+nav .bas input[type=button]{
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}
+
+
+/* --- BASELINE --- */
+
+.baseline{
+    border-style: solid;
+    border-color: #bbb7b7;
+}
+
+.baseline h1{
+    font-size: 30px;
+    margin-left: 1%;
+}
+
+
+
+/* --- PRODUITS POPULAIRES --- */
+
+.populaire{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.produit{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.produit img{
+    background-color: #bbb7b7;
+}
+
+.produit p{
+    font-size: 22px;
+}
+
+
+
+
+/* --- PRODUITS DE SAISON --- */
+
+.saison{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.saison-ligne{
+    display: flex;
+    flex-direction: row;
+}
+
+.saison-ligne img{
+    width: 70%;
+    height: 70%;
+}
+
+.saison a{
+    color:#13a527;
+    font-size: 20px;
+    margin-top: 1%;
+    margin-left: 40%;
+}
