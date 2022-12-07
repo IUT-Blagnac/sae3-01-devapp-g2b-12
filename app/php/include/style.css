@@ -16,6 +16,14 @@ nav .haut{
     align-items: center;    
 }
 
+nav h1.item {
+	margin-bottom: 10px; /* FAUDRAIT TROUVER UN MEILLEUR MOYEN DE LE METTRE AU MILLIEU */
+}
+
+nav img.item {
+	height: 100px;
+}
+
 nav .haut .item{
     margin-left: 1%;
     margin-right: 1%;
@@ -23,7 +31,7 @@ nav .haut .item{
 }
 
 nav .haut .img-panier{
-    margin-left: 4%;
+    height: 50px;
 }
 
 nav .bas .item{
