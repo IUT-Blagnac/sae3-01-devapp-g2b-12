@@ -38,9 +38,9 @@ include("include/header.php");
     </nav>
     <!-- -->
 
-    <h1 class="recherche-nom">Nos fruits: </h1>
+    <h1 class="produits-titre">Nos légumes: </h1>
 
-    <table>
+    <table class="produits-table">
         <tr>
             <td><img src="img/pommes.png" alt="image produit"></td>
             <td><img src="img/pommes.png" alt="image produit"></td>

@@ -268,17 +268,6 @@ form{
     border-color: #f8a62c;
 }
 
-
-
-
-
-
-
-
-
-
-/* --- FORMULAIRE CONNEXION --- */
-
 /* --- FORMULAIRE CONNEXION --- */
 
 .box{
@@ -339,4 +328,20 @@ form{
 #buttonCreerCompte{
     color: green;
     text-decoration: underline;
+}
+
+
+/* --- FRUITS / LEGUMES / COMPOSITIONS --- */
+
+.produits-titre{
+    margin-left: 2%;
+}
+
+.produits-table{
+    margin-left: 2%;
+}
+
+.produits-table img{
+    width: 70%;
+    height: 70%;
 }
