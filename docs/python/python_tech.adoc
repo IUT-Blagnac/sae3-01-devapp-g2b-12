@@ -26,7 +26,40 @@ Documentation rédigée par :
 
 * Rémy GUIBERT
 
+== Utilisation
+
+Ce programme sert à enregistrer des informations récupérées de capteurs d'un réseau MQTT.
+
+On peut paramétrer de quels capteurs on récupère les données, quelles données sont récupérées, à quelle fréquence et quel est la valeur maximale pour chaque données.
+
+Les informations récupérées sont enregistrées dans le fichier `data.json`.
+
+//Ce programme est fait pour fonctionner en coopération avec l'application Java, il va donc de soit que les deux programmes soit exécutés en même temps.
+
+=== Erreurs
+
+Le programme est fait pour ne pas fonctionner dans le cas où le fichier de configuration n'est pas correctement formaté.
+
+Il affichera dans la console le mesage suivant : `Le fichier de configuration ("config.json") est manquant ou mal écrit.`
+
+Le fichier de configuration n'est pas analysé en profondeur donc il peut y avoir des bugs par rapport à une trés mauvaise configuration.
+
+Les autres erreurs sont des erreurs du script ou éventuellement d'autres facteurs.
+
+=== Nominale
+
+La plupart du temps rien ne sera affiché à l'écran, si ce n'est des messages alertant sur le dépassement d'une valeur seuil.
+
 == Configuration
+
+Le programme est configurable via un fichier `config.php`.
+
+Ce fichier permet de paramétrer 4 options :
+
+- quels capteurs doivent être pris en comptes,
+- quelles données seront affichées,
+- pour chaque donnée, le seuil d'alerte,
+- et la fréquence à laquelle les données sont actualisées
 
 === Appareil(s)
 
@@ -35,9 +68,3 @@ Documentation rédigée par :
 === Valeur(s) max
 
 === Fréquence
-
-== Utilisation
-
-=== Erreur
-
-=== Nominale
