@@ -80,6 +80,52 @@ include("include/header.php");
             </tr>
         </table>
 
+        <form method="post" action="">
+
+            <div class="panier-form-column">
+                <h2>Moyen de paiement</h2>
+
+                <p>Numéro de carte</p>
+                <input type="text">
+
+                <p>Date</p>
+                <input type="date">
+
+                <p>Code</p>
+                <input type="number">
+
+                <div style="margin-top: 2%">
+                    <input type="radio" name="paiment" value="cb">
+                    <label for="cb">Carte bancaire</label>
+                </div>
+
+                <div style="margin-top: 2%">
+                    <input type="radio" name="paiment" value="pp">
+                    <label for="pp">PayPal</label>
+                </div>
+
+                <p id="prix-panier">Prix total: ... €</p>
+                <input type="submit" value="Payer">
+            </div>
+
+            <div class="panier-form-column">
+                <h2>Données de livraison</h2>
+
+                <p>Adresse</p>
+                <input type="text">
+
+                <p>Ville</p>
+                <input type="text">
+
+                <p>Code Postal</p>
+                <input type="number">
+            </div>
+
+        
+        
+
+        </form>
+
     </div>
 
 
