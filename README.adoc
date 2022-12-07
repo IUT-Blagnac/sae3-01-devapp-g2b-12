@@ -86,7 +86,7 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 Le dossier racine du site web se trouve dans le réportoire `{baseURL}/tree/master/app/php/[app/php]`
 
-Tous les fichiers et répertoires du dossier racine doivent être téléversés sur le serveur hébergera votre site web.
+Tous les fichiers et répertoires du dossier racine doivent être téléversés sur le serveur qui hébergera votre site web.
 
 == Documentations
 
