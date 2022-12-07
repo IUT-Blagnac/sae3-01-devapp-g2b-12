@@ -7,7 +7,6 @@ import sys
 # paramètres MQTT
 host = 'chirpstack.iut-blagnac.fr'
 port = 1883
-appid = '1'
 
 try:
     # lit le fichier de configuration
@@ -17,13 +16,13 @@ try:
     os.close(config_file)
 
     # charge la configuration
-    device = config_json['device']
+    devices = config_json['devices']
     data_wanted = config_json['data_wanted']
     alert_values = config_json['alert_values']
     frequency = config_json['frequency']
 
     # test la configuration
-    assert isinstance(device, type([]))
+    assert isinstance(devices, type([]))
     assert isinstance(data_wanted, type([]))
     assert isinstance(alert_values, type([]))
     assert isinstance(frequency, type(1))
@@ -56,10 +55,12 @@ last_time_saved = 0
 
 
 def on_connect(client, userdata, flags, rc):
-    print(f'Connecté au seveur MQTT "{host}".')
+    print(f'Connecté au seveur MQTT {host} sur le port {port}.')
     # s'abonne aux appareils voulus
-    for deviceid in device:
-        client.subscribe(f'application/{appid}/device/{deviceid}/event/up')
+    for device in devices:
+        if device != '#':
+            device += '/event/up'
+        client.subscribe(f'application/1/device/{device}')
 
 
 def on_message(client, userdata, msg):

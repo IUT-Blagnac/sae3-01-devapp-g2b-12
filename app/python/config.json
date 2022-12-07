@@ -1,5 +1,5 @@
 {
-    "device": ["#"],
+    "devices": ["#"],
     "data_wanted": ["humidity", "co2", "temperature"],
     "alert_values": [50, 600, 25],
     "frequency" : 10
