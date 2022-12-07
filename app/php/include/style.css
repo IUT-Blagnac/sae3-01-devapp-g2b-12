@@ -1,0 +1,167 @@
+html{
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
+/* --- NAVIGATION --- */
+
+nav{
+    display: flex;
+    flex-direction: column;
+    background-color: #e9e7e7;
+}
+
+nav .haut{
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+}
+
+nav .haut .item{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+nav .haut .img-panier{
+    margin-left: 4%;
+}
+
+nav .bas .item{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+
+nav .bas a{
+    text-decoration: none;
+    color:#13a527;
+    font-size: 20px;
+}
+
+nav .bas input[type=button]{
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}
+
+/* --- BASELINE --- */
+
+.baseline{
+    border-style: solid;
+    border-color: #bbb7b7;
+}
+
+.baseline h1{
+    font-size: 30px;
+    margin-left: 1%;
+}
+
+
+/* --- PRODUITS POPULAIRES --- */
+
+.populaire{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.produit{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.produit img{
+    background-color: #bbb7b7;
+}
+
+.produit p{
+    font-size: 22px;
+}
+
+
+/* --- PRODUITS DE SAISON --- */
+
+.saison{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.saison-ligne{
+    display: flex;
+    flex-direction: row;
+}
+
+.saison-ligne img{
+    width: 70%;
+    height: 70%;
+}
+
+.saison a{
+    color:#13a527;
+    font-size: 20px;
+    margin-top: 1%;
+    margin-left: 40%;
+}
+
+/* --- FORMULAIRE --- */
+
+h1{
+    margin-left: 42%;
+    margin-right: 42%;
+    margin-bottom: -2.5%;
+}
+
+.formulaire{
+    background-color: rgb(226, 243, 243);
+    margin-left: 25%;
+    margin-right: 25%;
+    border-style: solid;
+    border-color: gray;
+    border-width: 1px;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+
+.form-gauche{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10%;
+}
+
+.form-droite{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.ensemble{
+    display: flex;
+    flex-direction: row;
+}
+
+.ensemble .part{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+}
+
+.formulaire input[type=submit]{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}
