@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>Accueil</title>
   <link rel="stylesheet" href="style/styleIndex">
+  <link rel="stylesheet" href="style/styleHeader.css"> <!--  Temporaire -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -14,7 +15,7 @@
 
 <body>
 
-<!-- A ENLEVER -->
+<!-- Temporaire -->
   <nav>
     <div class="haut">
       <img src="img/logo.png" alt="logo" width="5%" height="5%" class="item">
