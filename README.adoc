@@ -55,7 +55,7 @@ Projet réalisé par :
 ** `php` => code du site web
 ** `python` => code de l'application Python
 - `docs` => répertoire contenant les documentations :
-** `bd` => document en lien avec la base de données
+** `bd` => documents en lien avec la base de données
 ** `java` => documentation utilisateur et technique de l'application Java
 ** `moa` => documents de la MOA
 ** `python` => documentation technique de l'application Python
