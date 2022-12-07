@@ -54,6 +54,8 @@ Le fichier de configuration n'est pas analysé en profondeur donc il peut y avoi
 
 Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
 
+Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/python/python_tech.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
+
 == Configuration
 
 Le programme est configurable via le fichier `config.json`.
