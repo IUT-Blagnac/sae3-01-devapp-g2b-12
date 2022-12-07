@@ -225,4 +225,64 @@ form{
 
 /* --- CONSULTATION DU PANIER --- */
 
+/* --- FORMULAIRE CONNEXION --- */
 
+.box{
+    width: 500px;
+    height: 300px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+.connexion{
+    display: block;
+    position: relative;
+    text-align: center;
+    font-family: calibri;
+    width: 150px;
+    height: 22px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 175px;
+    margin-top: -22px;
+    background: #fff;
+}
+
+.email {
+    margin-top: 30px;
+    display: block;
+    margin-left: 40px;
+}
+
+.email input[type=text]{
+    width: 90%;
+}
+
+.email label{
+    display: block;
+    font-family: calibri;
+    margin-top: 20px;
+}
+.bco{
+    text-align: center;
+}
+
+.bco input[type=button]{
+    margin-top: 50px;
+    height: 45px;
+    width: 120px;
+    font-size: 15px;
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}
+
+#buttonCreerCompte{
+    color: green;
+    text-decoration: underline;
+}
