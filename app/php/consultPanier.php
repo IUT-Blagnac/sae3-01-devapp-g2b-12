@@ -9,7 +9,7 @@
 </head>
 
 <?php
-    include("include/header.php");
+include("include/header.php");
 ?>
 
 <body>
@@ -38,10 +38,53 @@
     </nav>
     <!-- -->
 
+    <div class="panier-table">
 
-    
+        <table>
+            <tr>
+                <td style="background-color: #bbb7b7">
+                    <img src="img/pommes.png" alt="image article" width="70%" height="70%">
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+            </tr>
+        </table>
 
-    
+        <table>
+            <tr>
+                <td style="background-color: #bbb7b7">
+                    <img src="img/pommes.png" alt="image article" width="70%" height="70%">
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+                <td>
+                    <p>test</p>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+
+
+
 </body>
 
 </html>

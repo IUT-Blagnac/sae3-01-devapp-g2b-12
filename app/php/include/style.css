@@ -225,4 +225,23 @@ form{
 
 /* --- CONSULTATION DU PANIER --- */
 
+.panier-table{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+}
 
+.panier-table table{
+    border: 1px solid;
+    text-align: center;
+}
+
+.panier-table td{
+    border: 1px solid;
+    width: 20%;
+}
+
+.panier-table img{
+    width: 50%;
+    height: 50%;
+}
