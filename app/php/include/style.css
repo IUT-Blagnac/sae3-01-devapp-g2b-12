@@ -268,6 +268,113 @@ form{
     border-color: #f8a62c;
 }
 
+
+
+
+
+
+
+
+
+
+/* --- FORMULAIRE INSCRIPTION --- */
+
+.boite{
+    width: 700px;
+    height: 400px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+#inscription{
+    display: block;
+    position: relative;
+    text-align: center;
+    font-family: calibri;
+    width:150px;
+    height: 22px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -22px;
+    background: #fff;
+}
+
+.gauche{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    float: left;
+    width: 300px;
+    height: 200px;
+    margin-top: 40px;
+}
+
+.droite{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    float: right;
+    width: 300px;
+    height: 200px;
+    margin-top: 40px;
+}
+
+#prenom{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#emailadress{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#mdpConfirmation{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#check{
+    display: flex;
+    padding-top: 35px;
+}
+
+#check input[type=checkbox]{
+    width: 22px;
+    height: 22px;
+    margin-left: 0px;
+}
+
+#check label{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+.buttins {
+    text-align: center;
+}
+
+.buttins input[type=button]{
+    margin-top: 50px;
+    height: 45px;
+    width: 140px;
+    font-size: 15px;
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}
+
 /* --- FORMULAIRE CONNEXION --- */
 
 .box{
