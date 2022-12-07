@@ -215,3 +215,10 @@ form{
     border-color: #239e48;
     font-size: 18px;
 }
+
+/* --- PAGE DE RECHERCHE --- */
+
+.recherche-nom{
+    margin-left: 2%;
+    margin-top: 2%;
+}
