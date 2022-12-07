@@ -23,10 +23,10 @@
         </div>
 
         <div class="bas">
-            <a href="" class="item">Nos légumes</a>
-            <a href="" class="item">Nos fruits</a>
-            <a href="" class="item">Nos compositions</a>
-            <a href="" class="item">A propos</a>
+            <a href="legumes.php" class="item">Nos légumes</a>
+            <a href="fruits.php" class="item">Nos fruits</a>
+            <a href="compositions.php" class="item">Nos compositions</a>
+            <a href="aPropos.php" class="item">A propos</a>
             <input type="button" value="CONNEXION " class="item">
         </div>
     </nav>
