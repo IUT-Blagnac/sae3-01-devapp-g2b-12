@@ -452,3 +452,17 @@ form{
     width: 70%;
     height: 70%;
 }
+
+
+/* --- A PROPOS --- */
+
+.a-propos-text{
+    border: solid 2px;
+    border-radius: 20px;;
+    margin: 3%;
+}
+
+.a-propos-text p{
+    margin-left: 2%;
+    margin-top: 2%;
+}

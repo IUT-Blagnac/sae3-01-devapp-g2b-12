@@ -39,102 +39,12 @@
     <!-- -->
 
 
-    <div class="baseline">
-        <h1>Bienvenue sur LéguMania!</h1>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
-    </div>
-
-    <h1>Produits populaires</h1>
-
-    <div class="populaire">
-
-        <div class="produit">
-            <img src="img/pommes.png" alt="image produit">
-            <p>Cagette de pommes rouges</p>
-            <p>3,49€</p>
-        </div>
-
-        <div class="produit">
-            <img src="img/pommes.png" alt="image produit">
-            <p>Nom</p>
-            <p>Prix</p>
-        </div>
-
-        <div class="produit">
-            <img src="img/pommes.png" alt="image produit">
-            <p>Nom</p>
-            <p>Prix</p>
-        </div>
-
-    </div>
-
-    <h1>Nos produits de saison</h1>
-
-    <div class="saison">
-
-        <div class="saison-ligne">
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-
-        </div>
-
-        <div class="saison-ligne">
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-            <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
-                <p>Cagette de pommes rouges</p>
-                <p>3,49€</p>
-            </div>
-
-
-        </div>
-
-        <a href="">Voir plus de produits</a>
-
+    <div class="a-propos-text">
+        <h1>A propos</h1>
+        <p>...</p>
+        <p>...</p>
+        <p>...</p>
+        <p>...</p>
     </div>
 
 </body>
