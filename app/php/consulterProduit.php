@@ -39,55 +39,28 @@
     <!-- -->
 
 
-    <h1 class="center">Ajouter un produit</h1>
+    <div class="consultation">
+
+        <img src="img/pommes.png" alt="image produit">
 
 
-    <div class="formulaire" id="borderTop">
+        <div class="description-produit">
+            <p id="titreProduitConsultation">Nom du produit</p>
+            <p>DESCRIPTION: ...</p>
+            <p>Catégorie</p>
+            <p>Taille/poids</p>
+            <h2>Prix ... €</h2>
 
-        <form method="post" action="">
-
-            <div class="form-gauche">
-                <p>Nom du produit</p>
-                <input type="text">
-
-                <p>Description</p>
-                <textarea name="description"></textarea>
+            <div class="consultation-bouttons">
+                <input type="text" value="Quantité">
+                <input type="button" value="Ajouter au Panier">
             </div>
 
-            <div class="from-droite">
-                <p>Catégorie</p>
-                <select name="categorie">
-                    <option value=""></option>
-                    <option value="cat1">Catégorie1</option>
-                    <option value="cat2">Catégorie2</option>
-                    <option value="cat3">Catégorie3</option>
-                </select>
-
-                <div class="ensemble">
-
-                    <div class="part">
-                        <p>Taille/poids cagette</p>
-                        <input type="text">
-                    </div>
-
-                    <div class="part">
-                        <p>Prix</p>
-                        <input type="number">
-                    </div>
-
-                </div>
-
-                <p>Image produit</p>
-                <input type="file" name="imgProduit" accept="image/png, image/jpeg" value="choisir un fichier">
-
-            </div>
-
-        </form>
-
-        <input type="submit" value="Ajouter le produit" class="center">
+        </div>
 
     </div>
 
+    
 </body>
 
 </html>

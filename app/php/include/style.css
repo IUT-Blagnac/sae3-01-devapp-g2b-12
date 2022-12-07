@@ -175,3 +175,43 @@ form{
 }
 
 /* --- CONSULTER PRODUIT --- */
+
+.consultation{
+    display: flex;
+    flex-direction: row;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+.consultation img{
+    background-color: rgb(170, 168, 168);
+}
+
+.description-produit{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+}
+
+#titreProduitConsultation{
+    font-size: 30px;
+}
+
+.consultation-bouttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.consultation-bouttons input[type=text]{
+    margin-right: 3%;
+}
+
+.consultation-bouttons input[type=button]{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #239e48;
+    color: white;
+    padding: 8px;
+    border-color: #239e48;
+    font-size: 18px;
+}
