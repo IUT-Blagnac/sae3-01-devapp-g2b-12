@@ -32,39 +32,89 @@ Ce programme sert à enregistrer des informations récupérées de capteurs d'un
 
 On peut paramétrer de quels capteurs on récupère les données, quelles données sont récupérées, à quelle fréquence et quel est la valeur maximale pour chaque données.
 
+Pour configurer le programme référez-vous à la section https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/python/python_tech.adoc#configuration[Configuration].
+
 Les informations récupérées sont enregistrées dans le fichier `data.json`.
 
-//Ce programme est fait pour fonctionner en coopération avec l'application Java, il va donc de soit que les deux programmes soit exécutés en même temps.
+Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire puis il suffit simplement de l'exécuter.
 
 === Erreurs
 
 Le programme est fait pour ne pas fonctionner dans le cas où le fichier de configuration n'est pas correctement formaté.
 
-Il affichera dans la console le mesage suivant : `Le fichier de configuration ("config.json") est manquant ou mal écrit.`
+Il affichera dans la console le message suivant : `Le fichier de configuration ("config.json") est manquant ou mal écrit.`
 
 Le fichier de configuration n'est pas analysé en profondeur donc il peut y avoir des bugs par rapport à une trés mauvaise configuration.
 
-Les autres erreurs sont des erreurs du script ou éventuellement d'autres facteurs.
+À part ça il ne devrait pas y avoir d'erreurs lié au programme.
 
 === Nominale
 
-La plupart du temps rien ne sera affiché à l'écran, si ce n'est des messages alertant sur le dépassement d'une valeur seuil.
+À la connexion au serveur MQTT le programma affiche un message.
+
+Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
 
 == Configuration
 
-Le programme est configurable via un fichier `config.php`.
+Le programme est configurable via le fichier `config.json`.
 
-Ce fichier permet de paramétrer 4 options :
+Ce fichier permet de paramétrer 4 options correspondant à 4 couples clé-valeur dans l'objet JSON :
 
-- quels capteurs doivent être pris en comptes,
-- quelles données seront affichées,
-- pour chaque donnée, le seuil d'alerte,
-- et la fréquence à laquelle les données sont actualisées
+|===
+| Clé | Valeur | Type Valeur
+| `devices` | Quels capteurs doivent être pris en comptes | Liste de chaînes
+| `data_wanted` | Quelles données seront enregistrées | Liste de chaîne
+| `alert_values` | Pour chaque donnée, son seuil d'alerte | Liste de nombres
+| `frequency`| Fréquence à laquelle les données sont actualisées | Nombre 
+|===
 
 === Appareil(s)
 
+Pour paramétrer de quel(s) appareil(s) on récupère les informations il faut changer la valeur de `devices`.
+
+Cette valeur doit être une liste de chaînes.
+
+Les chaînes correspondent à l'adresse MAC d'un appareil.
+
+Pour prendre en compte les données de tous les capteurs il suffit de mette `"#"` dans `devices`.
+
 === Donnée(s)
+
+Le programme est capable d'extraire 9 données des capteurs :
+
+|===
+| Nom | Valeur | Unité
+| `activity` | Activité dans un rayon de 5 mètre autour du capteur | Pas d'unité (valeur de 0 à 65535)
+| `co2` | Concentration en CO2 | ppm
+| `humidity` | Taux d'humidité | RH
+| `illumination` | Éclairage | lux
+| `infrared`| Infrarouge | lux
+| `infrared_and_visible`| Infrarouge et lumière visible | lux
+| `pressure`| Pression atmosphérique | hPa
+| `temperature`| Température ambiante | °C
+| `tvoc`| Composants organiques volatils | ppb
+|===
+
+Pour paramétrer quelles données sont prisent en compte il faut changer la valeur de `data_wanted`.
+
+Cette valeur doit être une liste de chaînes.
+
+Les chaînes correspondent au nom d'une donnée dans le tableau ci-dessus.
 
 === Valeur(s) max
 
+Chaque valeur ajoutée dans `data_wanted` doit avoir une valeur max.
+
+La valeur max peut être un nombre entier ou décimal.
+
+La première valeur de la liste `alert_values` correspond à la valeur max pour la première donnée de `data_wanted`, la deuxième valeur à la deuxième donnée, etc.
+
 === Fréquence
+
+Pour paramétrer à quelle fréquence les données sont enregistrées il faut changer la valeur de `frequency`.
+
+Cette valeur doit être un entier.
+
+Cela correspond au nombre de minute minimal entre chaque enregistrement.
+
+Si la valeur est mise à `0` il n'y aura pas de délai avant le prochain enregistrement.
