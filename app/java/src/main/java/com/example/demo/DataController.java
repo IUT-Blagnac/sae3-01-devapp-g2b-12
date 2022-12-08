@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.*;
 
-public class HelloController {
+public class DataController {
 
     private XYChart.Series seriesTemp = new XYChart.Series();
 
