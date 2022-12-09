@@ -497,16 +497,24 @@ form{
 /* --- FRUITS / LEGUMES / COMPOSITIONS --- */
 
 .produits-titre{
+    margin-top: 10%;
     margin-left: 2%;
 }
 
 .produits-table{
+    margin-top: 5%;
     margin-left: 2%;
 }
 
 .produits-table img{
     width: 70%;
     height: 70%;
+}
+
+.produits-table a:hover img{
+    background-color: #bbb7b7;
+    border-color: #bbb7b7;
+    border-radius: 20px;
 }
 
 

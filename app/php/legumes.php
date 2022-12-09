@@ -42,14 +42,14 @@ include("include/header.php");
 
     <table class="produits-table">
         <tr>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-            <td><img src="img/pommes.png" alt="image produit"></td>
+            <td><a href=""><img src="img/pommes.png" alt="image produit"></a></td>
+            <td><a href=""><img src="img/pommes.png" alt="image produit"></a></td>
+            <td><a href=""><img src="img/pommes.png" alt="image produit"></a></td>
         </tr>
         <tr>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-            <td><img src="img/pommes.png" alt="image produit"></td>
+            <td><a href=""><img src="img/pommes.png" alt="image produit"></a></td>
+            <td><a href=""><img src="img/pommes.png" alt="image produit"></a></td>
+            <td><a href=""><img src="img/pommes.png" alt="image produit"></a></td>
         </tr>
     </table>
 
