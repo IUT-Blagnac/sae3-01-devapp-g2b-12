@@ -6,6 +6,8 @@
     <title>Accueil</title>
     <link rel="stylesheet" href="include/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
 
 <?php
@@ -41,13 +43,10 @@
 
     <div class="baseline">
         <h1>Bienvenue sur LéguMania!</h1>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
+        <p>Sur notre site, ...</p>
     </div>
 
-    <h1>Produits populaires</h1>
+    <h1 class="index-h1">Produits populaires</h1>
 
     <div class="populaire">
 
@@ -71,7 +70,7 @@
 
     </div>
 
-    <h1>Nos produits de saison</h1>
+    <h1 class="index-h1">Nos produits de saison</h1>
 
     <div class="saison">
 

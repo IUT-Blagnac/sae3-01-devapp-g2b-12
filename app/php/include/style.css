@@ -1,6 +1,15 @@
+/* --- PAGES EN GENERAL --- */
+
 body {
     margin: 0;
 }
+
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
+
 
 /* --- NAVIGATION --- */
 
@@ -69,6 +78,12 @@ nav .bas a:hover{
     margin-left: 1%;
 }
 
+.baseline p{
+    font-size: 22px;
+    margin-left: 1%;
+    margin-top: 5%;
+}
+
 
 /* --- PRODUITS POPULAIRES --- */
 
@@ -81,18 +96,26 @@ nav .bas a:hover{
 .produit{
     margin-left: 2%;
     margin-right: 2%;
-}
-
-.produit img{
+    margin-top: 1%;
+    border-style: solid;
     background-color: #bbb7b7;
+    border-color: #bbb7b7;
+    border-radius: 20px;
 }
 
 .produit p{
     font-size: 22px;
+    text-align: center;
 }
 
 
 /* --- PRODUITS DE SAISON --- */
+
+.index-h1{
+    font-size: 30px;
+    margin-top: 2%;
+    text-align: center;
+}
 
 .saison{
     margin-top: 5%;
@@ -119,6 +142,8 @@ nav .bas a:hover{
 
 #index-plus-produits{
     margin-bottom: 5%;
+    margin-top: 2%;
+    margin-left: 45%;
 }
 
 #index-plus-produits:hover{
