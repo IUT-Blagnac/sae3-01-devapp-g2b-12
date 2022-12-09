@@ -1,100 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainPageController">
-   <left>
-      <VBox fillWidth="false" prefHeight="576.0" prefWidth="306.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configuration de l'application">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox fillHeight="false" prefHeight="100.0" prefWidth="302.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Capteur(s)">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </Text>
-                  <TextArea fx:id="param1" prefHeight="30.0" prefWidth="97.0">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </TextArea>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox fillHeight="false" prefHeight="100.0" prefWidth="301.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Donnée(s) et valeur(s) max" />
-                  <TextArea prefHeight="97.0" prefWidth="157.0">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                  </TextArea>
-               </children>
-            </HBox>
-            <HBox fillHeight="false" prefHeight="100.0" prefWidth="300.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence" />
-                  <TextField prefHeight="25.0" prefWidth="45.0" />
-               </children>
-            </HBox>
-            <Button fx:id="valider" mnemonicParsing="false" onAction="#actionValider" prefHeight="25.0" prefWidth="65.0" text="Valider">
-               <VBox.margin>
-                  <Insets left="35.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-         <BorderPane.margin>
-            <Insets left="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </left>
-   <right>
-      <VBox prefHeight="576.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-         <children>
-            <LineChart fx:id="graphTemp" animated="false">
-              <xAxis>
-                <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </LineChart>
-            <LineChart fx:id="graphHumi" animated="false">
-              <xAxis>
-                <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </LineChart>
-            <LineChart fx:id="graphC02" animated="false">
-              <xAxis>
-                <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </LineChart>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </right>
-</BorderPane>
+<AnchorPane minHeight="575.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainPageController">
+   <children>
+      <Text layoutX="15.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Configuration de l'application">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="25.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capteurs" />
+      <Text layoutX="25.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Données" />
+      <Text layoutX="25.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence" />
+      <TextField fx:id="frequencyTF" layoutX="91.0" layoutY="406.0" prefHeight="25.0" prefWidth="45.0" />
+      <Button layoutX="105.0" layoutY="529.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="97.0" text="Enregistrer" />
+      <CheckBox fx:id="activityCheckbox" layoutX="35.0" layoutY="170.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Activité" />
+      <TextField fx:id="activityValue" disable="true" layoutX="237.0" layoutY="167.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="co2Value" disable="true" layoutX="237.0" layoutY="192.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="humidityValue" disable="true" layoutX="237.0" layoutY="217.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="illuminationValue" disable="true" layoutX="237.0" layoutY="242.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="infraredValue" disable="true" layoutX="237.0" layoutY="267.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="infraredAndVisibleValue" disable="true" layoutX="237.0" layoutY="292.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="pressureValue" disable="true" layoutX="237.0" layoutY="317.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="temperatureValue" disable="true" layoutX="237.0" layoutY="342.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="tvocValue" disable="true" layoutX="237.0" layoutY="367.0" prefHeight="25.0" prefWidth="45.0" />
+      <CheckBox fx:id="co2Checkbox" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Concentration en CO2" />
+      <CheckBox fx:id="humidityCheckbox" layoutX="35.0" layoutY="220.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Taux d'humidité" />
+      <CheckBox fx:id="illuminationCheckbox" layoutX="35.0" layoutY="245.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Éclairage" />
+      <CheckBox fx:id="infraredCheckbox" layoutX="35.0" layoutY="270.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge" />
+      <CheckBox fx:id="infraredAndVisibleCheckbox" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge et lumière visible" />
+      <CheckBox fx:id="pressureCheckbox" layoutX="35.0" layoutY="323.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Pression atmosphérique" />
+      <CheckBox fx:id="temperatureCheckbox" layoutX="35.0" layoutY="348.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Température ambiante" />
+      <CheckBox fx:id="tvocCheckbox" layoutX="35.0" layoutY="373.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Composants organiques volatils" />
+      <Text layoutX="324.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphiques des données">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <GridPane fx:id="graphGrid" layoutX="300.0" layoutY="44.0" prefHeight="525.0" prefWidth="750.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <ScrollPane fx:id="devicesSP" layoutX="84.0" layoutY="41.0" prefHeight="83.0" prefWidth="190.0">
+        <content>
+          <AnchorPane fx:id="devicesAP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="175.0" />
+        </content>
+      </ScrollPane>
+      <Text layoutX="225.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valeurs max" />
+      <Text layoutX="283.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppm" />
+      <Text layoutX="283.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RH" />
+      <Text layoutX="283.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
+      <Text layoutX="283.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
+      <Text layoutX="283.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
+      <Text layoutX="283.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hPa" />
+      <Text layoutX="283.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="°C" />
+      <Text layoutX="283.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppb" />
+   </children>
+</AnchorPane>
