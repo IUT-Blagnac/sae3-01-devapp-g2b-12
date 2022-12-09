@@ -60,26 +60,28 @@ Les données reçues des capteurs sont enregistrées dans le fichier `data.json`
 
 Le programme est configurable via le fichier `config.json`.
 
-Ce fichier permet de paramétrer 4 options correspondant à 4 couples clé-valeur dans l'objet JSON :
+Ce fichier permet de paramétrer 6 options correspondant à 6 couples clé-valeur dans l'objet JSON :
 
 |===
-| Clé | Valeur | Type Valeur
+| Clé | Valeur | Type Valeur | Configurable via l'application Java
 
-| `devices` | Quels capteurs doivent être pris en comptes | Liste de chaînes
-| `data_wanted` | Quelles données seront enregistrées | Liste de chaîne
-| `alert_values` | Pour chaque donnée, son seuil d'alerte | Liste de nombres
-| `frequency`| Fréquence à laquelle les données sont actualisées | Nombre 
+| `devices` | Quels capteurs doivent être pris en comptes | Liste de chaînes | Oui
+| `data_wanted` | Quelles données seront enregistrées | Liste de chaînes | Oui
+| `alert_values` | Pour chaque donnée, son seuil d'alerte | Liste de nombres | Oui
+| `frequency`| Fréquence à laquelle les données sont actualisées | Entier | Oui
+| `host`| Nom de domaine du serveur MQTT | Chaîne | Non
+| `port`| Port du serveur MQTT | Entier | Non
 |===
 
 === Appareil(s)
 
 Pour paramétrer de quel(s) appareil(s) on récupère les informations il faut changer la valeur de `devices`.
 
-Cette valeur doit être une liste de chaînes.
+Cette valeur doit être une liste d'une ou plusieurs chaînes.
 
-Les chaînes correspondent à l'adresse MAC d'un appareil.
+Les chaînes correspondent à l'adresse MAC d'un capteur.
 
-Pour prendre en compte les données de tous les capteurs il suffit de mette `"#"` dans `devices`.
+Pour prendre en compte les données de tous les capteurs il suffit de mette `"#"` dans cette liste.
 
 === Donnée(s)
 
@@ -101,7 +103,7 @@ Le programme est capable d'extraire 9 données des capteurs :
 
 Pour paramétrer quelles données sont prisent en compte il faut changer la valeur de `data_wanted`.
 
-Cette valeur doit être une liste de chaînes.
+Cette valeur doit être une liste d'une ou plusieurs chaînes.
 
 Les chaînes correspondent au nom d'une donnée dans le tableau ci-dessus.
 
@@ -122,3 +124,15 @@ Cette valeur doit être un entier.
 Cela correspond au nombre de minute minimal entre chaque enregistrement.
 
 Si la valeur est mise à `0` il n'y aura pas de délai avant le prochain enregistrement.
+
+=== Hôte
+
+Le nom de domaine du serveur MQTT peut être paramétré en changeant la valeur de `host`.
+
+Par défaut il est paramétré sur `chirpstack.iut-blagnac.fr`.
+
+=== Port
+
+Le port du serveur MQTT peut être paramétré en changeant la valeur de `port`.
+
+Le port par défaut est `1883`.
