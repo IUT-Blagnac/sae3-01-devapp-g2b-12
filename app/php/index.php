@@ -36,6 +36,7 @@
             <a href="connexion.php" class="item bouton-orange">CONNEXION</a>
         </div>
     </nav>
+    <div style="height: 155px"></div>
     <!-- -->
 
 
