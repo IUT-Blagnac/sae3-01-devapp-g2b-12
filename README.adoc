@@ -27,7 +27,7 @@ image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
 - Version courante : {baseURL}/releases/tag/v1[v1]
-- Lien vers les User Stories et Issues https://github.com/orgs/IUT-Blagnac/projects/23[ici], reste 100 %
+- Lien vers les User Stories et Issues https://github.com/orgs/IUT-Blagnac/projects/23[ici], reste 100 % US
 
 toc::[]
 
@@ -55,9 +55,10 @@ Projet réalisé par :
 ** `php` => code du site web
 ** `python` => code de l'application Python
 - `docs` => répertoire contenant les documentations :
+** `moa` => documents de la MOA
 ** `bd` => documents en lien avec la base de données
 ** `java` => documentation utilisateur et technique de l'application Java
-** `moa` => documents de la MOA
+** `php` => documents en lien avec le site web
 ** `python` => documentation technique de l'application Python
 
 
