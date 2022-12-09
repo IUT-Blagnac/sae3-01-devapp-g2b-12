@@ -50,19 +50,19 @@
     <div class="populaire">
 
         <div class="produit">
-            <img src="img/pommes.png" alt="image produit">
+            <a href=""><img src="img/pommes.png" alt="image produit"></a>
             <p>Cagette de pommes rouges</p>
             <p>3,49€</p>
         </div>
 
         <div class="produit">
-            <img src="img/pommes.png" alt="image produit">
+            <a href=""><img src="img/pommes.png" alt="image produit"></a>
             <p>Nom</p>
             <p>Prix</p>
         </div>
 
         <div class="produit">
-            <img src="img/pommes.png" alt="image produit">
+            <a href=""><img src="img/pommes.png" alt="image produit"></a>
             <p>Nom</p>
             <p>Prix</p>
         </div>
@@ -76,25 +76,25 @@
         <div class="saison-ligne">
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
@@ -105,25 +105,25 @@
         <div class="saison-ligne">
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
 
             <div class="produit">
-                <img src="img/pommes.png" alt="image produit">
+                <a href=""><img src="img/pommes.png" alt="image produit"></a>
                 <p>Cagette de pommes rouges</p>
                 <p>3,49€</p>
             </div>
