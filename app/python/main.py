@@ -4,10 +4,6 @@ import os
 import time
 import sys
 
-# paramètres MQTT
-host = 'chirpstack.iut-blagnac.fr'
-port = 1883
-
 try:
     # lit le fichier de configuration
     config_file = os.open('config.json', os.O_RDONLY)
@@ -16,6 +12,8 @@ try:
     os.close(config_file)
 
     # charge la configuration
+    host = config_json['host']
+    port = config_json['port']
     devices = config_json['devices']
     data_wanted = config_json['data_wanted']
     alert_values = config_json['alert_values']
@@ -23,7 +21,9 @@ try:
 
     # test la configuration
     assert isinstance(devices, type([]))
+    assert len(devices) >= 1
     assert isinstance(data_wanted, type([]))
+    assert len(data_wanted) >= 1
     assert isinstance(alert_values, type([]))
     assert isinstance(frequency, type(1))
     assert len(data_wanted) == len(alert_values)
