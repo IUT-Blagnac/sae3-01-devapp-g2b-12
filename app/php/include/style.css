@@ -22,6 +22,8 @@ nav {
     display: flex;
     flex-direction: column;
     background-color: #e9e7e7;
+    position: fixed;
+    width: 100%;
 }
 
 nav .bas, nav .haut {
@@ -29,8 +31,6 @@ nav .bas, nav .haut {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-left: 50vw;
-    transform: translateX(-50%);
 }
 
 nav .haut a {
