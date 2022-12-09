@@ -150,16 +150,15 @@ nav .bas .bouton-orange:hover {
 }
 
 .saison a{
-    color:#13a527;
-    font-size: 20px;
-    margin-top: 1%;
-    margin-left: 40%;
+    margin-left: 15%;
 }
 
 #index-plus-produits{
-    margin-bottom: 5%;
+    color:#13a527;
+    font-size: 20px;
     margin-top: 2%;
-    margin-left: 45%;
+    margin-left: 46%;
+    margin-bottom: 5%;
 }
 
 #index-plus-produits:hover{
