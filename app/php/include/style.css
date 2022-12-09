@@ -23,6 +23,7 @@ nav {
     flex-direction: column;
     background-color: #e9e7e7;
     position: fixed;
+    top: 0;
     width: 100%;
 }
 
