@@ -1,4 +1,4 @@
-package com.example.demo;
+package view;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.*;
 
-public class DataController {
+public class MainPageController {
 
     private XYChart.Series seriesTemp = new XYChart.Series();
 
@@ -113,7 +113,7 @@ public class DataController {
             JSONParser parser = new JSONParser();
 
             try {
-                Reader rd = new FileReader("c:\\Users\\Trahald\\Desktop\\demo\\src\\main\\test.json");
+                Reader rd = new FileReader("src\\test.json");
 
                 JSONObject jsObj = (JSONObject) parser.parse(rd);
 

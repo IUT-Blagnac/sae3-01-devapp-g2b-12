@@ -1,5 +1,3 @@
-package com.example.demo;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,12 +6,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DataApplication extends Application {
+public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(DataApplication.class.getResource("data-view.fxml"));
+        fxmlLoader.setLocation(Main.class.getResource("view/MainPage.fxml"));
 
         BorderPane vueListe = fxmlLoader.load();
 

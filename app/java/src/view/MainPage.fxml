@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DataController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainPageController">
    <left>
-      <VBox fillWidth="false" prefHeight="416.0" prefWidth="176.0" BorderPane.alignment="CENTER">
+      <VBox fillWidth="false" prefHeight="576.0" prefWidth="306.0" BorderPane.alignment="CENTER">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configuration de l'application">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Text>
-            <HBox fillHeight="false" prefHeight="100.0" prefWidth="200.0">
+            <HBox fillHeight="false" prefHeight="100.0" prefWidth="302.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètre1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Capteur(s)">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
@@ -37,24 +37,20 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox fillHeight="false" prefHeight="100.0" prefWidth="178.0">
+            <HBox fillHeight="false" prefHeight="100.0" prefWidth="301.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètre2" />
-                  <TextArea prefHeight="36.0" prefWidth="99.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Donnée(s) et valeur(s) max" />
+                  <TextArea prefHeight="97.0" prefWidth="157.0">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </TextArea>
                </children>
             </HBox>
-            <HBox fillHeight="false" prefHeight="100.0" prefWidth="200.0">
+            <HBox fillHeight="false" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètre3" />
-                  <TextArea prefHeight="37.0" prefWidth="96.0">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                  </TextArea>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence" />
+                  <TextField prefHeight="25.0" prefWidth="45.0" />
                </children>
             </HBox>
             <Button fx:id="valider" mnemonicParsing="false" onAction="#actionValider" prefHeight="25.0" prefWidth="65.0" text="Valider">
