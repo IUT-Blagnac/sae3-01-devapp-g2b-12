@@ -1,6 +1,6 @@
 <nav>
     <div class="haut">
-        <img src="img/logo.png" alt="Logo LéguMania" class="item">
+        <a href="index.php"><img src="img/logo.png" alt="Logo LéguMania" class="item"></a>
         <h1 class="item">LéguMania</h1>
 
         <form action="recherche.php" method="get" class="item">

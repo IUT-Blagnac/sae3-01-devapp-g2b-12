@@ -25,9 +25,9 @@ nav img.item {
 }
 
 nav .haut .item{
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
 }
 
 nav .haut .img-panier{
@@ -53,6 +53,10 @@ nav .bas input[type=button]{
     border-color: #f8a62c;
 }
 
+nav .bas a:hover{
+    font-size: 25px;
+}
+
 /* --- BASELINE --- */
 
 .baseline{
@@ -69,7 +73,7 @@ nav .bas input[type=button]{
 /* --- PRODUITS POPULAIRES --- */
 
 .populaire{
-    margin-top: 2%;
+    margin-top: 5%;
     display: flex;
     flex-direction: row;
 }
@@ -91,7 +95,7 @@ nav .bas input[type=button]{
 /* --- PRODUITS DE SAISON --- */
 
 .saison{
-    margin-top: 2%;
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
 }
@@ -112,6 +116,16 @@ nav .bas input[type=button]{
     margin-top: 1%;
     margin-left: 40%;
 }
+
+#index-plus-produits{
+    margin-bottom: 5%;
+}
+
+#index-plus-produits:hover{
+    font-size: 25px;
+}
+
+
 
 /* --- FORMULAIRE AJOUT PRODUIT --- */
 
