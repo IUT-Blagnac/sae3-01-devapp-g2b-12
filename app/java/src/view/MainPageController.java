@@ -233,16 +233,30 @@ public class MainPageController implements Initializable {
     }
     
     private void deleteDevice(ActionEvent event) {
-    	// reste à mettre à jour la position des autres objets pour qu'il n'y ait pas de trous
+    	// supprime le bouton déclencheur et le TextField correspondant
     	Button source = (Button) event.getSource();
-    	for (int i = 0; i < devicesAP.getChildren().size(); i++) {
+    	for (int i = 0; i < devicesAP.getChildren().size(); i ++) {
     		Node node = devicesAP.getChildren().get(i);
 			if (node.getLayoutY() == source.getLayoutY()) {
 				devicesAP.getChildren().remove(node);
 				devicesAP.getChildren().remove(source);
-				return;
+				break;
 			}
 		}
+    	// décalle le reste des éléments pour ne laisser aucun trous
+    	int layoutY = 0;
+    	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
+    		Node nodeTF = devicesAP.getChildren().get(i);
+    		Node nodeBT = devicesAP.getChildren().get(i+1);
+			if (nodeTF.getLayoutY()-layoutY == 25) {
+				nodeTF.setLayoutY(layoutY);
+				nodeBT.setLayoutY(layoutY);
+			}
+			layoutY += 25;
+		}
+    	nextDeviceY -= 25;
+		devicesAP.setPrefHeight(nextDeviceY);
+		devicesSP.setHmax(devicesAP.getPrefHeight());
     }
 
     //Modifie les graphiques
