@@ -235,14 +235,10 @@ public class MainPageController implements Initializable {
     private void deleteDevice(ActionEvent event) {
     	// supprime le bouton déclencheur et le TextField correspondant
     	Button source = (Button) event.getSource();
-    	for (int i = 0; i < devicesAP.getChildren().size(); i ++) {
-    		Node node = devicesAP.getChildren().get(i);
-			if (node.getLayoutY() == source.getLayoutY()) {
-				devicesAP.getChildren().remove(node);
-				devicesAP.getChildren().remove(source);
-				break;
-			}
-		}
+    	int indexBT = devicesAP.getChildren().indexOf(source);
+    	devicesAP.getChildren().remove(indexBT);
+    	devicesAP.getChildren().remove(indexBT-1);
+    	
     	// décalle le reste des éléments pour ne laisser aucun trous
     	int layoutY = 0;
     	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
