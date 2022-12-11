@@ -70,6 +70,9 @@ def on_message(client, userdata, msg):
         # sauvegarde chaque données voulues
         for data_name in data_wanted:
             data_json[data_name] = data_object[data_name]
+        # si frequency est 0 on sauvegarde
+        if not frequency:
+            save_data(None, None)
 
 
 def save_data(signum, frame):
