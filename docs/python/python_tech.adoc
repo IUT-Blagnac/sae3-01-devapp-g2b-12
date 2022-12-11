@@ -30,7 +30,7 @@ Documentation rédigée par :
 
 Ce programme sert à enregistrer des informations récupérées de capteurs d'un réseau MQTT.
 
-On peut paramétrer de quels capteurs on récupère les données, quelles données sont récupérées, à quelle fréquence et quel est la valeur maximale pour chaque données.
+On peut paramétrer de quels capteurs on récupère les données, quelles données sont enregistrées, à quelle fréquence et quel est la valeur maximale pour chaque données.
 
 Pour configurer le programme référez-vous à la section https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/python/python_tech.adoc#configuration[Configuration].
 
@@ -68,7 +68,7 @@ Ce fichier permet de paramétrer 6 options correspondant à 6 couples clé-valeu
 | `devices` | Quels capteurs doivent être pris en comptes | Liste de chaînes | Oui
 | `data_wanted` | Quelles données seront enregistrées | Liste de chaînes | Oui
 | `alert_values` | Pour chaque donnée, son seuil d'alerte | Liste de nombres | Oui
-| `frequency`| Fréquence à laquelle les données sont actualisées | Entier | Oui
+| `frequency`| Fréquence à laquelle les données sont enregistrées | Entier | Oui
 | `host`| Nom de domaine du serveur MQTT | Chaîne | Non
 | `port`| Port du serveur MQTT | Entier | Non
 |===
@@ -121,9 +121,9 @@ Pour paramétrer à quelle fréquence les données sont enregistrées il faut ch
 
 Cette valeur doit être un entier.
 
-Cela correspond au nombre de minute minimal entre chaque enregistrement.
+Cela correspond au nombre de minute entre chaque enregistrement.
 
-Si la valeur est mise à `0` il n'y aura pas de délai avant le prochain enregistrement.
+Si la valeur est mise à `0` il n'y aura pas de délai avant chaque enregistrement.
 
 === Hôte
 
