@@ -1,8 +1,8 @@
 import paho.mqtt.client as mqtt
 import json
 import os
-import time
 import sys
+import signal
 
 try:
     # lit le fichier de configuration
@@ -50,9 +50,6 @@ units = {
     'tvoc': ['TVOC', 'ppb']
 }
 
-# dernière fois sauvegardé
-last_time_saved = 0
-
 
 def on_connect(client, userdata, flags, rc):
     print(f'Connecté au seveur MQTT {host} sur le port {port}.')
@@ -61,40 +58,45 @@ def on_connect(client, userdata, flags, rc):
         if device != '#':
             device += '/event/up'
         client.subscribe(f'application/1/device/{device}')
+    # définit une alarme
+    signal.alarm(frequency*60)
 
 
 def on_message(client, userdata, msg):
-    global last_time_saved
-    # prend en compte les données seulement si l'intervalle de lecture est dépassé
-    if time.time() - last_time_saved >= frequency * 60:
-        payload_json = json.loads(msg.payload)
-        # si la clé "object" n'est pas présente on ignore les données
-        if 'object' in payload_json.keys():
-            data_object = payload_json['object']
-            # sauvegarde chaque données voulues
-            for data_name in data_wanted:
-                data_json[data_name] = data_object[data_name]
-                # calcul le dépassement
-                alert_value = alert_values[data_wanted.index(data_name)]
-                difference = data_json[data_name] - alert_value
-                if difference > 0:
-                    print(f'Dépassement de la valeur maximale de {units[data_name][0]} ', end='')
-                    print(f'({alert_value} {units[data_name][1]}) de {difference} {units[data_name][1]} !')
-            # ouvre le fichier de données
-            data_file = os.open('data.json', os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
-            # écrit les valeurs
-            data_txt = json.dumps(data_json, indent=4)
-            os.write(data_file, data_txt.encode())
-            # ferme le fichier de données
-            os.close(data_file)
-            # met à jour la dernière fois sauvegardé
-            last_time_saved = time.time()
+    payload_json = json.loads(msg.payload)
+    # si la clé "object" n'est pas présente on ignore les données
+    if 'object' in payload_json.keys():
+        data_object = payload_json['object']
+        # sauvegarde chaque données voulues
+        for data_name in data_wanted:
+            data_json[data_name] = data_object[data_name]
+
+
+def save_data(signum, frame):
+    # calcul le dépassement
+    for data_name in data_wanted:
+        alert_value = alert_values[data_wanted.index(data_name)]
+        difference = data_json[data_name] - alert_value
+        if difference > 0:
+            print(f'Dépassement de la valeur maximale de {units[data_name][0]} ', end='')
+            print(f'({alert_value} {units[data_name][1]}) de {difference} {units[data_name][1]} !')
+
+    # ouvre le fichier de données
+    data_file = os.open('data.json', os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
+    # écrit les valeurs
+    data_txt = json.dumps(data_json, indent=4)
+    os.write(data_file, data_txt.encode())
+    # ferme le fichier de données
+    os.close(data_file)
+    # redéfinit l'alarme
+    signal.alarm(frequency*60)
 
 
 client = mqtt.Client()
 
 client.on_connect = on_connect
 client.on_message = on_message
+signal.signal(signal.SIGALRM, save_data)
 
 client.connect(host, port)
 
