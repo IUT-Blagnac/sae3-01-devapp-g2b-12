@@ -52,7 +52,6 @@ Projet réalisé par :
 *** `tests.yml` => script pour tester l'application
 - `app` => répertoire contenant le code des applications :
 ** `java` => code de l'application Java
-** `php` => code du site web
 ** `python` => code de l'application Python
 - `docs` => répertoire contenant les documentations :
 ** `moa` => documents de la MOA
@@ -62,7 +61,7 @@ Projet réalisé par :
 ** `python` => documentation technique de l'application Python
 
 
-== Applications 
+== Applications
 
 === IOT
 
@@ -83,12 +82,6 @@ Pour exécuter cette application il vous faut deux fichiers :
 
 IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
-=== Site web
-
-Le dossier racine du site web se trouve dans le réportoire `{baseURL}/tree/master/app/php/[app/php]`
-
-Tous les fichiers et répertoires du dossier racine doivent être téléversés sur le serveur qui hébergera votre site web.
-
 == Documentations
 
 === IOT
@@ -98,3 +91,13 @@ Tous les fichiers et répertoires du dossier racine doivent être téléversés 
 - Documentation technique de l'application Java {baseURL}/blob/master/docs/java/java_tech.adoc[ici]
 
 - Documentation technique du programme Python {baseURL}/blob/master/docs/python/python_tech.adoc[ici]
+
+=== Site web
+
+- Charte graphique : {baseURL}/raw/master/docs/php/Charte%20graphique.pdf[ici]
+
+- Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Sch%C3%A9ma%20d'Encha%C3%AEnement%20des%20Pages.pdf[ici]
+
+=== Base de données
+
+- Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
