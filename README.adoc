@@ -101,3 +101,21 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 === Base de données
 
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
+
+
+=== Évaluations hebdomadaires
+
+NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
+
+ifdef::env-github[]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image]
+endif::[]
+
+ifndef::env-github[]
+++++
+<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image"></iframe>
+++++
+endif::[]
+
+=Sprint 1 retour :
+Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les priorité et la rédaction de la US. Différdncier IOT et site WEB. Identifier les sprint.Identifier à quelle US se rattache une tâche. release Ecommerce ? rien sur les tests
