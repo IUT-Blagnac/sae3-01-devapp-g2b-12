@@ -56,15 +56,15 @@
         </div>
 
         <div class="produit">
-            <a href=""><img src="img/pommes.png" alt="image produit"></a>
-            <p>Nom</p>
-            <p>Prix</p>
+            <a href=""><img src="img/tomates.png" alt="image produit"></a>
+            <p>Cagette de tomates</p>
+            <p>2€59</p>
         </div>
 
         <div class="produit">
-            <a href=""><img src="img/pommes.png" alt="image produit"></a>
-            <p>Nom</p>
-            <p>Prix</p>
+            <a href=""><img src="img/courgettes.png" alt="image produit"></a>
+            <p>Cagette de courgettes</p>
+            <p>1,59€</p>
         </div>
 
     </div>
