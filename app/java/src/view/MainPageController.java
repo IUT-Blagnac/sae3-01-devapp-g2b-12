@@ -22,12 +22,14 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.*;
+import java.util.Map.Entry;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 
 public class MainPageController implements Initializable {
 
@@ -163,8 +165,6 @@ public class MainPageController implements Initializable {
 	}
 
     private void loadConfig() {
-    	// ici il faudra charger la config et modifier la vue par rapport à celle-ci
-    	
     	int gridX = 0;
     	int gridY = 0;
 
@@ -192,7 +192,7 @@ public class MainPageController implements Initializable {
     		NumberAxis yAxis = new NumberAxis(dataGraph.get(dataWanted.get(i).getAsString()), 0, 150, 50);
 
     		LineChart<Double, Double> graph = new LineChart(xAxis, yAxis);
-    		
+
     		graphMap.put(dataWanted.get(i).getAsString(), graph);
 
     		graphGrid.add(graph, gridX, gridY);
@@ -343,6 +343,51 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void saveConfig() {
+    	JsonObject config = new JsonObject();
+    	config.add("devices", new JsonArray());
+
+    	// devices
+    	JsonArray devices = config.getAsJsonArray("devices");
+    	TextField device;
+    	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
+    		device = (TextField) devicesAP.getChildren().get(i);
+    		if (!device.getText().equals("")) {
+    			devices.add(device.getText());
+    		}
+    	}
+    	if (devices.size() == 0) {
+    		devices.add("#");
+    		device = (TextField) devicesAP.getChildren().get(0);
+    		device.setText("#");
+    	}
+    	
+    	// data
+    	config.add("data_wanted", new JsonArray());
+    	config.add("alert_values", new JsonArray());
+    	JsonArray data_wanted = config.getAsJsonArray("data_wanted");
+    	JsonArray alert_values = config.getAsJsonArray("alert_values");
+    	for (Entry<String, CheckBox> me : dataCheckboxes.entrySet()) {
+    		if (me.getValue().isSelected()) {
+    			data_wanted.add(me.getKey());
+    			alert_values.add(dataValues.get(me.getValue()).getText());
+    		}
+    	}
+    	
+    	// frequency
+    	int frequency;
+    	if (frequencyTF.getText().equals("")) {
+    		frequencyTF.setText("0");
+    		frequency = 0;
+    	} else {
+    		frequency = Integer.valueOf(frequencyTF.getText());
+    	}
+    	config.add("frequency", new JsonPrimitive(frequency));
+    	
+    	// host
+    	config.add("host", new JsonPrimitive("chirpstack.iut-blagnac.fr"));
+    	// port
+    	config.add("port", new JsonPrimitive(1883));
+
     	try {
 	    	Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 	
@@ -354,8 +399,6 @@ public class MainPageController implements Initializable {
     	} catch (IOException e) {
     		e.printStackTrace();
     	}
-    	// recharge la configuration pour prendre en compte les changements
-    	loadConfig();
     }
     
     @FXML
