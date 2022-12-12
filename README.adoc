@@ -117,5 +117,5 @@ ifndef::env-github[]
 ++++
 endif::[]
 
-=Sprint 1 retour :
+=Sprint 3 retour :
 Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US. Différencier IOT et site WEB. Identifier les sprints.Identifier à quelle US se rattache une tâche. release Ecommerce ? rien sur les tests
