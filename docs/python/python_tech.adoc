@@ -20,7 +20,7 @@
 
 toc::[]
 
-== Equipe
+== Rédacteurs
 
 Documentation rédigée par :
 
@@ -32,11 +32,21 @@ Ce programme sert à enregistrer des informations récupérées de capteurs d'un
 
 On peut paramétrer de quels capteurs on récupère les données, quelles données sont enregistrées, à quelle fréquence et quel est la valeur maximale pour chaque données.
 
-Pour configurer le programme référez-vous à la section https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/python/python_tech.adoc#configuration[Configuration].
+Pour configurer le programme référez-vous à la section {baseURL}/blob/master/docs/python/python_tech.adoc#configuration[Configuration].
 
 Les informations récupérées sont enregistrées dans le fichier `data.json`.
 
-Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire puis il suffit simplement de l'exécuter.
+Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire et d'avoir installé les logiciels listés dans la partie "Installation" juste en dessous, ensuite il faut simplement double cliquer sur le fichier.
+
+=== Installation
+
+Tout d'abord il vous faut installer Python (https://www.python.org/ftp/python/3.10.9/python-3.10.9-amd64.exe[installeur Windows 64-bit], https://www.python.org/ftp/python/3.10.9/python-3.10.9-macos11.pkg[installeur macOS 64-bit]).
+
+Lors de l'installation il vous faudra cocher "Pip" et "Ajouter Python au PATH" afin de pouvoir installer des packages via un terminal.
+
+Ouvrez donc un terminal en mode administrateur, et exécutez-y la commande suivante `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
+
+Une fois cela fait, vous pouvez lancer le programme sans soucis.
 
 === Erreurs
 
@@ -54,7 +64,7 @@ Le fichier de configuration n'est pas analysé en profondeur donc il peut y avoi
 
 Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
 
-Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/python/python_tech.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
+Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section {baseURL}/blob/master/docs/python/python_tech.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
 
 == Configuration
 
