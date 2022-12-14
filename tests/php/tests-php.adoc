@@ -1,121 +1,14 @@
-//----------------------------------------
 
-// Table of content
 :toc: macro
 :toc-title: Sommaire
 :numbered:
-
-// Icons
-:tip-caption: :bulb:
-:note-caption: :paperclip:
-:warning-caption: :warning:
-:important-caption: :exclamation:
-:caution-caption: :fire:
-
-:baseURL: https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12
-
-//----------------------------------------
-
-= SAÉ 3.01 2022-2023
-
-// Tags
-image:{baseURL}/actions/workflows/build.yml/badge.svg[Build]
-image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
-image:{baseURL}/actions/workflows/quality.yml/badge.svg[Quality]
-image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
-
-TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
-
-- Version courante : {baseURL}/releases/tag/v3[v3]
-- Lien vers les User Stories et Issues https://github.com/orgs/IUT-Blagnac/projects/23[ici], reste 100 % US
-
 toc::[]
 
-== Équipe
+== Introduction
 
-Projet réalisé par :
-
-- https://github.com/PattateDouce[Rémy Guibert]
-- https://github.com/Falettiattendre[Léo Faletti]
-- https://github.com/ludovic-estival[Ludovic Estival]
+Tests rédigés par Ludovic Estival.
+Ces tests ont pour but de vérifier les fonctionnalités implémentées sur le site.
 
 
-== Hiérarchie du dépôt
+== Test 1: connexion au site
 
-- `.gitignore` => fichier des éléments à ne pas pousser (en général) sur le dépôt
-- `.github` => répertoire qui contient des éléments de gestion de projet :
-** `ISSUE_TEMPLATE` => repertoire qui contient quelques templates pour les issues :
-*** `us.yml` => template pour les User Stories
-*** `bug.yml` => template pour les issues de bug report
-** `workflows` => repertoire qui contient les actions à lancer à chaque push sur le repo :
-*** `build.yml` => script pour build l'application
-*** `tests.yml` => script pour tester l'application
-- `app` => répertoire contenant le code des applications :
-** `java` => code de l'application Java
-** `python` => code de l'application Python
-- `docs` => répertoire contenant les documentations :
-** `moa` => documents de la MOA
-** `bd` => documents en lien avec la base de données
-** `java` => documentation utilisateur et technique de l'application Java
-** `php` => documents en lien avec le site web
-** `python` => documentation technique de l'application Python
-
-
-== Applications
-
-=== IOT
-
-Cette application donne les informations des capteurs de votre entrepôt via des graphiques.
-
-Vous pouvez configurer plusieurs choses :
-
-- quels capteurs doivent être pris en comptes,
-- quelles données seront affichées,
-- pour chaque donnée, le seuil d'alerte,
-- et la fréquence à laquelle les données sont actualisées
-
-Pour exécuter cette application il vous faut deux fichiers :
-
-- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar]
-
-- un fichier Python qui recouillera les données des capteurs : {baseURL}/raw/master/app/python/main.py[main.py]
-
-IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
-
-== Documentations
-
-=== IOT
-
-- Documentation utilisateur de l'application Java {baseURL}/blob/master/docs/java/java_user.adoc[ici]
-
-- Documentation technique de l'application Java {baseURL}/blob/master/docs/java/java_tech.adoc[ici]
-
-- Documentation technique du programme Python {baseURL}/blob/master/docs/python/python_tech.adoc[ici]
-
-=== Site web
-
-- Charte graphique : {baseURL}/raw/master/docs/php/Charte%20graphique.pdf[ici]
-
-- Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
-
-=== Base de données
-
-- Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
-
-
-=== Évaluations hebdomadaires
-
-NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
-
-ifdef::env-github[]
-image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image]
-endif::[]
-
-ifndef::env-github[]
-++++
-<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image"></iframe>
-++++
-endif::[]
-
-=Sprint 3 retour :
-Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US. Différencier IOT et site WEB. Identifier les sprints.Identifier à quelle US se rattache une tâche. release Ecommerce ? rien sur les tests
