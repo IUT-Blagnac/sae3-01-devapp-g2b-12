@@ -76,7 +76,7 @@ Vous pouvez configurer plusieurs choses :
 
 Pour exécuter cette application il vous faut deux fichiers :
 
-- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar]
+- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar] (pas encore fait)
 
 - un fichier Python qui recouillera les données des capteurs : {baseURL}/raw/master/app/python/main.py[main.py]
 
@@ -86,9 +86,9 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 === IOT
 
-- Documentation utilisateur de l'application Java {baseURL}/blob/master/docs/java/java_user.adoc[ici]
+- Documentation utilisateur de l'application Java {baseURL}/blob/master/docs/java/java_user.adoc[ici] (pas encore fait)
 
-- Documentation technique de l'application Java {baseURL}/blob/master/docs/java/java_tech.adoc[ici]
+- Documentation technique de l'application Java {baseURL}/blob/master/docs/java/java_tech.adoc[ici] (pas encore fait)
 
 - Documentation technique du programme Python {baseURL}/blob/master/docs/python/python_tech.adoc[ici]
 
