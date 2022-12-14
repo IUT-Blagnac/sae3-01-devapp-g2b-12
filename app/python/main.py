@@ -3,8 +3,14 @@ import json
 import os
 import sys
 import signal
+import time
 
+# test sur la configuration
 try:
+    # vérifie que le fichier existe
+    assert os.access('config.json', os.R_OK)
+    # vérifie que le fichier est lisible
+    assert os.access('config.json', os.F_OK)
     # lit le fichier de configuration
     config_file = os.open('config.json', os.O_RDONLY)
     config_raw = os.read(config_file, 1024)
@@ -19,7 +25,7 @@ try:
     alert_values = config_json['alert_values']
     frequency = config_json['frequency']
 
-    # test la configuration
+    # test les options
     assert isinstance(devices, type([]))
     assert len(devices) >= 1
     assert isinstance(data_wanted, type([]))
@@ -84,6 +90,10 @@ def save_data(signum, frame):
             print(f'Dépassement de la valeur maximale de {units[data_name][0]} ', end='')
             print(f'({alert_value} {units[data_name][1]}) de {difference} {units[data_name][1]} !')
 
+    # vérifie que le fichier existe
+    assert os.access('data.json', os.R_OK)
+    # vérifie que le fichier est lisible
+    assert os.access('data.json', os.W_OK)
     # ouvre le fichier de données
     data_file = os.open('data.json', os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
     # écrit les valeurs
