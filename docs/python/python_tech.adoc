@@ -28,41 +28,41 @@ Documentation rédigée par :
 
 == Utilisation
 
-Ce programme sert à enregistrer des informations récupérées de capteurs d'un réseau MQTT.
+IMPORTANT: Ce programme ne fonctionne que sur les systèmes UNIX.
 
-On peut paramétrer de quels capteurs on récupère les données, quelles données sont enregistrées, à quelle fréquence et quel est la valeur maximale pour chaque données.
+Ce programme sert à enregistrer des informations récupérées de capteurs d'un réseau MQTT et alerter de dépassement de seuils.
 
-Pour configurer le programme référez-vous à la section {baseURL}/blob/master/docs/python/python_tech.adoc#configuration[Configuration].
+On peut paramétrer sont comportement, pour cela référez-vous à la section {baseURL}/blob/master/docs/python/python_tech.adoc#configuration[Configuration].
 
-Les informations récupérées sont enregistrées dans le fichier `data.json`.
-
-Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire et d'avoir installé les logiciels listés dans la partie "Installation" juste en dessous, ensuite il faut simplement double cliquer sur le fichier.
+Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire et d'avoir installé les logiciels listés dans la partie `Installation` juste en dessous, ensuite il faut simplement double cliquer sur le fichier.
 
 === Installation
 
-IMPORTANT: Ce programme ne fonctionne que sous les systèmes UNIX.
+Tout d'abord il vous faut installer Python, ouvrez un terminal et entrez-y la commande suivante : `sudo apt install python3`.
 
-Tout d'abord il vous faut installer Python, ouvrez un terminal et entrez-y la commande suivante `sudo apt install python3`.
+Ensuite entrez la commande : `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
 
-Ensuite entrez la commande `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
-
-Une fois cela fait, vous pouvez lancer le programme sans soucis avec `python3 main.py`.
+Une fois cela fait, vous pouvez lancer le programme sans soucis avec la commande : `python3 main.py`.
 
 === Erreurs
 
-Le programme est fait pour ne pas fonctionner dans le cas où le fichier de configuration n'est pas correctement formaté.
+Le programme est fait pour ne pas fonctionner dans le cas où le fichier de configuration n'existe pas, le script n'a pas le droit de le lire ou si il n'est pas correctement formaté.
 
-Il affichera dans la console le message suivant : `Le fichier de configuration ("config.json") est manquant ou mal écrit.`
+Il affichera dans la console le message suivant : `Le fichier de configuration ("config.json") est manquant, le script n'a pas le droit de lecture ou la configuration est mal écrite.`.
 
-Le fichier de configuration n'est pas analysé en profondeur donc il peut y avoir des bugs par rapport à une trés mauvaise configuration.
+Il est aussi programmé pour se fermer dans le cas où un fichier `data.json` existe mais qu'il est incapable d'écrire dedans.
 
-À part ça il ne devrait pas y avoir d'erreurs lié au programme.
+Dans ce cas le programme affichera le message : `Le fichier de données ("data.json") existe mais le script n'a pas le droit d'écriture sur le fichier.`.
+
+À part ça il ne devrait pas y avoir d'autres erreurs.
 
 === Nominale
 
-À la connexion au serveur MQTT le programma affiche un message.
+À la connexion au serveur MQTT le programme affiche un message.
 
 Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
+
+Les autres messages sont liés au {baseURL}/blob/master/docs/python/python_tech.adoc#tests[Tests]
 
 Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section {baseURL}/blob/master/docs/python/python_tech.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
 
@@ -146,3 +146,17 @@ Par défaut il est paramétré sur `chirpstack.iut-blagnac.fr`.
 Le port du serveur MQTT peut être paramétré en changeant la valeur de `port`.
 
 Le port par défaut est `1883`.
+
+== Tests
+
+Le fichier de configuraton est tester dès le début, chaque paramètre est tester sur sont type et éventuellement la longueur qu'il doit avoir, dans le cas où quelque chose ne vas pas, le programme se ferme après avoir afficher le message : `Le fichier de configuration ("config.json") est manquant, le script n'a pas le droit de lecture ou la configuration est mal écrite.`.
+
+Pour vérifier que les données sont biens issues des capteurs demandés, le nom du capteurs est affihcer à l'écran lorsque le script reçoit des données, de cette magnière on peut vérifier avec la configuration si sela correspond.
+
+données
+
+alert
+
+fréquence
+
+data
