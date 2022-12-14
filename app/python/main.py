@@ -33,7 +33,7 @@ try:
     assert all(isinstance(data, str) for data in data_wanted)
     assert len(data_wanted) >= 1
     assert isinstance(alert_values, type([]))
-    assert all(isinstance(alert_value, int|float) for alert_value in alert_values)
+    assert all(isinstance(alert_value, (int, float)) for alert_value in alert_values)
     assert len(data_wanted) == len(alert_values)
     assert isinstance(frequency, int)
     assert isinstance(host, str)
@@ -83,7 +83,7 @@ def on_message(client, userdata, msg):
         for data_name in data_wanted:
             data_json[data_name] = data_object[data_name]
         # tests sur le(s) capteur(s) et la/les donnée(s) reçue(s)
-        print(msg.topic)
+        print('-----'+msg.topic+'-----')
         print(time.strftime('%H:%M:%S'))
         print(data_json)
         # si frequency est 0 on sauvegarde
@@ -93,7 +93,7 @@ def on_message(client, userdata, msg):
 
 def save_data(signum, frame):
     # test sur l'heure de l'enregistrement, les données qui vont être enregistrées et les valeurs max
-    print('enregistrement')
+    print('-----enregistrement-----')
     print(time.strftime('%H:%M:%S'))
     print(data_json)
     print("valeurs d'alerte :", alert_values)
