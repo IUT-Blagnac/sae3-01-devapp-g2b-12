@@ -125,4 +125,4 @@ Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les prior
 
 === IoT
 
-Pour la partie Python les tests sont implémentés dans le script lui-même, {baseURL}/blob/master/app/python/main.py[ici]
+Pour la partie Python les tests sont implémentés dans le script lui-même, {baseURL}/blob/master/app/python/main.py[ici], et expliquer dans sa documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc[ici].
