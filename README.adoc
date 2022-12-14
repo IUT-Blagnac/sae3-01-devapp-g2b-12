@@ -59,6 +59,7 @@ Projet réalisé par :
 ** `java` => documentation utilisateur et technique de l'application Java
 ** `php` => documents en lien avec le site web
 ** `python` => documentation technique de l'application Python
+- `tests` => répertoire contenant les tests :
 
 
 == Applications
@@ -119,3 +120,9 @@ endif::[]
 
 =Sprint 3 retour :
 Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US. Différencier IOT et site WEB. Identifier les sprints.Identifier à quelle US se rattache une tâche. release Ecommerce ? rien sur les tests
+
+== Tests
+
+=== IoT
+
+Pour la partie Python les tests sont implémentés dans le script lui-même, {baseURL}/blob/master/app/python/main.py[ici]
