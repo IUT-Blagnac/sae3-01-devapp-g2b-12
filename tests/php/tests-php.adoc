@@ -12,3 +12,17 @@ Ces tests ont pour but de vérifier les fonctionnalités implémentées sur le s
 
 == Test 1: connexion au site
 
+=== Connexion en tant que client
+
+=== Connexion en tant qu'agriculteur
+
+=== Connexion avec un utilisateur non inscrit
+
+
+
+== Test 2: inscription au site
+
+=== Inscription en tant que client
+
+=== Inscription en tant qu'agriculteur
+
