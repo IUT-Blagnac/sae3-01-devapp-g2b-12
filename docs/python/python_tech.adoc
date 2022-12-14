@@ -40,13 +40,13 @@ Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien form
 
 === Installation
 
-Tout d'abord il vous faut installer Python (https://www.python.org/ftp/python/3.10.9/python-3.10.9-amd64.exe[installeur Windows 64-bit], https://www.python.org/ftp/python/3.10.9/python-3.10.9-macos11.pkg[installeur macOS 64-bit]).
+IMPORTANT: Ce programme ne fonctionne que sous les systèmes UNIX.
 
-Lors de l'installation il vous faudra cocher "Pip" et "Ajouter Python au PATH" afin de pouvoir installer des packages via un terminal.
+Tout d'abord il vous faut installer Python, ouvrez un terminal et entrez-y la commande suivante `sudo apt install python3`.
 
-Ouvrez donc un terminal en mode administrateur, et exécutez-y la commande suivante `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
+Ensuite entrez la commande `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
 
-Une fois cela fait, vous pouvez lancer le programme sans soucis.
+Une fois cela fait, vous pouvez lancer le programme sans soucis avec `python3 main.py`.
 
 === Erreurs
 
