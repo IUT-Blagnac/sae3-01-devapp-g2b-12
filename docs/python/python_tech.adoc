@@ -62,8 +62,6 @@ Dans ce cas le programme affichera le message : `Le fichier de données ("data.j
 
 Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
 
-Les autres messages sont liés au {baseURL}/blob/master/docs/python/python_tech.adoc#tests[Tests]
-
 Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section {baseURL}/blob/master/docs/python/python_tech.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
 
 == Configuration
@@ -151,14 +149,14 @@ Le port par défaut est `1883`.
 
 == Tests
 
-Le fichier de configuraton est tester dès le début, chaque paramètre est tester sur sont type et éventuellement la longueur qu'il doit avoir, dans le cas où quelque chose ne vas pas, le programme se ferme après avoir afficher le message : `Le fichier de configuration ("config.json") est manquant, le script n'a pas le droit de lecture ou la configuration est mal écrite.`.
+Les fichiers de test sont dans un répertoire différent se trouvant {baseURL}/tree/master/tests/python[ici].
 
-Pour vérifier que les données sont biens issues des capteurs demandés, le nom du capteurs est affihcer à l'écran lorsque le script reçoit des données, de cette magnière on peut vérifier avec la configuration si sela correspond.
+Ce répertoire contient 3 fichiers de configurations, servant à tester différentes choses, et le programme Python modifié pour pouvoir tester son fonctionnement.
 
-données
+Pour vérifier que les données sont biens issues des capteurs demandés, le nom du capteur est affihcer à l'écran lorsque le script reçoit des données, de cette manière on peut vérifier avec la configuration si sela correspond bien.
 
-alert
+Pour vérifier que les données reçues sont biens celles demandées, lorsqu'un capteurs envoit des données elles sont affichées à l'écran avec leurs valeurs, à ce moment là on peut vérifier avec la configuration si c'est bien celles demandées.
 
-fréquence
+Les valeurs d'alerte sont affiché à l'écran lors d'un enregistrement, de cette magnière on peut vérifier avec la configuration si c'est bien celles définies.
 
-data
+Lors d'un enregistrement, comme lorsque des données sont reçues, l'heure, les minutes et les secondes sont affichés, on peut alors regarder les différents moment où il y a eu un enregistrement et vérifier avec la configuration qu'il y a bien le bon nombre de minute entre chaque enregistrement.
