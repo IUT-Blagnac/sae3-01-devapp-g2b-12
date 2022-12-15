@@ -66,7 +66,7 @@ Projet réalisé par :
 
 == Applications
 
-=== IOT
+=== IoT
 
 Cette application donne les informations des capteurs de votre entrepôt via des graphiques.
 
@@ -87,7 +87,7 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 == Documentations
 
-=== IOT
+=== IoT
 
 - Documentation utilisateur de l'application Java {baseURL}/blob/master/docs/java/java_user.adoc[ici] (pas encore fait)
 
