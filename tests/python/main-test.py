@@ -83,9 +83,9 @@ def on_message(client, userdata, msg):
         for data_name in data_wanted:
             data_json[data_name] = data_object[data_name]
         # tests sur le(s) capteur(s) et la/les donnée(s) reçue(s)
-        print('-----'+msg.topic+'-----')
-        print(time.strftime('%H:%M:%S'))
-        print(data_json)
+        print('-----Capteur :', msg.topic, '-----')
+        print('Heure :', time.strftime('%H:%M:%S'))
+        print('Données reçues :', data_json)
         # si frequency est 0 on sauvegarde
         if not frequency:
             save_data(None, None)
@@ -93,10 +93,10 @@ def on_message(client, userdata, msg):
 
 def save_data(signum, frame):
     # test sur l'heure de l'enregistrement, les données qui vont être enregistrées et les valeurs max
-    print('-----enregistrement-----')
-    print(time.strftime('%H:%M:%S'))
-    print(data_json)
-    print("valeurs d'alerte :", alert_values)
+    print('----- Enregistrement -----')
+    print('Heure :', time.strftime('%H:%M:%S'))
+    print('Données enregistrées :', data_json)
+    print("Valeurs d'alerte :", alert_values)
     # calcul le dépassement
     for data_name in data_wanted:
         alert_value = alert_values[data_wanted.index(data_name)]
