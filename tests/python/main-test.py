@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import signal
+import time
 
 # test sur la configuration
 try:
@@ -81,12 +82,21 @@ def on_message(client, userdata, msg):
         # sauvegarde chaque données voulues
         for data_name in data_wanted:
             data_json[data_name] = data_object[data_name]
+        # tests sur le(s) capteur(s) et la/les donnée(s) reçue(s)
+        print('-----'+msg.topic+'-----')
+        print(time.strftime('%H:%M:%S'))
+        print(data_json)
         # si frequency est 0 on sauvegarde
         if not frequency:
             save_data(None, None)
 
 
 def save_data(signum, frame):
+    # test sur l'heure de l'enregistrement, les données qui vont être enregistrées et les valeurs max
+    print('-----enregistrement-----')
+    print(time.strftime('%H:%M:%S'))
+    print(data_json)
+    print("valeurs d'alerte :", alert_values)
     # calcul le dépassement
     for data_name in data_wanted:
         alert_value = alert_values[data_wanted.index(data_name)]
