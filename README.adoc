@@ -60,6 +60,8 @@ Projet réalisé par :
 ** `php` => documents en lien avec le site web
 ** `python` => documentation technique de l'application Python
 - `tests` => répertoire contenant les tests :
+** `php` => tests en lien avec le site web
+** `python` => version de test de l'application Python
 
 
 == Applications
@@ -99,7 +101,7 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 - Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
 
-- Lien du site: 
+- Lien du site web :
 * http://192.168.224.138/~SAESYS12/[Réseau filaire de l'IUT] 
 * http://193.54.227.164/~SAESYS12/[Autre réseau]
 
@@ -108,6 +110,7 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
 
+- Le script de création de la base de données se trouve {baseURL}/raw/master/docs/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
 
 === Évaluations hebdomadaires
 
@@ -130,9 +133,8 @@ Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les prior
 
 === IoT
 
-Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/blob/master/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc#tests[ici].
-
+Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/raw/master/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc#tests[ici].
 
 === PHP
 
-Vous pouvez retrouver les test du site web {baseURL}/blob/master/tests/php/tests-php.adoc[ici].
+Vous pouvez retrouver les tests du site web {baseURL}/blob/master/tests/php/tests-php.adoc[ici].
