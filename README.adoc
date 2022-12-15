@@ -19,9 +19,9 @@
 = SAÉ 3.01 2022-2023
 
 // Tags
-image:{baseURL}/actions/workflows/build.yml/badge.svg[Build]
-image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
-image:{baseURL}/actions/workflows/quality.yml/badge.svg[Quality]
+//image:{baseURL}/actions/workflows/build.yml/badge.svg[Build]
+//image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
+//image:{baseURL}/actions/workflows/quality.yml/badge.svg[Quality]
 image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
@@ -130,7 +130,7 @@ Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les prior
 
 === IoT
 
-Pour la partie Python les tests sont implémentés dans le script lui-même, {baseURL}/blob/master/app/python/main.py[ici], et expliquer dans sa documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc[ici].
+Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/blob/master/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc#tests[ici].
 
 
 === PHP
