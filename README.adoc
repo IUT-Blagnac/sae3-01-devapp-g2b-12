@@ -99,6 +99,11 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 - Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
 
+- Lien du site: 
+* http://192.168.224.138/~SAESYS12/[Réseau filaire de l'IUT] 
+* http://193.54.227.164/~SAESYS12/[Autre réseau]
+
+
 === Base de données
 
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
