@@ -135,6 +135,8 @@ Cela correspond au nombre de minute entre chaque enregistrement.
 
 Si la valeur est mise à `0` il n'y aura pas de délai avant chaque enregistrement.
 
+Si aucune données n'a été reçues avant le premier enregistrement, les informations voulues seront enregistrées à `0`.
+
 === Hôte
 
 Le nom de domaine du serveur MQTT peut être paramétré en changeant la valeur de `host`.
