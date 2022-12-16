@@ -1,8 +1,7 @@
-
-:toc: macro
+= Tests du site web
+:toc:
 :toc-title: Sommaire
 :numbered:
-toc::[]
 
 == Introduction
 
