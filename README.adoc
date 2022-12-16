@@ -55,7 +55,7 @@ Projet réalisé par :
 - `app` => répertoire contenant le code des applications :
 ** `java` => code de l'application Java
 ** `python` => code de l'application Python
-- `docs` => répertoire contenant les documentations :
+- `docs` => répertoire contenant les documents/documentations :
 ** `moa` => documents de la MOA
 ** `bd` => documents en lien avec la base de données
 ** `java` => documentation utilisateur et technique de l'application Java
