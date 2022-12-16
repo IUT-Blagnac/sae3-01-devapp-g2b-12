@@ -17,7 +17,7 @@ L'utilisateur entre son login (adresse-mail) et son mot de passe dans le formula
 |Test |Attendu |Résultat
 |Connexion avec compte client |Redirection vers accueil avec modification du header |Ok
 |Connexion avec compte agriculteur |Redirection vers accueil avec modification du header |Ok
-|Connexion avec compte inexistant |Redirection vers formulaire de connexion avec message d'erreur |Ok mais rajouter message d'erreur
+|Connexion avec compte inexistant |Redirection vers formulaire de connexion avec message d'erreur |Ok
 |=======
 
 == Test 2: déconnexion du site
