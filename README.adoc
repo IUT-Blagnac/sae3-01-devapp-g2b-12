@@ -87,6 +87,12 @@ Pour exécuter cette application il vous faut deux fichiers :
 
 IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
+=== Site web
+
+- Lien du site web :
+* http://192.168.224.138/~SAESYS12/[Réseau filaire de l'IUT] 
+* http://193.54.227.164/~SAESYS12/[Autre réseau]
+
 == Documentations
 
 === IoT
@@ -102,10 +108,6 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 - Charte graphique : {baseURL}/raw/master/docs/php/Charte%20graphique.pdf[ici]
 
 - Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
-
-- Lien du site web :
-* http://192.168.224.138/~SAESYS12/[Réseau filaire de l'IUT] 
-* http://193.54.227.164/~SAESYS12/[Autre réseau]
 
 
 === Base de données
