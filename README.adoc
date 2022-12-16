@@ -39,6 +39,9 @@ Projet réalisé par :
 - https://github.com/Falettiattendre[Léo Faletti]
 - https://github.com/ludovic-estival[Ludovic Estival]
 
+Tuteur enseignant de l’équipe :
+
+- mailto:teste@irit.fr[Olivier Teste]
 
 == Hiérarchie du dépôt
 
