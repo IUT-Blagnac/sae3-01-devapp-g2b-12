@@ -20,7 +20,6 @@
 
 // Tags
 image:{baseURL}/actions/workflows/codeql-python.yml/badge.svg[Quality Python]
-image:{baseURL}/actions/workflows/codeql-java.yml/badge.svg[Quality Java]
 image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
@@ -49,7 +48,6 @@ Projet réalisé par :
 *** `us.yml` => template pour les User Stories
 *** `bug.yml` => template pour les issues de bug report
 ** `workflows` => repertoire qui contient les actions à lancer à chaque push sur le repo :
-*** `codeql-java.yml` => script pour analyser l'application Java avec https://docs.github.com/fr/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql[CodeQL]
 *** `codeql-python.yml` => script pour analyser l'application Python avec https://docs.github.com/fr/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql[CodeQL]
 - `app` => répertoire contenant le code des applications :
 ** `java` => code de l'application Java
