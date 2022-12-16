@@ -19,9 +19,8 @@
 = SAÉ 3.01 2022-2023
 
 // Tags
-//image:{baseURL}/actions/workflows/build.yml/badge.svg[Build]
-//image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
-//image:{baseURL}/actions/workflows/quality.yml/badge.svg[Quality]
+image:{baseURL}/actions/workflows/codeql-java.yml/badge.svg[Quality Java]
+image:{baseURL}/actions/workflows/codeql-python.yml/badge.svg[Quality Python]
 image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
