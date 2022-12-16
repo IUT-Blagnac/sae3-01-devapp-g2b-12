@@ -25,7 +25,7 @@ image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
 - Version courante : {baseURL}/releases/tag/v3[v3]
-- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 100 % US
+- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 94 % US
 - Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici]
 - Projet : https://github.com/orgs/IUT-Blagnac/projects/23[ici]
 
@@ -116,6 +116,10 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
 
 - Le script de création de la base de données se trouve {baseURL}/raw/master/docs/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
+
+- Le script d'insertion dans la base de données se trouve {baseURL}/raw/master/docs/bd/Script%20d%27insertion%20dans%20la%20base.sql[ici].
+
+- Le document de création et d'insertion se trouve {baseURL}/raw/master/docs/bd/Cr%C3%A9ation%20et%20insertion%20de%20la%20base.pdf[ici]
 
 === Évaluations hebdomadaires
 
