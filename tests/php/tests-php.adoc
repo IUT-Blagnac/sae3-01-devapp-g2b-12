@@ -42,3 +42,31 @@ Ainsi, dans ce test, un compte peut être "correct" ou "incorrect".
 |Création compte agriculteur correct |Redirection vers accueil avec modification du header | A TESTER
 |Création compte incorrect |Redirection vers formulaire avec message d'erreur | A TESTER
 |=======
+
+== Test 4: rechercher un produit par son nom
+
+L'utilisateur entre le nom d'un produit dans la barre de recherche.
+
+== Test 5: rechercher un produit avec des filtres de recherche
+
+L'utilisateur cherche un produit par son nom puis filtre les résultats de la recherche. Par exemple, il peut filtrer par sous-catégorie ou par région.
+
+== Test 6: consulter la page d'un produit
+
+L'utilisateur peut accéder aux informations d'un produit en cliquant dessus.
+
+== Test 7: gestion et mise à jour du panier
+
+L'utilisateur peut enregistrer plusieurs articles dans son panier. Il peut aussi supprimer des articles ou augmenter la quantité.
+
+== Test 8: mise à jour d'un compte
+
+Un utilisateur connecté, via un formulaire, peut modifier les informations de son compte.
+
+== Test 9: un agriculteur peut ajouter ses produits sur le site
+
+Une fois connecté, un agriculteur peut remplir un formulaire pour ajouter ses produits sur le site.
+
+== Test 10: un agriculteur peut consulter et modifié les produits ajoutés
+
+Un agriculteur connecté peut accéder à la liste de ses produits et les modifier.
