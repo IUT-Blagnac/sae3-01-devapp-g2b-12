@@ -45,28 +45,72 @@ Ainsi, dans ce test, un compte peut être "correct" ou "incorrect".
 
 == Test 4: rechercher un produit par son nom
 
-L'utilisateur entre le nom d'un produit dans la barre de recherche.
+L'utilisateur entre le nom d'un produit dans la barre de recherche et appuie sur le bouton de recherche.
+
+|=======
+|Test |Attendu |Résultat
+|Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| A TESTER
+|Saisie du nom d'un article non présent dans la BD |Afficgae page de résultat vide avec message erreur| A TESTER
+|Aucune saisie de nom |Affichage page de résultat vide| A TESTER
+|=======
 
 == Test 5: rechercher un produit avec des filtres de recherche
 
-L'utilisateur cherche un produit par son nom puis filtre les résultats de la recherche. Par exemple, il peut filtrer par sous-catégorie ou par région.
+Après la recherche par nom de produit, l'utilisateur filtre les résultats de la recherche. Par exemple, il peut filtrer par sous-catégorie ou par région.
+
+|=======
+|Test |Attendu |Résultat
+|Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | A TESTER
+|Recherche d'un produit non existant puis filtre par région |Affichage message erreur | A TESTER 
+|Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | A TESTER 
+|=======
 
 == Test 6: consulter la page d'un produit
 
 L'utilisateur peut accéder aux informations d'un produit en cliquant dessus.
 
+|=======
+|Test |Attendu |Résultat
+| | |
+| | | 
+|=======
+
 == Test 7: gestion et mise à jour du panier
 
 L'utilisateur peut enregistrer plusieurs articles dans son panier. Il peut aussi supprimer des articles ou augmenter la quantité.
+
+|=======
+|Test |Attendu |Résultat
+| | |
+| | | 
+|=======
 
 == Test 8: mise à jour d'un compte
 
 Un utilisateur connecté, via un formulaire, peut modifier les informations de son compte.
 
+|=======
+|Test |Attendu |Résultat
+| | |
+| | | 
+|=======
+
 == Test 9: un agriculteur peut ajouter ses produits sur le site
 
 Une fois connecté, un agriculteur peut remplir un formulaire pour ajouter ses produits sur le site.
 
-== Test 10: un agriculteur peut consulter et modifié les produits ajoutés
+|=======
+|Test |Attendu |Résultat
+| | |
+| | | 
+|=======
+
+== Test 10: un agriculteur peut consulter et modifier les produits ajoutés
 
 Un agriculteur connecté peut accéder à la liste de ses produits et les modifier.
+
+|=======
+|Test |Attendu |Résultat
+| | |
+| | | 
+|=======
