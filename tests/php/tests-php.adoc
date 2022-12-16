@@ -12,17 +12,33 @@ Ces tests ont pour but de vérifier les fonctionnalités implémentées sur le s
 
 == Test 1: connexion au site
 
-=== Connexion en tant que client
+L'utilisateur entre son login (adresse-mail) et son mot de passe dans le formulaire de connexion.
 
-=== Connexion en tant qu'agriculteur
+|=======
+|Test |Attendu |Résultat
+|Connexion avec compte client |Redirection vers accueil avec modification du header |Ok
+|Connexion avec compte agriculteur |Redirection vers accueil avec modification du header |Ok
+|Connexion avec compte inexistant |Redirection vers formulaire de connexion avec message d'erreur |Ok mais rajouter message d'erreur
+|=======
 
-=== Connexion avec un utilisateur non inscrit
+== Test 2: déconnexion du site
 
+L'utilisateur appuie sur le bouton de déconnexion du header.
 
+|=======
+|Test |Attendu |Résultat
+|Déconnexion du site |Redirection vers accueil avec modification du header | Ok
+|=======
 
-== Test 2: inscription au site
+== Test 3: inscription au site
 
-=== Inscription en tant que client
+L'utilisateur entre différentes informations via un formulaire de création de compte.
+Les données entrées sont vérifiées par des expressions régulières pour valider ou non la création d'un compte.
+Ainsi, dans ce test, un compte peut être "correct" ou "incorrect".
 
-=== Inscription en tant qu'agriculteur
-
+|=======
+|Test |Attendu |Résultat
+|Création compte client correct |Redirection vers accueil avec modification du header | A TESTER
+|Création compte agriculteur correct |Redirection vers accueil avec modification du header | A TESTER
+|Création compte incorrect |Redirection vers formulaire avec message d'erreur | A TESTER
+|=======
