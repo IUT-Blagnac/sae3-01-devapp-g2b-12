@@ -108,7 +108,7 @@ IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même ré
 
 - Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
 
-- Code commenté de la connexion à compte: {baseURL}/raw/master/docs/php/PHP - Session _ cookie.pdf[ici]
+- Code commenté de la connexion à compte: {baseURL}/raw/master/docs/php/PHP%-%Session%_%cookie.pdf[ici]
 
 
 === Base de données
