@@ -24,7 +24,7 @@ image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL
 
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
-- Version courante : {baseURL}/releases/tag/v3[v3]
+- Version courante : {baseURL}/releases/tag/v4[v4]
 - User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 94 % US
 - Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici]
 - Projet : https://github.com/orgs/IUT-Blagnac/projects/23[ici]
