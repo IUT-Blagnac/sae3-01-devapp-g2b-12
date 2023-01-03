@@ -1,6 +1,5 @@
 package view;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,15 +38,15 @@ public class MainPageController implements Initializable {
 
     private JsonObject config;
     
-    private HashMap<Integer, LineChart<Double, Double>> graphMap = new HashMap<>();
+    private HashMap<String, LineChart<Double, Double>> dataChart = new HashMap<>();
 
-    private HashMap<Integer, XYChart.Series<Double, Double>> graphSeries = new HashMap<>();
-    
-    private HashMap<CheckBox, TextField> dataValues = new HashMap<>();
-    
-    private HashMap<String, CheckBox> dataCheckboxes = new HashMap<>();
+    private HashMap<String, String> dataGraphName = new HashMap<>();
 
-    private HashMap<String, String> dataGraph = new HashMap<>();
+    private HashMap<String, XYChart.Series<Double, Double>> dataSeries = new HashMap<>();
+    
+    private HashMap<CheckBox, TextField> dataTextField = new HashMap<>();
+    
+    private HashMap<String, CheckBox> dataCheckbox = new HashMap<>();
 
     @FXML
     private AnchorPane devicesAP;
@@ -58,64 +57,64 @@ public class MainPageController implements Initializable {
     int nextDeviceY = 0;
     
     @FXML
-    private CheckBox activityCheckbox;
+    private CheckBox activityCB;
 
     @FXML
-    private TextField activityValue;
+    private TextField activityV;
 
     @FXML
-    private CheckBox co2Checkbox;
+    private CheckBox co2CB;
 
     @FXML
-    private TextField co2Value;
+    private TextField co2V;
 
     @FXML
-    private CheckBox humidityCheckbox;
+    private CheckBox humidityCB;
 
     @FXML
-    private TextField humidityValue;
+    private TextField humidityV;
 
     @FXML
-    private CheckBox illuminationCheckbox;
+    private CheckBox illuminationCB;
 
     @FXML
-    private TextField illuminationValue;
+    private TextField illuminationV;
 
     @FXML
-    private CheckBox infraredCheckbox;
+    private CheckBox infraredCB;
 
     @FXML
-    private TextField infraredValue;
+    private TextField infraredV;
 
     @FXML
-    private CheckBox infraredAndVisibleCheckbox;
+    private CheckBox infraredAndVisibleCB;
 
     @FXML
-    private TextField infraredAndVisibleValue;
+    private TextField infraredAndVisibleV;
 
     @FXML
-    private CheckBox pressureCheckbox;
+    private CheckBox pressureCB;
 
     @FXML
-    private TextField pressureValue;
+    private TextField pressureV;
 
     @FXML
-    private CheckBox temperatureCheckbox;
+    private CheckBox temperatureCB;
 
     @FXML
-    private TextField temperatureValue;
+    private TextField temperatureV;
 
     @FXML
-    private CheckBox tvocCheckbox;
+    private CheckBox tvocCB;
 
     @FXML
-    private TextField tvocValue;
+    private TextField tvocV;
 
     @FXML
-    private TextField frequencyTF;
+    private TextField frequencyV;
     
     @FXML
-    private GridPane graphGrid;
+    private GridPane graphGP;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -127,37 +126,37 @@ public class MainPageController implements Initializable {
 		}
 
 		// Relie chaque donnée à sa CheckBox
-		dataCheckboxes.put("activity", activityCheckbox);
-		dataCheckboxes.put("co2", co2Checkbox);
-		dataCheckboxes.put("humidity", humidityCheckbox);
-		dataCheckboxes.put("illumination", illuminationCheckbox);
-		dataCheckboxes.put("infrared", infraredCheckbox);
-		dataCheckboxes.put("infrared_and_visible", infraredAndVisibleCheckbox);
-		dataCheckboxes.put("pressure", pressureCheckbox);
-		dataCheckboxes.put("temperature", temperatureCheckbox);
-		dataCheckboxes.put("tvoc", tvocCheckbox);
+		dataCheckbox.put("activity", activityCB);
+		dataCheckbox.put("co2", co2CB);
+		dataCheckbox.put("humidity", humidityCB);
+		dataCheckbox.put("illumination", illuminationCB);
+		dataCheckbox.put("infrared", infraredCB);
+		dataCheckbox.put("infrared_and_visible", infraredAndVisibleCB);
+		dataCheckbox.put("pressure", pressureCB);
+		dataCheckbox.put("temperature", temperatureCB);
+		dataCheckbox.put("tvoc", tvocCB);
 
 		// Relie chaque CheckBox à son TextField
-		dataValues.put(activityCheckbox, activityValue);
-		dataValues.put(co2Checkbox, co2Value);
-		dataValues.put(humidityCheckbox, humidityValue);
-		dataValues.put(illuminationCheckbox, illuminationValue);
-		dataValues.put(infraredCheckbox, infraredValue);
-		dataValues.put(infraredAndVisibleCheckbox, infraredAndVisibleValue);
-		dataValues.put(pressureCheckbox, pressureValue);
-		dataValues.put(temperatureCheckbox, temperatureValue);
-		dataValues.put(tvocCheckbox, tvocValue);
+		dataTextField.put(activityCB, activityV);
+		dataTextField.put(co2CB, co2V);
+		dataTextField.put(humidityCB, humidityV);
+		dataTextField.put(illuminationCB, illuminationV);
+		dataTextField.put(infraredCB, infraredV);
+		dataTextField.put(infraredAndVisibleCB, infraredAndVisibleV);
+		dataTextField.put(pressureCB, pressureV);
+		dataTextField.put(temperatureCB, temperatureV);
+		dataTextField.put(tvocCB, tvocV);
 
 		// Relie chaque donnée à son nom sur les graphes
-		dataGraph.put("activity", "Activité");
-		dataGraph.put("co2", "CO2");
-		dataGraph.put("humidity", "Humidité");
-		dataGraph.put("illumination", "Éclairage");
-		dataGraph.put("infrared", "Infrarouge (IR)");
-		dataGraph.put("infrared_and_visible", "IR et visible");
-		dataGraph.put("pressure", "Pression");
-		dataGraph.put("temperature", "Temperature");
-		dataGraph.put("tvoc", "TVOC");
+		dataGraphName.put("activity", "Activité");
+		dataGraphName.put("co2", "CO2");
+		dataGraphName.put("humidity", "Humidité");
+		dataGraphName.put("illumination", "Éclairage");
+		dataGraphName.put("infrared", "Infrarouge (IR)");
+		dataGraphName.put("infrared_and_visible", "IR et visible");
+		dataGraphName.put("pressure", "Pression");
+		dataGraphName.put("temperature", "Temperature");
+		dataGraphName.put("tvoc", "TVOC");
 		
 		loadConfig();
 	}
@@ -180,26 +179,28 @@ public class MainPageController implements Initializable {
     	}
 
     	for (int i = 0; i < dataWanted.size(); i ++) {
-    		CheckBox ckbx = dataCheckboxes.get(dataWanted.get(i).getAsString());
-        	TextField txfd = dataValues.get(ckbx);
+    		CheckBox ckbx = dataCheckbox.get(dataWanted.get(i).getAsString());
+        	TextField txfd = dataTextField.get(ckbx);
         	ckbx.setSelected(true);
         	txfd.setDisable(false);
         	txfd.setText(alertValues.get(i).getAsString());
 
-        	NumberAxis xAxis = new NumberAxis("N° valeur", 1, 10, 5);
-    		NumberAxis yAxis = new NumberAxis(dataGraph.get(dataWanted.get(i).getAsString()), 0, 150, 50);
+        	NumberAxis xAxis = new NumberAxis();
+        	xAxis.setLabel("N° valeur");
+    		NumberAxis yAxis = new NumberAxis();
+    		yAxis.setLabel(dataGraphName.get(dataWanted.get(i).getAsString()));
 
     		LineChart<Double, Double> graph = new LineChart(xAxis, yAxis);
 
     		XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
 
     		graph.getData().add(series);
+    		
+    		dataSeries.put(dataWanted.get(i).getAsString(), series);
 
-    		graphSeries.put(i, series); // TODO CHNAGER OHLA
+    		dataChart.put(dataWanted.get(i).getAsString(), graph);
 
-    		graphMap.put(i, graph);
-
-    		graphGrid.add(graph, gridX, gridY);
+    		graphGP.add(graph, gridX, gridY);
     		if (gridX == 2) {
     			gridY ++;
     			gridX = 0;
@@ -208,11 +209,11 @@ public class MainPageController implements Initializable {
     		}
     	}
 
-    	frequencyTF.setText(String.valueOf(frequency));
+    	frequencyV.setText(String.valueOf(frequency));
 
 		// Lecture répétée du fichier JSON
     	if (frequency == 0) {
-    		new Timer().schedule(lecture, 0, 5*1000);
+    		new Timer().schedule(lecture, 0, 30*1000);
     	} else {
     		new Timer().schedule(lecture, 0, frequency*60*1000);
     	}
@@ -261,34 +262,34 @@ public class MainPageController implements Initializable {
 		devicesSP.setHmax(devicesAP.getPrefHeight());
     }
 
-    // Classe qui lit les données du fichier JSON
+    // Classe qui met � jour les graphiques en fonction du fichier JSON
     public class UpdateChart extends TimerTask {
         public void run() {
             try {
-            	System.out.println("-----lecture-----");
+                Reader dataFileReader = new FileReader("data.json");
 
-                Reader frd = new FileReader("data.json");
+                JsonObject jsObj = (JsonObject) JsonParser.parseReader(dataFileReader);
 
-                JsonObject jsObj = (JsonObject) JsonParser.parseReader(frd);
+            	for (String dataName : jsObj.keySet()) {
+            		if (dataSeries.containsKey(dataName)) {
+	            		XYChart.Series<Double, Double> series = dataSeries.get(dataName);
 
-                Platform.runLater(() -> {
-                	System.out.println("-----chose-----");
-                	for (int i = 0; i < graphSeries.size(); i ++) {
-                		XYChart.Series<Double, Double> series = graphSeries.get(i);
+	            		double valeur = jsObj.get(dataName).getAsDouble();
 
-	                    series.getData().add(new XYChart.Data(series.getData().size()+1, 100));
-                	}
-                });
+	            		int num = series.getData().size();
 
+	                    series.getData().add(new XYChart.Data(num, valeur));
+            		}
+            	}
             } catch (Exception e) {
+            	System.out.println("Erreur lors de la mise � jour des graphiques.");
                 e.printStackTrace();
             }
         }
     }
 
-    public void arretLecture(){
+    public void arretLecture() {
         lecture.cancel();
-        System.out.println("-----fin lecture-----");
     }
 
     @FXML
@@ -316,20 +317,20 @@ public class MainPageController implements Initializable {
     	config.add("alert_values", new JsonArray());
     	JsonArray data_wanted = config.getAsJsonArray("data_wanted");
     	JsonArray alert_values = config.getAsJsonArray("alert_values");
-    	for (Entry<String, CheckBox> me : dataCheckboxes.entrySet()) {
+    	for (Entry<String, CheckBox> me : dataCheckbox.entrySet()) {
     		if (me.getValue().isSelected()) {
     			data_wanted.add(me.getKey());
-    			alert_values.add(dataValues.get(me.getValue()).getText());
+    			alert_values.add(new JsonPrimitive(Integer.valueOf(dataTextField.get(me.getValue()).getText())));
     		}
     	}
     	
     	// frequency
     	int frequency;
-    	if (frequencyTF.getText().equals("")) {
-    		frequencyTF.setText("0");
+    	if (frequencyV.getText().equals("")) {
+    		frequencyV.setText("0");
     		frequency = 0;
     	} else {
-    		frequency = Integer.valueOf(frequencyTF.getText());
+    		frequency = Integer.valueOf(frequencyV.getText());
     	}
     	config.add("frequency", new JsonPrimitive(frequency));
     	
@@ -367,7 +368,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void onActionCheckBox(ActionEvent event) {
     	CheckBox ckbx = (CheckBox) event.getSource();
-    	TextField txfd = dataValues.get(ckbx);
+    	TextField txfd = dataTextField.get(ckbx);
 		if (ckbx.isSelected()) {
 			txfd.setDisable(false);
 			txfd.setText("0");
