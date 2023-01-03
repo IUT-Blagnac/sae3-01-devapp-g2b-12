@@ -135,8 +135,31 @@ ifndef::env-github[]
 ++++
 endif::[]
 
-=Sprint 3 retour :
-Liens à jour dans le readme. Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US. Différencier IOT et site WEB. Identifier les sprints.Identifier à quelle US se rattache une tâche. release Ecommerce ? rien sur les tests
+==== Retour Sprint 3
+Liens à jour dans le readme.
+
+Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US.
+
+Différencier IOT et site WEB.
+
+Identifier les sprints.Identifier à quelle US se rattache une tâche.
+
+Release Ecommerce ?
+
+Rien sur les tests.
+
+==== Retour Sprint 4
+Documentations : J'ai un squelette vide, à compléter et versionner !
+
+Tests : ok
+
+Livrables : lien vers le site c'est bien, pensez à mettre un lien vers les codes sources versionnés. Je n'ai pas le lien pour IOT.
+
+Attention à partir de maintenant on ne fouille plus dans vos dépôts !
+
+Il me manque donc les lies vers : les backlogs produits, les backlogs de sprint !!
+
+La numérotation des sprints suit ce que vous a dit M. Bruel on vient de terminer le sprint 4, on prévois le sprint 5. Pensez à garder une trace des sprints terminés dans Github !
 
 == Tests
 
