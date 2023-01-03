@@ -83,7 +83,7 @@ Vous pouvez configurer plusieurs choses :
 
 Pour exécuter cette application il vous faut deux fichiers :
 
-- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar] (pas encore fait)
+- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar]
 
 - un fichier Python qui recouillera les données des capteurs : {baseURL}/raw/master/app/python/main.py[main.py]
 
