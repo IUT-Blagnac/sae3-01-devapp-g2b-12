@@ -24,10 +24,10 @@ image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL
 
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
-- Version courante : {baseURL}/releases/tag/v4[v4]
-- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 94 % US
-- Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici]
-- Projet : https://github.com/orgs/IUT-Blagnac/projects/23[ici]
+- Version courante : {baseURL}/releases/tag/v5[v5]
+- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 94 % US (17/18)
+- Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici], reste 91 % (21/23)
+- Backlog produit et backlog de sprint : https://github.com/orgs/IUT-Blagnac/projects/23[ici]
 
 toc::[]
 
@@ -53,7 +53,9 @@ Tuteur enseignant de l’équipe :
 ** `workflows` => repertoire qui contient les actions à lancer à chaque push sur le repo :
 *** `codeql-python.yml` => script pour analyser l'application Python avec https://docs.github.com/fr/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql[CodeQL]
 - `app` => répertoire contenant le code des applications :
+** `bd` => scripts SQL de la BD
 ** `java` => code de l'application Java
+** `php` => sources du site web
 ** `python` => code de l'application Python
 - `docs` => répertoire contenant les documents/documentations :
 ** `moa` => documents de la MOA
@@ -87,21 +89,31 @@ Pour exécuter cette application il vous faut deux fichiers :
 
 IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
+Sources de la version 5 :
+
+- Java : {baseURL}/tree/master/app/java/src/[ici]
+- Python : {baseURL}/tree/master/app/python/[ici]
+
 === Site web
 
-- Lien du site web :
-* http://192.168.224.138/~SAESYS12/[Réseau filaire de l'IUT] 
-* http://193.54.227.164/~SAESYS12/[Autre réseau]
+Lien du site web :
+
+- http://192.168.224.139/~SAESYS12/[Réseau filaire de l'IUT] 
+- http://193.54.227.164/~SAESYS12/[Autre réseau]
+
+Sources de la version 5 : {baseURL}/tree/master/app/php/[ici]
 
 == Documentations
 
 === IoT
 
+- Documentation technique du programme Python {baseURL}/blob/master/docs/python/python_tech.adoc[ici]
+
+WARNING: LES DOCUMENTATIONS JAVA NE SONT PAS ENCORE ÉCRITES, ELLES SONT MARQUÉES ICI À TITRE INDICATIF
+
 - Documentation utilisateur de l'application Java {baseURL}/blob/master/docs/java/java_user.adoc[ici] (pas encore fait)
 
 - Documentation technique de l'application Java {baseURL}/blob/master/docs/java/java_tech.adoc[ici] (pas encore fait)
-
-- Documentation technique du programme Python {baseURL}/blob/master/docs/python/python_tech.adoc[ici]
 
 === Site web
 
@@ -136,28 +148,30 @@ ifndef::env-github[]
 endif::[]
 
 ==== Retour Sprint 3
+
 Liens à jour dans le readme.
 
 Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US.
 
 Différencier IOT et site WEB.
 
-Identifier les sprints.Identifier à quelle US se rattache une tâche.
+Identifier les sprints.
+
+Identifier à quelle US se rattache une tâche.
 
 Release Ecommerce ?
 
 Rien sur les tests.
 
 ==== Retour Sprint 4
+
 Documentations : J'ai un squelette vide, à compléter et versionner !
 
 Tests : ok
 
 Livrables : lien vers le site c'est bien, pensez à mettre un lien vers les codes sources versionnés. Je n'ai pas le lien pour IOT.
 
-Attention à partir de maintenant on ne fouille plus dans vos dépôts !
-
-Il me manque donc les lies vers : les backlogs produits, les backlogs de sprint !!
+Attention à partir de maintenant on ne fouille plus dans vos dépôts ! Il me manque donc les liens vers : les backlogs produits, les backlogs de sprint !!
 
 La numérotation des sprints suit ce que vous a dit M. Bruel on vient de terminer le sprint 4, on prévois le sprint 5. Pensez à garder une trace des sprints terminés dans Github !
 
