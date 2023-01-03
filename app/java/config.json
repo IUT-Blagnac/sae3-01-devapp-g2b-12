@@ -1,0 +1,24 @@
+{
+  "devices": [
+    "#"
+  ],
+  "data_wanted": [
+    "tvoc",
+    "activity",
+    "co2",
+    "infrared_and_visible",
+    "infrared",
+    "pressure"
+  ],
+  "alert_values": [
+    "0",
+    "13",
+    "600",
+    "0",
+    "0",
+    "0"
+  ],
+  "frequency": 0,
+  "host": "chirpstack.iut-blagnac.fr",
+  "port": 1883
+}

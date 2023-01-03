@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
@@ -33,22 +35,18 @@ import com.google.gson.JsonPrimitive;
 
 public class MainPageController implements Initializable {
 
-    private XYChart.Series seriesTemp = new XYChart.Series();
-
-    private XYChart.Series seriesHumi = new XYChart.Series();
-
-    private XYChart.Series seriesC02 = new XYChart.Series();
-
-    private TimerTask lecture = new ReadTask();
+	private TimerTask lecture = new UpdateChart();
 
     private JsonObject config;
     
-    private HashMap<String, LineChart<Double, Double>> graphMap = new HashMap<>();
+    private HashMap<Integer, LineChart<Double, Double>> graphMap = new HashMap<>();
+
+    private HashMap<Integer, XYChart.Series<Double, Double>> graphSeries = new HashMap<>();
     
     private HashMap<CheckBox, TextField> dataValues = new HashMap<>();
     
     private HashMap<String, CheckBox> dataCheckboxes = new HashMap<>();
-    
+
     private HashMap<String, String> dataGraph = new HashMap<>();
 
     @FXML
@@ -122,7 +120,7 @@ public class MainPageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			config = JsonParser.parseReader(new FileReader("src/config.json")).getAsJsonObject();
+			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
 		} catch (Exception e) {
 			System.out.println("Erreur lors du chargement de la configuration.");
 			e.printStackTrace();
@@ -193,7 +191,13 @@ public class MainPageController implements Initializable {
 
     		LineChart<Double, Double> graph = new LineChart(xAxis, yAxis);
 
-    		graphMap.put(dataWanted.get(i).getAsString(), graph);
+    		XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
+
+    		graph.getData().add(series);
+
+    		graphSeries.put(i, series); // TODO CHNAGER OHLA
+
+    		graphMap.put(i, graph);
 
     		graphGrid.add(graph, gridX, gridY);
     		if (gridX == 2) {
@@ -207,9 +211,11 @@ public class MainPageController implements Initializable {
     	frequencyTF.setText(String.valueOf(frequency));
 
 		// Lecture répétée du fichier JSON
-        new Timer().schedule(lecture, 0, frequency*60*1000);
-
-        modifierGraphiques();
+    	if (frequency == 0) {
+    		new Timer().schedule(lecture, 0, 5*1000);
+    	} else {
+    		new Timer().schedule(lecture, 0, frequency*60*1000);
+    	}
 	}
     
     private void createNewDevice(ActionEvent event, String value, String button) {
@@ -255,80 +261,23 @@ public class MainPageController implements Initializable {
 		devicesSP.setHmax(devicesAP.getPrefHeight());
     }
 
-    //Modifie les graphiques
-    private void modifierGraphiques() {
-        // Titre des axes
-        /*this.graph1.getYAxis().setLabel("Temps (minutes)");
-        this.graph1.getXAxis().setLabel("Température");
-
-        this.graph2.getYAxis().setLabel("Temps (minutes)");
-        this.graph2.getXAxis().setLabel("Humidité");
-
-        this.graph3.getYAxis().setLabel("Temps (minutes)");
-        this.graph3.getXAxis().setLabel("Taux C02");
-
-        // Séries de données
-        this.seriesTemp.setName("Température en fonction du temps");
-        this.seriesHumi.setName("Humidité en fonction du temps");
-        this.seriesC02.setName("C02 en fonction du temps");
-
-        // Ajout des séries aux graphiques
-        this.graph1.getData().add(this.seriesTemp);
-        this.graph2.getData().add(this.seriesHumi);
-        this.graph3.getData().add(this.seriesC02);*/
-
-    }
-
-    // Ajout d'une nouvelle valeur de température
-    public void addTemp(double d) {
-        Calendar calendar = GregorianCalendar.getInstance();
-        int min = calendar.get(Calendar.MINUTE);
-
-        XYChart.Data donnee = new XYChart.Data(Math.random()*d, min);
-
-        this.seriesTemp.getData().add(donnee);
-    }
-
-    // Ajout d'une nouvelle valeur d'humidité'
-    public void addHumi(double d) {
-        Calendar calendar = GregorianCalendar.getInstance();
-        int min = calendar.get(Calendar.MINUTE);
-
-        XYChart.Data donnee = new XYChart.Data(Math.random()*d, min);
-
-        this.seriesHumi.getData().add(donnee);
-    }
-
-    // Ajout d'une nouvelle valeur de C02
-    public void addCO2(double d) {
-        Calendar calendar = GregorianCalendar.getInstance();
-        int min = calendar.get(Calendar.MINUTE);
-
-        XYChart.Data donnee = new XYChart.Data(Math.random()*d, min);
-
-        this.seriesC02.getData().add(donnee);
-    }
-
     // Classe qui lit les données du fichier JSON
-    public class ReadTask extends TimerTask {
+    public class UpdateChart extends TimerTask {
         public void run() {
             try {
-                Reader rd = new FileReader("src/data.json");
+            	System.out.println("-----lecture-----");
 
-                JsonObject jsObj = (JsonObject) JsonParser.parseReader(rd);
+                Reader frd = new FileReader("data.json");
 
-                double temp = jsObj.get("temperature").getAsDouble();
-                double humi = jsObj.get("humidity").getAsDouble();
-                double co2 = jsObj.get("co2").getAsDouble();
-
-                // System.out.println("Température: " + temp);
-                // System.out.println("Humidité: " + humi);
-                // System.out.println("CO2: " + co2);
+                JsonObject jsObj = (JsonObject) JsonParser.parseReader(frd);
 
                 Platform.runLater(() -> {
-                    addTemp(temp);
-                    addHumi(humi);
-                    addCO2(co2);
+                	System.out.println("-----chose-----");
+                	for (int i = 0; i < graphSeries.size(); i ++) {
+                		XYChart.Series<Double, Double> series = graphSeries.get(i);
+
+	                    series.getData().add(new XYChart.Data(series.getData().size()+1, 100));
+                	}
                 });
 
             } catch (Exception e) {
@@ -339,6 +288,7 @@ public class MainPageController implements Initializable {
 
     public void arretLecture(){
         lecture.cancel();
+        System.out.println("-----fin lecture-----");
     }
 
     @FXML
@@ -388,19 +338,32 @@ public class MainPageController implements Initializable {
     	// port
     	config.add("port", new JsonPrimitive(1883));
 
+    	String message;
+    	AlertType type;
+
     	try {
 	    	Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-	
+
 	    	File file = new File("config.json");
-	
+
 			FileOutputStream out = new FileOutputStream(file);
 			out.write(gson.toJson(config).getBytes());
 			out.close();
+
+			message = "La configuration a bien �t� enregistr�e.\nElle sera effective au prochain d�marrage.";
+			type = AlertType.INFORMATION;
     	} catch (IOException e) {
     		e.printStackTrace();
+    		message = "Une erreur est survenue lors de l'enregistrement.";
+    		type = AlertType.ERROR;
     	}
+
+    	Alert alert = new Alert(type);
+    	alert.setTitle("Enregistrement");
+    	alert.setHeaderText(message);
+    	alert.showAndWait();
     }
-    
+
     @FXML
     private void onActionCheckBox(ActionEvent event) {
     	CheckBox ckbx = (CheckBox) event.getSource();
