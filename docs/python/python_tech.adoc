@@ -16,7 +16,7 @@
 
 //----------------------------------------
 
-= Documentation technique de l'application Python
+= Documentation technique V1 de l'application Python
 
 toc::[]
 
