@@ -3,26 +3,16 @@
     "#"
   ],
   "data_wanted": [
-    "tvoc",
-    "activity",
     "illumination",
     "co2",
     "temperature",
-    "humidity",
-    "infrared_and_visible",
-    "infrared",
     "pressure"
   ],
   "alert_values": [
-    0,
-    13,
-    0,
-    400,
-    15,
-    40,
-    0,
-    0,
-    0
+    10.5,
+    455,
+    15.5,
+    5.6
   ],
   "frequency": 0,
   "host": "chirpstack.iut-blagnac.fr",

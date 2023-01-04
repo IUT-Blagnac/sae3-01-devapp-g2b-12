@@ -54,6 +54,7 @@
       <Text layoutX="283.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppb" />
       <Text layoutX="25.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence" />
       <TextField fx:id="frequencyV" layoutX="91.0" layoutY="406.0" prefHeight="25.0" prefWidth="45.0" />
+      <Text layoutX="143.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
       <Button layoutX="105.0" layoutY="529.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="97.0" text="Enregistrer" />
       <Text layoutX="324.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphiques des données">
          <font>

@@ -34,19 +34,21 @@ import com.google.gson.JsonPrimitive;
 
 public class MainPageController implements Initializable {
 
-	private TimerTask lecture = new UpdateChart();
+	private TimerTask chartUpdater = new ChartUpdater();
+
+	private Timer scheduler = new Timer();
 
     private JsonObject config;
     
-    private HashMap<String, LineChart<Double, Double>> dataChart = new HashMap<>();
+    private HashMap<String, LineChart<Integer, Double>> dataChart = new HashMap<>();
 
-    private HashMap<String, String> dataGraphName = new HashMap<>();
+    private HashMap<String, String> dataChartName = new HashMap<>();
 
-    private HashMap<String, XYChart.Series<Double, Double>> dataSeries = new HashMap<>();
+    private HashMap<String, XYChart.Series<Integer, Double>> dataSeries = new HashMap<>();
     
-    private HashMap<CheckBox, TextField> dataTextField = new HashMap<>();
-    
-    private HashMap<String, CheckBox> dataCheckbox = new HashMap<>();
+    private HashMap<String, CheckBox> dataCB = new HashMap<>();
+
+    private HashMap<CheckBox, TextField> dataCBtoTF = new HashMap<>();
 
     @FXML
     private AnchorPane devicesAP;
@@ -54,7 +56,7 @@ public class MainPageController implements Initializable {
     @FXML
     private ScrollPane devicesSP;
 
-    int nextDeviceY = 0;
+    private int nextDeviceY = 0;
     
     @FXML
     private CheckBox activityCB;
@@ -118,47 +120,46 @@ public class MainPageController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
-		} catch (Exception e) {
-			System.out.println("Erreur lors du chargement de la configuration.");
-			e.printStackTrace();
-		}
-
 		// Relie chaque donnée à sa CheckBox
-		dataCheckbox.put("activity", activityCB);
-		dataCheckbox.put("co2", co2CB);
-		dataCheckbox.put("humidity", humidityCB);
-		dataCheckbox.put("illumination", illuminationCB);
-		dataCheckbox.put("infrared", infraredCB);
-		dataCheckbox.put("infrared_and_visible", infraredAndVisibleCB);
-		dataCheckbox.put("pressure", pressureCB);
-		dataCheckbox.put("temperature", temperatureCB);
-		dataCheckbox.put("tvoc", tvocCB);
+		dataCB.put("activity", activityCB);
+		dataCB.put("co2", co2CB);
+		dataCB.put("humidity", humidityCB);
+		dataCB.put("illumination", illuminationCB);
+		dataCB.put("infrared", infraredCB);
+		dataCB.put("infrared_and_visible", infraredAndVisibleCB);
+		dataCB.put("pressure", pressureCB);
+		dataCB.put("temperature", temperatureCB);
+		dataCB.put("tvoc", tvocCB);
 
 		// Relie chaque CheckBox à son TextField
-		dataTextField.put(activityCB, activityV);
-		dataTextField.put(co2CB, co2V);
-		dataTextField.put(humidityCB, humidityV);
-		dataTextField.put(illuminationCB, illuminationV);
-		dataTextField.put(infraredCB, infraredV);
-		dataTextField.put(infraredAndVisibleCB, infraredAndVisibleV);
-		dataTextField.put(pressureCB, pressureV);
-		dataTextField.put(temperatureCB, temperatureV);
-		dataTextField.put(tvocCB, tvocV);
+		dataCBtoTF.put(activityCB, activityV);
+		dataCBtoTF.put(co2CB, co2V);
+		dataCBtoTF.put(humidityCB, humidityV);
+		dataCBtoTF.put(illuminationCB, illuminationV);
+		dataCBtoTF.put(infraredCB, infraredV);
+		dataCBtoTF.put(infraredAndVisibleCB, infraredAndVisibleV);
+		dataCBtoTF.put(pressureCB, pressureV);
+		dataCBtoTF.put(temperatureCB, temperatureV);
+		dataCBtoTF.put(tvocCB, tvocV);
 
 		// Relie chaque donnée à son nom sur les graphes
-		dataGraphName.put("activity", "Activité");
-		dataGraphName.put("co2", "CO2");
-		dataGraphName.put("humidity", "Humidité");
-		dataGraphName.put("illumination", "Éclairage");
-		dataGraphName.put("infrared", "Infrarouge (IR)");
-		dataGraphName.put("infrared_and_visible", "IR et visible");
-		dataGraphName.put("pressure", "Pression");
-		dataGraphName.put("temperature", "Temperature");
-		dataGraphName.put("tvoc", "TVOC");
-		
-		loadConfig();
+		dataChartName.put("activity", "Activité");
+		dataChartName.put("co2", "CO2");
+		dataChartName.put("humidity", "Humidité");
+		dataChartName.put("illumination", "Éclairage");
+		dataChartName.put("infrared", "Infrarouge (IR)");
+		dataChartName.put("infrared_and_visible", "IR et visible");
+		dataChartName.put("pressure", "Pression");
+		dataChartName.put("temperature", "Temperature");
+		dataChartName.put("tvoc", "TVOC");
+
+		try {
+			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
+			loadConfig();
+		} catch (Exception e) {
+			System.out.println("Erreur lors du chargement de la configuration, fichier config.json inexistant ou autre problème.");
+			e.printStackTrace();
+		}
 	}
 
     private void loadConfig() {
@@ -170,6 +171,7 @@ public class MainPageController implements Initializable {
     	JsonArray alertValues = config.getAsJsonArray("alert_values");
     	int frequency = config.get("frequency").getAsInt();
 
+    	// devices
     	for (int i = 0; i < devices.size(); i ++) {
     		if (i == devices.size()-1) {
     			createNewDevice(null, devices.get(i).getAsString(), "+");
@@ -178,9 +180,10 @@ public class MainPageController implements Initializable {
     		}
     	}
 
+    	// data wanted + alert values
     	for (int i = 0; i < dataWanted.size(); i ++) {
-    		CheckBox ckbx = dataCheckbox.get(dataWanted.get(i).getAsString());
-        	TextField txfd = dataTextField.get(ckbx);
+    		CheckBox ckbx = dataCB.get(dataWanted.get(i).getAsString());
+        	TextField txfd = dataCBtoTF.get(ckbx);
         	ckbx.setSelected(true);
         	txfd.setDisable(false);
         	txfd.setText(alertValues.get(i).getAsString());
@@ -188,17 +191,17 @@ public class MainPageController implements Initializable {
         	NumberAxis xAxis = new NumberAxis();
         	xAxis.setLabel("N° valeur");
     		NumberAxis yAxis = new NumberAxis();
-    		yAxis.setLabel(dataGraphName.get(dataWanted.get(i).getAsString()));
+    		yAxis.setLabel(dataChartName.get(dataWanted.get(i).getAsString()));
 
-    		LineChart<Double, Double> graph = new LineChart(xAxis, yAxis);
+    		LineChart<Integer, Double> graph = new LineChart(xAxis, yAxis);
 
-    		XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
+    		XYChart.Series<Integer, Double> series = new XYChart.Series<Integer, Double>();
 
     		graph.getData().add(series);
-    		
-    		dataSeries.put(dataWanted.get(i).getAsString(), series);
 
     		dataChart.put(dataWanted.get(i).getAsString(), graph);
+
+    		dataSeries.put(dataWanted.get(i).getAsString(), series);
 
     		graphGP.add(graph, gridX, gridY);
     		if (gridX == 2) {
@@ -209,13 +212,14 @@ public class MainPageController implements Initializable {
     		}
     	}
 
+    	// frequency
     	frequencyV.setText(String.valueOf(frequency));
 
-		// Lecture répétée du fichier JSON
+		// Lecture répétée du fichier JSON, toutes les 30 secondes si la fréquence est à 0
     	if (frequency == 0) {
-    		new Timer().schedule(lecture, 0, 30*1000);
+    		scheduler.schedule(chartUpdater, 0, 30*1000);
     	} else {
-    		new Timer().schedule(lecture, 0, frequency*60*1000);
+    		scheduler.schedule(chartUpdater, 0, frequency*60*1000);
     	}
 	}
     
@@ -262,34 +266,35 @@ public class MainPageController implements Initializable {
 		devicesSP.setHmax(devicesAP.getPrefHeight());
     }
 
-    // Classe qui met � jour les graphiques en fonction du fichier JSON
-    public class UpdateChart extends TimerTask {
+    // Classe qui permet de mettre à jour les graphiques en fonction du fichier JSON
+    public class ChartUpdater extends TimerTask {
         public void run() {
             try {
+            	// lit le fichier des données
                 Reader dataFileReader = new FileReader("data.json");
-
                 JsonObject jsObj = (JsonObject) JsonParser.parseReader(dataFileReader);
-
+                // pour chaque donnée
             	for (String dataName : jsObj.keySet()) {
             		if (dataSeries.containsKey(dataName)) {
-	            		XYChart.Series<Double, Double> series = dataSeries.get(dataName);
-
+	            		// extrait la valeur
 	            		double valeur = jsObj.get(dataName).getAsDouble();
 
-	            		int num = series.getData().size();
-
-	                    series.getData().add(new XYChart.Data(num, valeur));
+	            		// l'ajoute au bon graphique
+	            		XYChart.Series<Integer, Double> series = dataSeries.get(dataName);
+	            		int numValue = series.getData().size();
+	                    series.getData().add(new XYChart.Data<Integer, Double>(numValue, valeur));
             		}
             	}
             } catch (Exception e) {
-            	System.out.println("Erreur lors de la mise � jour des graphiques.");
+            	System.out.println("Erreur lors de la mise à jour des graphiques :");
                 e.printStackTrace();
             }
         }
     }
 
     public void arretLecture() {
-        lecture.cancel();
+        chartUpdater.cancel();
+        scheduler.cancel();
     }
 
     @FXML
@@ -312,28 +317,39 @@ public class MainPageController implements Initializable {
     		device.setText("#");
     	}
     	
-    	// data
+    	// data wanted + alert values
     	config.add("data_wanted", new JsonArray());
     	config.add("alert_values", new JsonArray());
     	JsonArray data_wanted = config.getAsJsonArray("data_wanted");
     	JsonArray alert_values = config.getAsJsonArray("alert_values");
-    	for (Entry<String, CheckBox> me : dataCheckbox.entrySet()) {
+    	for (Entry<String, CheckBox> me : dataCB.entrySet()) {
     		if (me.getValue().isSelected()) {
     			data_wanted.add(me.getKey());
-    			alert_values.add(new JsonPrimitive(Integer.valueOf(dataTextField.get(me.getValue()).getText())));
+    			TextField dataTF = dataCBtoTF.get(me.getValue());
+    			if (dataTF.getText().equals("")) {
+    				dataTF.setText("0");
+    			}
+    			try {
+    				alert_values.add(new JsonPrimitive(Integer.valueOf(dataTF.getText())));
+				} catch (Exception e) {
+					alert_values.add(new JsonPrimitive(Double.valueOf(dataTF.getText())));
+				}
     		}
     	}
     	
     	// frequency
     	int frequency;
     	if (frequencyV.getText().equals("")) {
-    		frequencyV.setText("0");
-    		frequency = 0;
-    	} else {
-    		frequency = Integer.valueOf(frequencyV.getText());
+    		frequencyV.setText("10");
     	}
+    	try {
+    		frequency = Integer.valueOf(frequencyV.getText());
+		} catch (Exception e) {
+			frequency = 10;
+			frequencyV.setText("10");
+		}
     	config.add("frequency", new JsonPrimitive(frequency));
-    	
+
     	// host
     	config.add("host", new JsonPrimitive("chirpstack.iut-blagnac.fr"));
     	// port
@@ -351,7 +367,7 @@ public class MainPageController implements Initializable {
 			out.write(gson.toJson(config).getBytes());
 			out.close();
 
-			message = "La configuration a bien �t� enregistr�e.\nElle sera effective au prochain d�marrage.";
+			message = "La configuration a bien été enregistrée.\nElle sera effective au prochain démarrage.";
 			type = AlertType.INFORMATION;
     	} catch (IOException e) {
     		e.printStackTrace();
@@ -368,7 +384,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void onActionCheckBox(ActionEvent event) {
     	CheckBox ckbx = (CheckBox) event.getSource();
-    	TextField txfd = dataTextField.get(ckbx);
+    	TextField txfd = dataCBtoTF.get(ckbx);
 		if (ckbx.isSelected()) {
 			txfd.setDisable(false);
 			txfd.setText("0");
