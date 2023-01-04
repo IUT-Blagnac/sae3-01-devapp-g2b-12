@@ -7,10 +7,18 @@ import view.MainPageController;
 
 import java.io.IOException;
 
+/**
+ * Classe principale servant à lancer l'application
+ * @author Rémy Guibert
+ */
 public class Main extends Application {
 
+	// Contrôleur de l'application
 	private MainPageController ctrl;
 
+    /**
+     * Charge la vue et le contrôleur et affiche l'application
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -21,24 +29,22 @@ public class Main extends Application {
 
         Scene scene = new Scene(vueListe, 1050, 575);
 
-        stage.setTitle("Visualisation des données");
+        stage.setTitle("Visualisation des données de l'entrepôt");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
-
     /**
-        IMPORTANT:
-        Quand l'application s'arrête, il faut arrêter
-        la tâche de lecture, sinon elle continue.
-     **/
+     * Met fin à la planification afin d'arrêter les Thread et de fermer l'application
+     */
     @Override
     public void stop(){
-    	ctrl.arretLecture();
+    	ctrl.terminateScheduling();
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 
 }
