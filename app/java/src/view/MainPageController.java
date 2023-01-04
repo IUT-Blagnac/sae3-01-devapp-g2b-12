@@ -32,31 +32,44 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
+/**
+ * Classe contrôleur gérant la seule page de l'application
+ * @author Rémy Guibert
+ */
 public class MainPageController implements Initializable {
-
+	// objet qui s'occupe de la màj des graphiques en parallèle
 	private TimerTask chartUpdater = new ChartUpdater();
 
+	// planificateur de l'objet qui met à jour les graphiques
 	private Timer scheduler = new Timer();
 
+	// objet JSON qui contient la configuration
     private JsonObject config;
-    
+
+    // map reliant le nom technique des données à leurs graphiques
     private HashMap<String, LineChart<Integer, Double>> dataChart = new HashMap<>();
 
+    // map reliant le nom technique des données aux noms à afficher sur les graphiques
     private HashMap<String, String> dataChartName = new HashMap<>();
 
+    // map reliant le nom technique des données à leurs liste de valeurs du graphiques
     private HashMap<String, XYChart.Series<Integer, Double>> dataSeries = new HashMap<>();
-    
+
+    // map reliant le nom technique des données à leurs CheckBox respectives
     private HashMap<String, CheckBox> dataCB = new HashMap<>();
 
+    // map reliant les CheckBox des données à leurs TextField
     private HashMap<CheckBox, TextField> dataCBtoTF = new HashMap<>();
+
+    // hauteur Y en pixel à laquelle doit être créer la prochaine entrée de "Device"
+    // voir createNewDevice() et deleteDevice()
+    private int nextDeviceY = 0;
 
     @FXML
     private AnchorPane devicesAP;
 
     @FXML
     private ScrollPane devicesSP;
-
-    private int nextDeviceY = 0;
     
     @FXML
     private CheckBox activityCB;
@@ -118,6 +131,9 @@ public class MainPageController implements Initializable {
     @FXML
     private GridPane graphGP;
 
+	/**
+	 * Initialise les maps et la configuration
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Relie chaque donnée à sa CheckBox
@@ -154,14 +170,19 @@ public class MainPageController implements Initializable {
 		dataChartName.put("tvoc", "TVOC");
 
 		try {
+			// lit la configuration
 			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
+			// charge la configuration dans l'interface
 			loadConfig();
 		} catch (Exception e) {
-			System.out.println("Erreur lors du chargement de la configuration, fichier config.json inexistant ou autre problème.");
+			System.out.println("Erreur lors du chargement de la configuration :");
 			e.printStackTrace();
 		}
 	}
 
+    /**
+     * Charge la configuration dans l'interface, et planifi la màj des graphiques
+     */
     private void loadConfig() {
     	int gridX = 0;
     	int gridY = 0;
@@ -176,7 +197,7 @@ public class MainPageController implements Initializable {
     		if (i == devices.size()-1) {
     			createNewDevice(null, devices.get(i).getAsString(), "+");
     		} else {
-    			createNewDevice(null, devices.get(i).getAsString(), "-");
+    			createNewDevice(null, devices.get(i).getAsString(), " -");
     		}
     	}
 
@@ -223,26 +244,43 @@ public class MainPageController implements Initializable {
     	}
 	}
     
+    /**
+     * Ajoute un nouveau TextField et Button dans la lise des capteurs
+     * @param event Événement déclancheur de l'appel, peut être null
+     * @param value Valeur du TextField lors de la création
+     * @param button Valeur du Button lors de la création
+     */
     private void createNewDevice(ActionEvent event, String value, String button) {
+    	// création du TextField
     	TextField newTF = new TextField();
     	newTF.setText(value);
 		newTF.setLayoutY(nextDeviceY);
-		devicesAP.getChildren().add(newTF);
+		// création du Button
 		Button newAddBT = new Button();
 		newAddBT.setText(button);
 		newAddBT.setLayoutX(149);
 		newAddBT.setLayoutY(nextDeviceY);
 		newAddBT.setOnAction( e -> createNewDevice(e, "", "+") );
+		// ajout dans la liste des capteurs
+		devicesAP.getChildren().add(newTF);
 		devicesAP.getChildren().add(newAddBT);
-		nextDeviceY += 25;
+		// change le texte du bouton appellant
 		if (event != null) {
-			((Button) event.getSource()).setText(" -");
-			((Button) event.getSource()).setOnAction( e -> deleteDevice(e) );
+			Button source = (Button) event.getSource();
+			source.setText(" -");
+			source.setOnAction( e -> deleteDevice(e) );
 		}
+		// augmente la hauteur Y en pixel à laquelle sera créer le prochain capteur
+		nextDeviceY += 25;
+		// adapte l'AnchorPane et le ScrollPane à la nouvelle hauteur
 		devicesAP.setPrefHeight(nextDeviceY);
 		devicesSP.setHmax(devicesAP.getPrefHeight());
     }
-    
+
+    /**
+     * Supprime une entrée de la liste de capteurs
+     * @param event Événement déclancheur de l'appel
+     */
     private void deleteDevice(ActionEvent event) {
     	// supprime le bouton déclencheur et le TextField correspondant
     	Button source = (Button) event.getSource();
@@ -252,7 +290,7 @@ public class MainPageController implements Initializable {
     	
     	// décalle le reste des éléments pour ne laisser aucun trous
     	int layoutY = 0;
-    	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
+    	for (int i = indexBT-1; i < devicesAP.getChildren().size(); i += 2) {
     		Node nodeTF = devicesAP.getChildren().get(i);
     		Node nodeBT = devicesAP.getChildren().get(i+1);
 			if (nodeTF.getLayoutY()-layoutY == 25) {
@@ -261,28 +299,33 @@ public class MainPageController implements Initializable {
 			}
 			layoutY += 25;
 		}
+    	// réduit la hauteur Y en pixel à laquelle sera créer le prochain capteur
     	nextDeviceY -= 25;
+    	// adapte l'AnchorPane et le ScrollPane à la nouvelle hauteur
 		devicesAP.setPrefHeight(nextDeviceY);
 		devicesSP.setHmax(devicesAP.getPrefHeight());
     }
 
-    // Classe qui permet de mettre à jour les graphiques en fonction du fichier JSON
+    /**
+     * Classe qui permet de mettre à jour les graphiques en fonction du fichier JSON "data.json"
+     */
     public class ChartUpdater extends TimerTask {
         public void run() {
             try {
-            	// lit le fichier des données
-                Reader dataFileReader = new FileReader("data.json");
-                JsonObject jsObj = (JsonObject) JsonParser.parseReader(dataFileReader);
-                // pour chaque donnée
-            	for (String dataName : jsObj.keySet()) {
-            		if (dataSeries.containsKey(dataName)) {
-	            		// extrait la valeur
-	            		double valeur = jsObj.get(dataName).getAsDouble();
+            	// lit le fichier de données
+                JsonObject jsonData = JsonParser.parseReader(new FileReader("data.json")).getAsJsonObject();
 
-	            		// l'ajoute au bon graphique
+            	for (String dataName : jsonData.keySet()) {
+            		if (dataSeries.containsKey(dataName)) {
+	            		// extrait la nouvelle valeur
+	            		double valeur = jsonData.get(dataName).getAsDouble();
+
+	            		// récupère la bonne série
 	            		XYChart.Series<Integer, Double> series = dataSeries.get(dataName);
-	            		int numValue = series.getData().size();
-	                    series.getData().add(new XYChart.Data<Integer, Double>(numValue, valeur));
+
+	            		// ajoute la nouvelle valeur à la série
+	            		int newX = series.getData().size();
+	                    series.getData().add(new XYChart.Data<Integer, Double>(newX, valeur));
             		}
             	}
             } catch (Exception e) {
