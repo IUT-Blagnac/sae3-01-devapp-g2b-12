@@ -26,35 +26,39 @@
       </ScrollPane>
       <Text layoutX="25.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Données" />
       <Text layoutX="225.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valeurs max" />
-      <CheckBox fx:id="activityCB" layoutX="35.0" layoutY="170.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Activité" />
-      <TextField fx:id="activityV" disable="true" layoutX="230.0" layoutY="167.0" prefHeight="25.0" prefWidth="50.0" />
-      <CheckBox fx:id="co2CB" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Concentration en CO2" />
-      <TextField fx:id="co2V" disable="true" layoutX="230.0" layoutY="192.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppm" />
-      <CheckBox fx:id="humidityCB" layoutX="35.0" layoutY="220.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Taux d'humidité" />
-      <TextField fx:id="humidityV" disable="true" layoutX="230.0" layoutY="217.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RH" />
-      <CheckBox fx:id="illuminationCB" layoutX="35.0" layoutY="245.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Éclairage" />
-      <TextField fx:id="illuminationV" disable="true" layoutX="230.0" layoutY="242.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
-      <CheckBox fx:id="infraredCB" layoutX="35.0" layoutY="270.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge" />
-      <TextField fx:id="infraredV" disable="true" layoutX="230.0" layoutY="267.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
-      <CheckBox fx:id="infraredAndVisibleCB" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge et lumière visible" />
-      <TextField fx:id="infraredAndVisibleV" disable="true" layoutX="230.0" layoutY="292.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
-      <CheckBox fx:id="pressureCB" layoutX="35.0" layoutY="323.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Pression atmosphérique" />
-      <TextField fx:id="pressureV" disable="true" layoutX="230.0" layoutY="317.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hPa" />
-      <CheckBox fx:id="temperatureCB" layoutX="35.0" layoutY="348.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Température ambiante" />
-      <TextField fx:id="temperatureV" disable="true" layoutX="230.0" layoutY="342.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="°C" />
-      <CheckBox fx:id="tvocCB" layoutX="35.0" layoutY="373.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Composants organiques volatils" />
-      <TextField fx:id="tvocV" disable="true" layoutX="230.0" layoutY="367.0" prefHeight="25.0" prefWidth="50.0" />
-      <Text layoutX="283.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppb" />
-      <Text layoutX="25.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence" />
+      <CheckBox fx:id="tvocCB" layoutX="35.0" layoutY="170.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Composants organiques volatils" />
+      <TextField fx:id="tvocV" disable="true" layoutX="230.0" layoutY="167.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppb" />
+      <CheckBox fx:id="activityCB" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Activité" />
+      <TextField fx:id="activityV" disable="true" layoutX="230.0" layoutY="192.0" prefHeight="25.0" prefWidth="50.0" />
+      <CheckBox fx:id="illuminationCB" layoutX="35.0" layoutY="220.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Éclairage" />
+      <TextField fx:id="illuminationV" disable="true" layoutX="230.0" layoutY="217.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
+      <CheckBox fx:id="co2CB" layoutX="35.0" layoutY="245.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Concentration en CO2" />
+      <TextField fx:id="co2V" disable="true" layoutX="230.0" layoutY="242.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppm" />
+      <CheckBox fx:id="temperatureCB" layoutX="35.0" layoutY="270.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Température ambiante" />
+      <TextField fx:id="temperatureV" disable="true" layoutX="230.0" layoutY="267.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="°C" />
+      <CheckBox fx:id="humidityCB" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Taux d'humidité" />
+      <TextField fx:id="humidityV" disable="true" layoutX="230.0" layoutY="292.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RH" />
+      <CheckBox fx:id="infraredAndVisibleCB" layoutX="35.0" layoutY="320.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge et lumière visible" />
+      <TextField fx:id="infraredAndVisibleV" disable="true" layoutX="230.0" layoutY="317.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
+      <CheckBox fx:id="infraredCB" layoutX="35.0" layoutY="345.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge" />
+      <TextField fx:id="infraredV" disable="true" layoutX="230.0" layoutY="342.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux" />
+      <CheckBox fx:id="pressureCB" layoutX="35.0" layoutY="370.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Pression atmosphérique" />
+      <TextField fx:id="pressureV" disable="true" layoutX="230.0" layoutY="367.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text layoutX="283.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hPa" />
+      <Text layoutX="25.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence" />
       <TextField fx:id="frequencyV" layoutX="91.0" layoutY="406.0" prefHeight="25.0" prefWidth="45.0" />
-      <Text layoutX="143.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
+      <Text layoutX="143.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minute(s)" />
+      <Text layoutX="25.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serveur" />
+      <TextField fx:id="hostV" layoutX="91.0" layoutY="442.0" prefHeight="25.0" prefWidth="190.0" />
+      <Text layoutX="27.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port" />
+      <TextField fx:id="portV" layoutX="91.0" layoutY="478.0" prefHeight="25.0" prefWidth="45.0" />
       <Button layoutX="105.0" layoutY="529.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="97.0" text="Enregistrer" />
       <Text layoutX="324.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphiques des données">
          <font>

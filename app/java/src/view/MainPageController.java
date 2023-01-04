@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,10 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
@@ -28,9 +29,11 @@ import java.util.Map.Entry;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * Classe contrôleur gérant la seule page de l'application
@@ -70,54 +73,6 @@ public class MainPageController implements Initializable {
 
     @FXML
     private ScrollPane devicesSP;
-    
-    @FXML
-    private CheckBox activityCB;
-
-    @FXML
-    private TextField activityV;
-
-    @FXML
-    private CheckBox co2CB;
-
-    @FXML
-    private TextField co2V;
-
-    @FXML
-    private CheckBox humidityCB;
-
-    @FXML
-    private TextField humidityV;
-
-    @FXML
-    private CheckBox illuminationCB;
-
-    @FXML
-    private TextField illuminationV;
-
-    @FXML
-    private CheckBox infraredCB;
-
-    @FXML
-    private TextField infraredV;
-
-    @FXML
-    private CheckBox infraredAndVisibleCB;
-
-    @FXML
-    private TextField infraredAndVisibleV;
-
-    @FXML
-    private CheckBox pressureCB;
-
-    @FXML
-    private TextField pressureV;
-
-    @FXML
-    private CheckBox temperatureCB;
-
-    @FXML
-    private TextField temperatureV;
 
     @FXML
     private CheckBox tvocCB;
@@ -126,7 +81,61 @@ public class MainPageController implements Initializable {
     private TextField tvocV;
 
     @FXML
+    private CheckBox activityCB;
+
+    @FXML
+    private TextField activityV;
+
+    @FXML
+    private CheckBox illuminationCB;
+
+    @FXML
+    private TextField illuminationV;
+
+    @FXML
+    private CheckBox co2CB;
+
+    @FXML
+    private TextField co2V;
+
+    @FXML
+    private CheckBox temperatureCB;
+
+    @FXML
+    private TextField temperatureV;
+
+    @FXML
+    private CheckBox humidityCB;
+
+    @FXML
+    private TextField humidityV;
+
+    @FXML
+    private CheckBox infraredAndVisibleCB;
+
+    @FXML
+    private TextField infraredAndVisibleV;
+
+    @FXML
+    private CheckBox infraredCB;
+
+    @FXML
+    private TextField infraredV;
+
+    @FXML
+    private CheckBox pressureCB;
+
+    @FXML
+    private TextField pressureV;
+
+    @FXML
     private TextField frequencyV;
+
+    @FXML
+    private TextField hostV;
+
+    @FXML
+    private TextField portV;
     
     @FXML
     private GridPane graphGP;
@@ -169,28 +178,34 @@ public class MainPageController implements Initializable {
 		dataChartName.put("temperature", "Temperature");
 		dataChartName.put("tvoc", "TVOC");
 
-		try {
-			// lit la configuration
-			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
-			// charge la configuration dans l'interface
-			loadConfig();
-		} catch (Exception e) {
-			System.out.println("Erreur lors du chargement de la configuration :");
-			e.printStackTrace();
-		}
+		// charge la configuration dans l'interface
+		loadConfig();
 	}
 
     /**
-     * Charge la configuration dans l'interface, et planifi la màj des graphiques
+     * Charge la configuration dans l'interface, et planifi la mise à jour des graphiques
      */
     private void loadConfig() {
-    	int gridX = 0;
-    	int gridY = 0;
+    	// lit la configuration
+		try {
+			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
+		} catch (FileNotFoundException e) {
+			// affiche un message d'information
+	    	Alert alert = new Alert(AlertType.INFORMATION);
+	    	alert.setTitle("Pas de configuration");
+	    	alert.setHeaderText("Aucun fichier de configuration à charger.");
+	    	alert.setContentText("Vous pouvez en générer un en appuyant sur 'Enregistrer'.");
+	    	alert.showAndWait();
+			return;
+		}
 
+    	// charge les paramètres
     	JsonArray devices = config.getAsJsonArray("devices");
     	JsonArray dataWanted = config.getAsJsonArray("data_wanted");
     	JsonArray alertValues = config.getAsJsonArray("alert_values");
     	int frequency = config.get("frequency").getAsInt();
+    	String host = config.get("host").getAsString();
+    	int port = config.get("port").getAsInt();
 
     	// devices
     	for (int i = 0; i < devices.size(); i ++) {
@@ -200,6 +215,10 @@ public class MainPageController implements Initializable {
     			createNewDevice(null, devices.get(i).getAsString(), " -");
     		}
     	}
+
+    	// pour savoir où mettre les graphiques
+    	int gridX = 0;
+    	int gridY = 0;
 
     	// data wanted + alert values
     	for (int i = 0; i < dataWanted.size(); i ++) {
@@ -214,7 +233,8 @@ public class MainPageController implements Initializable {
     		NumberAxis yAxis = new NumberAxis();
     		yAxis.setLabel(dataChartName.get(dataWanted.get(i).getAsString()));
 
-    		LineChart<Integer, Double> graph = new LineChart(xAxis, yAxis);
+    		@SuppressWarnings({ "unchecked", "rawtypes" })
+			LineChart<Integer, Double> graph = new LineChart(xAxis, yAxis);
 
     		XYChart.Series<Integer, Double> series = new XYChart.Series<Integer, Double>();
 
@@ -236,14 +256,20 @@ public class MainPageController implements Initializable {
     	// frequency
     	frequencyV.setText(String.valueOf(frequency));
 
-		// Lecture répétée du fichier JSON, toutes les 30 secondes si la fréquence est à 0
+    	// host
+    	hostV.setText(String.valueOf(host));
+
+    	// port
+    	portV.setText(String.valueOf(port));
+
+		// Lecture répétée du fichier JSON, toutes les 45 secondes si la fréquence est à 0
     	if (frequency == 0) {
-    		scheduler.schedule(chartUpdater, 0, 30*1000);
+    		scheduler.schedule(chartUpdater, 0, 45*1000);
     	} else {
     		scheduler.schedule(chartUpdater, 0, frequency*60*1000);
     	}
 	}
-    
+
     /**
      * Ajoute un nouveau TextField et Button dans la lise des capteurs
      * @param event Événement déclancheur de l'appel, peut être null
@@ -260,7 +286,12 @@ public class MainPageController implements Initializable {
 		newAddBT.setText(button);
 		newAddBT.setLayoutX(149);
 		newAddBT.setLayoutY(nextDeviceY);
-		newAddBT.setOnAction( e -> createNewDevice(e, "", "+") );
+		// type de bouton
+		if (button == " -") {
+			newAddBT.setOnAction( e -> deleteDevice(e) );
+		} else {
+			newAddBT.setOnAction( e -> createNewDevice(e, "", "+") );
+		}
 		// ajout dans la liste des capteurs
 		devicesAP.getChildren().add(newTF);
 		devicesAP.getChildren().add(newAddBT);
@@ -290,7 +321,7 @@ public class MainPageController implements Initializable {
     	
     	// décalle le reste des éléments pour ne laisser aucun trous
     	int layoutY = 0;
-    	for (int i = indexBT-1; i < devicesAP.getChildren().size(); i += 2) {
+    	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
     		Node nodeTF = devicesAP.getChildren().get(i);
     		Node nodeBT = devicesAP.getChildren().get(i+1);
 			if (nodeTF.getLayoutY()-layoutY == 25) {
@@ -318,14 +349,16 @@ public class MainPageController implements Initializable {
             	for (String dataName : jsonData.keySet()) {
             		if (dataSeries.containsKey(dataName)) {
 	            		// extrait la nouvelle valeur
-	            		double valeur = jsonData.get(dataName).getAsDouble();
+	            		double newValue = jsonData.get(dataName).getAsDouble();
 
 	            		// récupère la bonne série
 	            		XYChart.Series<Integer, Double> series = dataSeries.get(dataName);
 
 	            		// ajoute la nouvelle valeur à la série
 	            		int newX = series.getData().size();
-	                    series.getData().add(new XYChart.Data<Integer, Double>(newX, valeur));
+	            		XYChart.Data<Integer, Double> newData = new XYChart.Data<Integer, Double>(newX, newValue);
+	            		newData.setNode(new HoveredThresholdNode(newValue));
+	            		Platform.runLater( () -> series.getData().add(newData) );
             		}
             	}
             } catch (Exception e) {
@@ -335,11 +368,17 @@ public class MainPageController implements Initializable {
         }
     }
 
-    public void arretLecture() {
+    /**
+     * Met fin à la planification afin d'arrêter les Thread et de fermer l'application
+     */
+    public void terminateScheduling() {
         chartUpdater.cancel();
         scheduler.cancel();
     }
 
+    /**
+     * Sauvegarde la configuration dans le fichier JSON
+     */
     @FXML
     private void saveConfig() {
     	JsonObject config = new JsonObject();
@@ -356,10 +395,11 @@ public class MainPageController implements Initializable {
     	}
     	if (devices.size() == 0) {
     		devices.add("#");
-    		device = (TextField) devicesAP.getChildren().get(0);
-    		device.setText("#");
+    		createNewDevice(null, "#", "+");
+    		//device = (TextField) devicesAP.getChildren().get(0);
+    		//device.setText("#");
     	}
-    	
+
     	// data wanted + alert values
     	config.add("data_wanted", new JsonArray());
     	config.add("alert_values", new JsonArray());
@@ -379,7 +419,7 @@ public class MainPageController implements Initializable {
 				}
     		}
     	}
-    	
+
     	// frequency
     	int frequency;
     	if (frequencyV.getText().equals("")) {
@@ -394,13 +434,30 @@ public class MainPageController implements Initializable {
     	config.add("frequency", new JsonPrimitive(frequency));
 
     	// host
-    	config.add("host", new JsonPrimitive("chirpstack.iut-blagnac.fr"));
+    	String host = hostV.getText();
+    	if (host.equals("")) {
+    		host = "chirpstack.iut-blagnac.fr";
+    		hostV.setText(host);
+    	}
+    	config.add("host", new JsonPrimitive(host));
+
     	// port
-    	config.add("port", new JsonPrimitive(1883));
+    	int port;
+    	if (portV.getText().equals("")) {
+    		portV.setText("1883");
+    	}
+    	try {
+    		port = Integer.valueOf(portV.getText());
+		} catch (Exception e) {
+			port = 1883;
+			portV.setText("1883");
+		}
+    	config.add("port", new JsonPrimitive(port));
 
     	String message;
     	AlertType type;
 
+    	// enregistre la configuration
     	try {
 	    	Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
@@ -410,7 +467,7 @@ public class MainPageController implements Initializable {
 			out.write(gson.toJson(config).getBytes());
 			out.close();
 
-			message = "La configuration a bien été enregistrée.\nElle sera effective au prochain démarrage.";
+			message = "La configuration a bien été enregistrée.";
 			type = AlertType.INFORMATION;
     	} catch (IOException e) {
     		e.printStackTrace();
@@ -418,22 +475,75 @@ public class MainPageController implements Initializable {
     		type = AlertType.ERROR;
     	}
 
+    	// affiche un message de confirmation/erreur
     	Alert alert = new Alert(type);
     	alert.setTitle("Enregistrement");
     	alert.setHeaderText(message);
     	alert.showAndWait();
+
+    	// actualise la vue
+    	clearVue();
+		loadConfig();
     }
 
+    /**
+     * Retire les éléments de la vue
+     */
+    private void clearVue() {
+    	// graphiques
+    	dataSeries.clear();
+    	graphGP.getChildren().clear();
+
+    	// séries
+    	dataChart.clear();
+
+    	// devices
+    	nextDeviceY = 0;
+
+    	// data wanted + alert values
+    	devicesAP.getChildren().clear();
+    	tvocCB.setSelected(false);
+    	activityCB.setSelected(false);
+    	illuminationCB.setSelected(false);
+    	co2CB.setSelected(false);
+    	temperatureCB.setSelected(false);
+    	humidityCB.setSelected(false);
+    	infraredAndVisibleCB.setSelected(false);
+    	infraredCB.setSelected(false);
+    	pressureCB.setSelected(false);
+
+    	// frequency
+    	frequencyV.setText("");
+
+    	// host
+    	hostV.setText("");
+
+    	// port
+    	portV.setText("");
+
+    	// task
+    	chartUpdater.cancel();
+    	chartUpdater = new ChartUpdater();
+	}
+
+	/**
+     * Déclenché lors d'une action sur une CheckBox
+     * Gère le TextField associé à celui-ci
+     * @param event
+     */
     @FXML
     private void onActionCheckBox(ActionEvent event) {
-    	CheckBox ckbx = (CheckBox) event.getSource();
-    	TextField txfd = dataCBtoTF.get(ckbx);
-		if (ckbx.isSelected()) {
-			txfd.setDisable(false);
-			txfd.setText("0");
+    	// récupère la CheckBox déclencheur
+    	CheckBox dataCB = (CheckBox) event.getSource();
+    	// récupère le TextField
+    	TextField dataTF = dataCBtoTF.get(dataCB);
+    	// affiche ou pas le TextField en fonctione de l'état de la CheckBox
+    	if (dataCB.isSelected()) {
+			dataTF.setDisable(false);
+			dataTF.setText("0");
 		} else {
-			txfd.setDisable(true);
-			txfd.setText("");
+			dataTF.setDisable(true);
+			dataTF.setText("");
 		}
     }
 }
