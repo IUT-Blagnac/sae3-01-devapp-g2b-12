@@ -70,8 +70,7 @@ L'utilisateur peut accéder aux informations d'un produit en cliquant dessus.
 
 |=======
 |Test |Attendu |Résultat
-| | |
-| | | 
+|Cliquer sur un produit|Ouverture de la page du produit|Ok
 |=======
 
 == Test 7: gestion et mise à jour du panier
