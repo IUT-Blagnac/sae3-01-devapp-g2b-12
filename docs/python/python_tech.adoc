@@ -77,8 +77,8 @@ Ce fichier permet de paramétrer 6 options correspondant à 6 couples clé-valeu
 | `data_wanted` | Quelles données seront enregistrées | Liste de chaînes | Oui
 | `alert_values` | Pour chaque donnée, son seuil d'alerte | Liste de nombres | Oui
 | `frequency`| Fréquence à laquelle les données sont enregistrées | Entier | Oui
-| `host`| Nom de domaine du serveur MQTT | Chaîne | Non
-| `port`| Port du serveur MQTT | Entier | Non
+| `host`| Nom de domaine du serveur MQTT | Chaîne | Oui
+| `port`| Port du serveur MQTT | Entier | Oui
 |===
 
 === Appareil(s)
