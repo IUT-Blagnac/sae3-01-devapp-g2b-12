@@ -13,7 +13,7 @@ INSERT INTO PANIER
 VALUES(28, 21, 28);
 
 UPDATE PRODUIT
-set stock = 0
+set stock = 5
 where idproduit = 21;
 
 DROP SEQUENCE seq_commande;
