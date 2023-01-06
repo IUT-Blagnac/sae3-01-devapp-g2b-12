@@ -66,6 +66,7 @@ Tuteur enseignant de l’équipe :
 - `tests` => répertoire contenant les tests :
 ** `php` => tests en lien avec le site web
 ** `python` => version de test de l'application Python
+** `doc` => script de test de la procédure et du trigger
 
 
 == Applications
@@ -103,6 +104,16 @@ Lien du site web :
 
 Sources de la version 5 : {baseURL}/tree/master/app/php/[ici]
 
+=== Base de données
+
+- Le script de création de la base de données se trouve {baseURL}/raw/master/app/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
+
+- Le script d'insertion dans la base de données se trouve {baseURL}/raw/master/app/bd/Script%20d%27insertion%20dans%20la%20base.sql[ici].
+
+- Script de la procédure {baseURL}/raw/master/app/bd/Script%20de%20la%20procédure%20Commander.sql[ici]
+
+- Script du trigger {baseURL}/raw/master/app/bd/Script%20du%20trigger%20t_i_quantite.sql[ici].
+
 == Documentations
 
 === IoT
@@ -127,11 +138,9 @@ WARNING: LES DOCUMENTATIONS JAVA NE SONT PAS ENCORE ÉCRITES, ELLES SONT MARQUÉ
 
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
 
-- Le script de création de la base de données se trouve {baseURL}/raw/master/docs/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
+- Le document de création et d'insertion se trouve {baseURL}/raw/master/docs/bd/Cr%C3%A9ation%20et%20insertion%20de%20la%20base.pdf[ici].
 
-- Le script d'insertion dans la base de données se trouve {baseURL}/raw/master/docs/bd/Script%20d%27insertion%20dans%20la%20base.sql[ici].
-
-- Le document de création et d'insertion se trouve {baseURL}/raw/master/docs/bd/Cr%C3%A9ation%20et%20insertion%20de%20la%20base.pdf[ici]
+- Le document concernant le trigger et la procédure se trouve {baseURL}/raw/master/docs/bd/Trigger%20et%20procédure.pdf[ici].
 
 === Évaluations hebdomadaires
 
@@ -184,3 +193,7 @@ Pour la partie Python les tests sont implémentés dans un autre script, se trou
 === PHP
 
 Vous pouvez retrouver les tests du site web {baseURL}/blob/master/tests/php/tests-php.adoc[ici].
+
+=== Base de données
+
+Des scripts de test pour le trigger et la procédure sont disponible {baseURL}/raw/master/tests/bd/Procédure%20Commander.sql[ici] et {baseURL}/raw/master/tests/bd/Trigger%20t_i_quantite.sql[ici]
