@@ -134,6 +134,8 @@ WARNING: LES DOCUMENTATIONS JAVA NE SONT PAS ENCORE ÉCRITES, ELLES SONT MARQUÉ
 
 - Code commenté de l'authentification : {baseURL}/raw/master/docs/php/Authentification.pdf[ici]
 
+- Code commenté consultation produits et modification compte : {baseURL}/raw/master/docs/php/Affichage%20produits%20et%20modification%20compte.pdf[ici]
+
 === Base de données
 
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
