@@ -13,8 +13,14 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-	// Contrôleur de l'application
+	/**
+	 * Contrôleur de l'application
+	 */
 	private MainPageController ctrl;
+
+    public static void main(String[] args) {
+        launch();
+    }
 
     /**
      * Charge la vue et le contrôleur et affiche l'application
@@ -40,11 +46,7 @@ public class Main extends Application {
      */
     @Override
     public void stop(){
-    	ctrl.terminateScheduling();
-    }
-
-    public static void main(String[] args) {
-        launch();
+    	ctrl.cancelScheduling();
     }
 
 }

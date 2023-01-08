@@ -5,13 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 /**
- * Classe pour afficher la valeur d'un point lorsqu'on le survol
- * @author Rémy Guibert
+ * Classe pour afficher la valeur d'un point lorsqu'on le survole
+ * @author RÃ©my Guibert
  */
 public class HoveredThresholdNode extends StackPane {
 
 	/**
-	 * Créer un Label qui sera affiché lorsqu'on survole le point
+	 * CrÃ©er un Label qui sera affichÃ© lorsqu'on survole le point
 	 * et ne sera plus visible dans les autres cas
 	 * @param value Valeur a afficher
 	 */
@@ -19,7 +19,7 @@ public class HoveredThresholdNode extends StackPane {
 		// taille du point
 		setPrefSize(10, 10);
 
-		// Label à afficher
+		// Label Ã  afficher
 		Label label = createLabel(value);
 
 		// affiche le Label lorsqu'on survole le point
@@ -29,14 +29,14 @@ public class HoveredThresholdNode extends StackPane {
 			toFront();
 		});
 
-		// fait disparaître le Label lorsque la souris s'éloigne du point
+		// fait disparaÃ®tre le Label lorsque la souris s'Ã©loigne du point
 		setOnMouseExited( event -> getChildren().clear() );
 	}
 
 	/**
-	 * Retourne un Label avec une valeur donnée et un contour
+	 * Retourne un Label avec une valeur donnÃ©e et un contour
 	 * @param value
-	 * @return le Label créé
+	 * @return le Label crÃ©Ã©
 	 */
 	private Label createLabel(double value) {
 		Label label = new Label(value + "");
@@ -44,4 +44,5 @@ public class HoveredThresholdNode extends StackPane {
 		label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
 		return label;
 	}
+
 }

@@ -25,7 +25,7 @@
         </content>
       </ScrollPane>
       <Text layoutX="25.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Données" />
-      <Text layoutX="225.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valeurs max" />
+      <Text layoutX="235.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valeurs max" />
       <CheckBox fx:id="tvocCB" layoutX="35.0" layoutY="170.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Composants organiques volatils" />
       <TextField fx:id="tvocV" disable="true" layoutX="230.0" layoutY="167.0" prefHeight="25.0" prefWidth="50.0" />
       <Text layoutX="283.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppb" />
@@ -59,7 +59,7 @@
       <TextField fx:id="hostV" layoutX="91.0" layoutY="442.0" prefHeight="25.0" prefWidth="190.0" />
       <Text layoutX="27.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port" />
       <TextField fx:id="portV" layoutX="91.0" layoutY="478.0" prefHeight="25.0" prefWidth="45.0" />
-      <Button layoutX="105.0" layoutY="529.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="97.0" text="Enregistrer" />
+      <Button layoutX="90.0" layoutY="529.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="150.0" text="Enregistrer et appliquer" />
       <Text layoutX="324.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphiques des données">
          <font>
             <Font name="System Bold" size="12.0" />
