@@ -91,7 +91,7 @@ Un utilisateur connecté, via un formulaire, peut modifier les informations de s
 |Test |Attendu |Résultat
 |Accès à la page de modification du compte depuis "Mon Compte"|Affichage du formulaire de modification du compte| Ok
 |Modifier les informations à l'aide du formulaire |Redirection vers la page "Mon Compte" avec session et BD mises à jour | Ok
-|Enregistrement avec des champs non remplis |Aucune redirection, indication du champ non remplit à l'utilisateur, aucune redirection | Ok
+|Enregistrement avec des champs non remplis |Aucune redirection, indication du champ non remplit à l'utilisateur | Ok
 |=======
 
 == Test 9: un agriculteur peut ajouter ses produits sur le site
