@@ -56,7 +56,7 @@ Dans ce cas le programme affichera le message : `Le fichier de données ("data.j
 
 À part ça il ne devrait pas y avoir d'autres erreurs.
 
-=== Nominale
+=== Lancement
 
 À la connexion au serveur MQTT le programme affiche un message.
 
