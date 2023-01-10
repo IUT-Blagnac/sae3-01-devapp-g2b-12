@@ -16,28 +16,48 @@
 
 //----------------------------------------
 
-= Documentation technique de l'application Java
+= Documentation technique V1 de l'application Java
 
 toc::[]
 
-== Equipe
+== Rédacteurs
 
 Documentation rédigée par :
 
-* Prénom NOM
-
-== Configuration
-
-=== Appareil(s)
-
-=== Donnée(s)
-
-=== Valeur(s) max
-
-=== Fréquence
+* Rémy GUIBERT
 
 == Utilisation
 
-=== Erreur
+Cette application sert à afficher des données reçues pour le programme Python et a les affichées sous forme de graphiques.
 
-=== Nominale
+Elle dispose d'une interface pour paramétrer le comportement de l'application Python et d'elle même, pour cela référez-vous à la section {baseURL}/blob/master/docs/java/java_tech.adoc#modification%20de%20la%20configuration[Modification de la configuration].
+
+Pour utiliser ce programme assurez-vous d'avoir installé le logiciel listé dans la partie `Installation` juste en dessous, ensuite il faut simplement double cliquer sur le fichier.
+
+=== Installation
+
+==== Standalone
+
+L'application nécessite Java 8 ainsi que JavaFX 8, pour avori cela il faut installer le JRE officiel d'Oracle disponible https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247136_10e8cce67c7843478f41411b7003171c[ici].
+
+==== Pour Eclipse
+
+Pour travailler sur l'application avec Eclipse, il faut d'abord installer l'extension `E(fx)clipe` via l'`Eclipse Marketplace`, ensuite il faut créer un projet JavaFX, y retirer le code par défaut et y copier les dossiers `lib` et `src` de {baseURL}/tree/master/app/java/[ce dossier], 
+
+=== Erreurs
+
+=== Lancement
+
+=== Fonctionnalités
+
+==== Modification de la configuration
+
+==== Affichage des données
+
+== Architecture de l'application
+
+=== Packages
+
+=== Diagramme de classe
+
+=== Rôle des classes
