@@ -41,65 +41,6 @@ INSERT INTO Categorie
 VALUES (SEQ_CATEGORIE.nextval, 3, 'Composition de légumes + fruits');
 
 
-------------------------- PRODUITS -------------------------
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 6, 'Tomates Rose de Berne', 'Cagette de 2,5kg de tomates "Rose de Berne"', 2.5, 12, 1, 'Languedoc-Roussillon');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 5, 'Laitue frisée d''amérique', 'Cagette de 1kg (soit deux unités) de laitue frisée', 1, 4.5, 3, 'Normandie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 8, 'Pomme de terre "Belle de Fontenay"', 'Cagette de 2kg de pommes de terre traditionnelles "Belle de Fontenay"', 2, 13.72, 1, 'Ile-de-France');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 8, 'Pomme de terre "Charlotte"', 'Cagette de 5kg de pommes de terre "Charlotte"', 5, 6.65, 10, 'Hauts-de-France');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 8, 'Pomme de terre "Charlotte"', 'Cagette de 5kg de pommes de terre "Charlotte"', 5, 6.65, 14, 'Bourgogne-Franche-Comté');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 8, 'Pomme de terre "Charlotte"', 'Cagette de 5kg de pommes de terre "Charlotte"', 5, 6.5, 8, 'Nouvelle-Aquitaine');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 6, 'Haricots verts filets', 'Cagette de 1.5kg de haricots verts filets extra fins', 1.5, 4.5, 2, 'Bretagne');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 10, 'Betterave crapaudine', 'Cagette de 3kg de betteraves crapaudines', 3, 7.05, 20, 'Charente-Maritime');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 10, 'Betterave potagère', 'Cagette de 4kg de betteraves rouges potagères', 4, 6.28, 47, 'Grand Est');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 10, 'Radis noir', 'Cagette de 2kg de radis noir', 2, 4.2, 12, 'Auvergne Rhône-Alpes');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 10, 'Radis noir', 'Cagette de 2kg de radis noir', 2, 4.8, 10, 'Languedoc-Roussillon');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 10, 'Radis demi-long', 'Cagette de 1.5kg de radis rouges demi-longs', 1.5, 2, 47, 'Occitanie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 6, 'Avocat Hass', 'Cagette de 3kg d''avocats hass', 3, 15.5, 6, 'Occitanie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 6, 'Avocat Hass', 'Cagette de 3kg d''avocats hass', 3, 15.2, 6, 'Provence-Alpes-Côte d''Azur');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 4, 'Chou-fleur', 'Cagette de 2.5kg de chou-fleur', 2.5, 10, 24, 'Bretagne');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 4, 'Chou-fleur', 'Cagette de 2kg de chou-fleur', 2, 8.5, 40, 'Grand Est');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 4, 'Chou-fleur', 'Cagette de 2.5kg de chou-fleur', 2.5, 10, 24, 'Languedoc-Roussillon');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 7, 'Ciboulette', 'Cagette de 1kg de ciboulette', 1, 5, 75, 'Occitanie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 7, 'Oignon rouge', 'Cagette de 2kg d''oignon rouge', 2.5, 10, 15, 'Hauts-de-France');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 7, 'Échalotte grise', 'Cagette de 1kg d''échalotte grise', 2.5, 7.5, 12, 'Grand Est');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 18, 'Composition de légumes de saison (hiver)', 'Cagette de 5kg composée de carottes, betteraves, topinambours et de chou rouge', 5, 25, 5, 'Pays de la Loire');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 18, 'Composition de légumes de saison (hiver)', 'Cagette de 5kg composée de carottes, betteraves, topinambours et de chou rouge', 5, 25, 5, 'Centre-Val de Loire');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 18, 'Composition de légumes de saison (hiver)', 'Cagette de 6kg composée de carottes, betteraves, rutabagas, poireaux et d''artichauts', 6, 32, 3, 'Normandie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 19, 'Composition de fruits de saison (hiver)', 'Cagette de 3kg composée de mandarines, poires, clémentines, et litchis', 3, 18, 10, 'Occitanie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 19, 'Composition de fruits de saison (hiver)', 'Cagette de 3kg composée de mandarines, poires, clémentines, et litchis', 3, 21, 52, 'Ile de France');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 19, 'Composition de fruits de saison (hiver)', 'Cagette de 5kg composée de mandarines, poires, pommes, kiwis et clémentines', 5, 25, 25, 'Bourgogne-Franche-Comté');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 20, 'Composition de fruits et de légumes de saison (hiver)', 'Cagette de 8kg composée de mandarines,clémentines, rutabagas, betteraves et de carottes', 8, 46, 12, 'Normandie');
-INSERT INTO Produit
-VALUES (SEQ_Produit.nextval, 20, 'Composition de fruits et de légumes de saison (hiver)', 'Cagette de 7kg composée de poires, pommes, poireaux, betteraves et de carottes', 7, 40, 5, 'Nouvelle-Aquitaine');
-
-
 ------------------------- CLIENTS -------------------------
 insert into Client values (SEQ_Client.nextval, 'Ricart', 'Corney', 'cricart2@foxnews.com', '$2y$10$kWe2jW2WTtiLVT.pGwaWHO5Y1CGOtn.cDH3c0tKR6ZmbVKTc5AgOG', 1);
 insert into Client values (SEQ_Client.nextval, 'Vynehall', 'Catlee', 'cvynehall3@columbia.edu', '$2y$10$JpzmPHNtKsfecM5ezlf7Zu3skpIdN.w6G/aGFn/wxK7hi/Qrpr7Fa', 0);
@@ -150,6 +91,65 @@ insert into Client values (SEQ_Client.nextval, 'Reap', 'Allister', 'areap1b@blog
 insert into Client values (SEQ_Client.nextval, 'Hawtry', 'Morganica', 'mhawtry1c@seattletimes.com', '$2y$10$84X07SKvIdCXDTPGqesChub7GoQ0rGFJJeLN4SjzQxR2tjOhzIjhG', 0);
 insert into Client values (SEQ_Client.nextval, 'Vaux', 'Nevile', 'nvaux1d@mashable.com', '$2y$10$FzH06joHOdBaQued6R1MXexhFShgPAJz/dbTmT36LW3xoo4sqVZ0y', 1);
 insert into Client values (SEQ_Client.nextval, 'Ellissen', 'Kirby', 'kellissen1@devhub.com', '$2y$10$7siAaZDzUTQry3uZvYv.B.Y6fmBegX1LKW215ghERAcDgd2g8oBkO', 0);
+
+
+------------------------- PRODUITS -------------------------
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 6, 1, 'Tomates Rose de Berne', 'Cagette de 2,5kg de tomates "Rose de Berne"', 2.5, 12, 1, 0, 'Languedoc-Roussillon');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 5, 1, 'Laitue frisée d''amérique', 'Cagette de 1kg (soit deux unités) de laitue frisée', 1, 4.5, 3, 0, 'Normandie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 8, 1, 'Pomme de terre "Belle de Fontenay"', 'Cagette de 2kg de pommes de terre traditionnelles "Belle de Fontenay"', 2, 13.72, 1, 0, 'Ile-de-France');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 8, 1, 'Pomme de terre "Charlotte"', 'Cagette de 5kg de pommes de terre "Charlotte"', 5, 6.65, 10, 0, 'Hauts-de-France');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 8, 1, 'Pomme de terre "Charlotte"', 'Cagette de 5kg de pommes de terre "Charlotte"', 5, 6.65, 14, 0, 'Bourgogne-Franche-Comté');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 8, 1, 'Pomme de terre "Charlotte"', 'Cagette de 5kg de pommes de terre "Charlotte"', 5, 6.5, 8, 0, 'Nouvelle-Aquitaine');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 6, 1, 'Haricots verts filets', 'Cagette de 1.5kg de haricots verts filets extra fins', 1.5, 4.5, 2, 0, 'Bretagne');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 10, 1, 'Betterave crapaudine', 'Cagette de 3kg de betteraves crapaudines', 3, 7.05, 20, 0, 'Charente-Maritime');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 10, 1, 'Betterave potagère', 'Cagette de 4kg de betteraves rouges potagères', 4, 6.28, 47, 0, 'Grand Est');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 10, 2, 'Radis noir', 'Cagette de 2kg de radis noir', 2, 4.2, 12, 0, 'Auvergne Rhône-Alpes');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 10, 2, 'Radis noir', 'Cagette de 2kg de radis noir', 2, 4.8, 10, 0, 'Languedoc-Roussillon');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 10, 2, 'Radis demi-long', 'Cagette de 1.5kg de radis rouges demi-longs', 1.5, 2, 47, 0, 'Occitanie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 6, 2, 'Avocat Hass', 'Cagette de 3kg d''avocats hass', 3, 15.5, 6, 0, 'Occitanie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 6, 2, 'Avocat Hass', 'Cagette de 3kg d''avocats hass', 3, 15.2, 6, 0, 'Provence-Alpes-Côte d''Azur');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 4, 2, 'Chou-fleur', 'Cagette de 2.5kg de chou-fleur', 2.5, 10, 24, 0, 'Bretagne');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 4, 3, 'Chou-fleur', 'Cagette de 2kg de chou-fleur', 2, 8.5, 40, 0, 'Grand Est');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 4, 3, 'Chou-fleur', 'Cagette de 2.5kg de chou-fleur', 2.5, 10, 24, 0, 'Languedoc-Roussillon');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 7, 3, 'Ciboulette', 'Cagette de 1kg de ciboulette', 1, 5, 75, 0, 'Occitanie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 7, 3, 'Oignon rouge', 'Cagette de 2kg d''oignon rouge', 2.5, 10, 15, 0, 'Hauts-de-France');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 7, 3, 'Échalotte grise', 'Cagette de 1kg d''échalotte grise', 2.5, 7.5, 12, 0, 'Grand Est');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 18, 3, 'Composition de légumes de saison (hiver)', 'Cagette de 5kg composée de carottes, betteraves, topinambours et de chou rouge', 5, 25, 5, 0, 'Pays de la Loire');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 18, 3, 'Composition de légumes de saison (hiver)', 'Cagette de 5kg composée de carottes, betteraves, topinambours et de chou rouge', 5, 25, 5, 0, 'Centre-Val de Loire');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 18, 4, 'Composition de légumes de saison (hiver)', 'Cagette de 6kg composée de carottes, betteraves, rutabagas, poireaux et d''artichauts', 6, 32, 3, 0, 'Normandie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 19, 4, 'Composition de fruits de saison (hiver)', 'Cagette de 3kg composée de mandarines, poires, clémentines, et litchis', 3, 18, 10, 0, 'Occitanie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 19, 4, 'Composition de fruits de saison (hiver)', 'Cagette de 3kg composée de mandarines, poires, clémentines, et litchis', 3, 21, 52, 0, 'Ile de France');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 19, 4, 'Composition de fruits de saison (hiver)', 'Cagette de 5kg composée de mandarines, poires, pommes, kiwis et clémentines', 5, 25, 25, 0, 'Bourgogne-Franche-Comté');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 20, 4, 'Composition de fruits et de légumes de saison (hiver)', 'Cagette de 8kg composée de mandarines,clémentines, rutabagas, betteraves et de carottes', 8, 46, 12, 0, 'Normandie');
+INSERT INTO Produit
+VALUES (SEQ_Produit.nextval, 20, 4, 'Composition de fruits et de légumes de saison (hiver)', 'Cagette de 7kg composée de poires, pommes, poireaux, betteraves et de carottes', 7, 40, 5, 0, 'Nouvelle-Aquitaine');
 
 
 ------------------------- PANIERS -------------------------
