@@ -43,9 +43,9 @@ VALUES (SEQ_CATEGORIE.nextval, 3, 'Composition de légumes + fruits');
 
 ------------------------- CLIENTS -------------------------
 insert into Client values (SEQ_Client.nextval, 'Ricart', 'Corney', 'cricart2@foxnews.com', '$2y$10$kWe2jW2WTtiLVT.pGwaWHO5Y1CGOtn.cDH3c0tKR6ZmbVKTc5AgOG', 1);
-insert into Client values (SEQ_Client.nextval, 'Vynehall', 'Catlee', 'cvynehall3@columbia.edu', '$2y$10$JpzmPHNtKsfecM5ezlf7Zu3skpIdN.w6G/aGFn/wxK7hi/Qrpr7Fa', 0);
-insert into Client values (SEQ_Client.nextval, 'Fishpond', 'Tuesday', 'tfishpond4@usnews.com', '$2y$10$qRSjhn5.kwJ1x9Q.rHIKx.sAsg9l8uT52E1J4/wYhqoO/oOVo6s1G', 0);
-insert into Client values (SEQ_Client.nextval, 'Ower', 'Billie', 'bower5@google.cn', '$2y$10$k47EK0Jvk0mPlXkBg2hcM.KM6aHWk/yIFw4GKhkYsb48/Z1zqObn2', 0);
+insert into Client values (SEQ_Client.nextval, 'Vynehall', 'Catlee', 'cvynehall3@columbia.edu', '$2y$10$JpzmPHNtKsfecM5ezlf7Zu3skpIdN.w6G/aGFn/wxK7hi/Qrpr7Fa', 1);
+insert into Client values (SEQ_Client.nextval, 'Fishpond', 'Tuesday', 'tfishpond4@usnews.com', '$2y$10$qRSjhn5.kwJ1x9Q.rHIKx.sAsg9l8uT52E1J4/wYhqoO/oOVo6s1G', 1);
+insert into Client values (SEQ_Client.nextval, 'Ower', 'Billie', 'bower5@google.cn', '$2y$10$k47EK0Jvk0mPlXkBg2hcM.KM6aHWk/yIFw4GKhkYsb48/Z1zqObn2', 1);
 insert into Client values (SEQ_Client.nextval, 'Scolding', 'Datha', 'dscolding6@ow.ly', '$2y$10$ob2myIl3Z/RVp0gJTa8hke/wXEgHkj9KJ4QKgmKueB8jZXbhyqRWK', 0);
 insert into Client values (SEQ_Client.nextval, 'Alebrooke', 'Terrel', 'talebrooke7@pbs.org', '$2y$10$5R6audHqxLwFEhFp7aIldu6/I/LsiSw1cWBpwYUgMstN/ciH6aGde', 0);
 insert into Client values (SEQ_Client.nextval, 'Raggatt', 'Eugenio', 'eraggatt8@nhs.uk', '$2y$10$KTFk3YkgrNcuIUzgIf8KUOd7EyBvFpoicEItDZqsW8fgR4aWsDjvi', 1);
