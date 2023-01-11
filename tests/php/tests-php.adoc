@@ -48,20 +48,23 @@ L'utilisateur entre le nom d'un produit dans la barre de recherche et appuie sur
 
 |=======
 |Test |Attendu |Résultat
-|Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| A TESTER
-|Saisie du nom d'un article non présent dans la BD |Afficgae page de résultat vide avec message erreur| A TESTER
-|Aucune saisie de nom |Affichage page de résultat vide| A TESTER
+|Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| En cours
+|Saisie du nom d'un article non présent dans la BD |Affichage page de résultat vide avec message| En cours
+|Aucune saisie de nom |Affichage page de résultat vide avec message| En cours
 |=======
 
 == Test 5: rechercher un produit avec des filtres de recherche
 
-Après la recherche par nom de produit, l'utilisateur filtre les résultats de la recherche. Par exemple, il peut filtrer par sous-catégorie ou par région.
+Après la recherche par nom de produit, l'utilisateur peut filtrer les résultats de la recherche. Par exemple, il peut filtrer par sous-catégorie ou par région. Il peut utiliser ces filtres s'il a entré ou non un mot-clé dans la barre de recherche.
 
 |=======
 |Test |Attendu |Résultat
-|Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | A TESTER
-|Recherche d'un produit non existant puis filtre par région |Affichage message erreur | A TESTER 
-|Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | A TESTER 
+|Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | En cours
+|Recherche d'un produit non existant puis filtre par région |Affichage des produits de cette région | En cours
+|Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | En cours
+|Recherche d'un produit existant puis filtre par catégorie|Affichage des produits avec ce nom et la catégorie correspondante| En cours
+|Recherche d'un produit non existant puis filtre par catégorie|Affichage des produits de cette catégorie | En cours
+|Aucune saisie de nom puis filtre par catégorie |Affichage de tous les produits de cette catégorie | En cours
 |=======
 
 == Test 6: consulter la page d'un produit
