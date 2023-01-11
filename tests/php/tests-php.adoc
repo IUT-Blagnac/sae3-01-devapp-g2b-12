@@ -73,14 +73,17 @@ L'utilisateur peut accéder aux informations d'un produit en cliquant dessus.
 |Cliquer sur un produit|Ouverture de la page du produit|Ok
 |=======
 
-== Test 7: gestion et mise à jour du panier
+== Test 7: gestion et mise à jour du panier puis passage d'une commande
 
-L'utilisateur peut enregistrer plusieurs articles dans son panier. Il peut aussi supprimer des articles ou augmenter la quantité.
+L'utilisateur peut enregistrer plusieurs articles dans son panier. Il peut aussi supprimer des articles ou augmenter la quantité. Enfin il peut régler sa commande.
 
 |=======
 |Test |Attendu |Résultat
-| | |
-| | | 
+|Ajout d'un produit via le bouton "Ajouter au panier" depuis la page produit.php|Le produit est ajouté au panier et est visible |Ok
+|Modification de la quantité|Le panier est actualisé avec la nouvelle valeur de quantité |Ok
+|Suppression d'un produit|Le panier est actualisé. On ne voit plus le produit supprimé|Ok
+|L'utilisateur remplit son panier sans être connecté puis se connecte|Le panier doit être sauvegardé|Ok
+|Réglement d'une commande via un formulaire|La commande est réglée et enregistrée dans la base de données|En cours
 |=======
 
 == Test 8: mise à jour d'un compte
