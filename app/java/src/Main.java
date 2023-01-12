@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import view.MainPageController;
@@ -35,6 +36,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(vueListe, 1050, 575);
 
+        stage.getIcons().add(new Image(Main.class.getResource("resources/icon.png").toExternalForm()));
         stage.setTitle("Visualisation des données de l'entrepôt");
         stage.setScene(scene);
         stage.setResizable(false);
