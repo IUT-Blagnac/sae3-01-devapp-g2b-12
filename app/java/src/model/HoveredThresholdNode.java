@@ -1,4 +1,4 @@
-package view;
+package model;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;

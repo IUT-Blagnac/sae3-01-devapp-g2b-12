@@ -16,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import model.HoveredThresholdNode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
