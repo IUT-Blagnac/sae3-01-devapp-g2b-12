@@ -48,9 +48,9 @@ L'utilisateur entre le nom d'un produit dans la barre de recherche et appuie sur
 
 |=======
 |Test |Attendu |Résultat
-|Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| En cours
-|Saisie du nom d'un article non présent dans la BD |Affichage page de résultat vide avec message| En cours
-|Aucune saisie de nom |Affichage page de résultat vide avec message| En cours
+|Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| Ok
+|Saisie du nom d'un article non présent dans la BD |Affichage page de résultat vide| Ok
+|Aucune saisie de nom |Affichage page de résultat vide avec message| Ok
 |=======
 
 == Test 5: rechercher un produit avec des filtres de recherche
@@ -59,12 +59,10 @@ Après la recherche par nom de produit, l'utilisateur peut filtrer les résultat
 
 |=======
 |Test |Attendu |Résultat
-|Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | En cours
-|Recherche d'un produit non existant puis filtre par région |Affichage des produits de cette région | En cours
-|Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | En cours
-|Recherche d'un produit existant puis filtre par catégorie|Affichage des produits avec ce nom et la catégorie correspondante| En cours
-|Recherche d'un produit non existant puis filtre par catégorie|Affichage des produits de cette catégorie | En cours
-|Aucune saisie de nom puis filtre par catégorie |Affichage de tous les produits de cette catégorie | En cours
+|Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | Ok
+|Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | Ok
+|Recherche d'un produit existant puis filtre par catégorie|Affichage des produits avec ce nom et la catégorie correspondante| Ok
+|Aucune saisie de nom puis filtre par catégorie |Affichage de tous les produits de cette catégorie | Ok
 |=======
 
 == Test 6: consulter la page d'un produit
