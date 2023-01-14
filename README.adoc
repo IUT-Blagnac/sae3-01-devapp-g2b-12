@@ -64,9 +64,9 @@ Tuteur enseignant de l’équipe :
 ** `php` => documents en lien avec le site web
 ** `python` => documentation technique de l'application Python
 - `tests` => répertoire contenant les tests :
+** `bd` => script de test de la procédure et du trigger
 ** `php` => tests en lien avec le site web
 ** `python` => version de test de l'application Python
-** `doc` => script de test de la procédure et du trigger
 
 
 == Applications
@@ -186,13 +186,23 @@ Attention à partir de maintenant on ne fouille plus dans vos dépôts ! Il me m
 
 La numérotation des sprints suit ce que vous a dit M. Bruel on vient de terminer le sprint 4, on prévois le sprint 5. Pensez à garder une trace des sprints terminés dans Github !
 
+==== Retour Sprint 5
+
+Doc : pour le site Web faire 2 docs, une tech et une utilisateur versionnée, rien en IOT pour le moment.
+
+Il manque toujours le liens vers les backlog produits et sprint !!
+
+Test ok mais je n'ai pas de date de Mise à jour du document pour le site Web.
+
+J'ai pas de comits ... comment travaillez-vous depuis les vacances ???
+
 == Tests
 
 === IoT
 
 Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/blob/v5/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/v5/docs/python/python_tech.adoc#tests[ici].
 
-=== PHP
+=== Site web
 
 Vous pouvez retrouver les tests du site web {baseURL}/blob/v5/tests/php/tests-php.adoc[ici].
 
