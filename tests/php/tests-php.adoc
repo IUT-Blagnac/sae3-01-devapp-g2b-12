@@ -15,6 +15,7 @@ L'utilisateur entre son login (adresse-mail) et son mot de passe dans le formula
 
 |=======
 |Test |Attendu |Résultat
+
 |Connexion avec compte client |Redirection vers accueil avec modification du header |Ok
 |Connexion avec compte agriculteur |Redirection vers accueil avec modification du header |Ok
 |Connexion avec compte inexistant |Redirection vers formulaire de connexion avec message d'erreur |Ok
@@ -26,6 +27,7 @@ L'utilisateur appuie sur le bouton de déconnexion du header.
 
 |=======
 |Test |Attendu |Résultat
+
 |Déconnexion du site |Redirection vers accueil avec modification du header | Ok
 |=======
 
@@ -37,6 +39,7 @@ Ainsi, dans ce test, un compte peut être "correct" ou "incorrect".
 
 |=======
 |Test |Attendu |Résultat
+
 |Création compte client correct |Redirection vers accueil avec modification du header | A TESTER
 |Création compte agriculteur correct |Redirection vers accueil avec modification du header | A TESTER
 |Création compte incorrect |Redirection vers formulaire avec message d'erreur | A TESTER
@@ -48,6 +51,7 @@ L'utilisateur entre le nom d'un produit dans la barre de recherche et appuie sur
 
 |=======
 |Test |Attendu |Résultat
+
 |Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| Ok
 |Saisie du nom d'un article non présent dans la BD |Affichage page de résultat vide| Ok
 |Aucune saisie de nom |Affichage page de résultat vide avec message| Ok
@@ -59,6 +63,7 @@ Après la recherche par nom de produit, l'utilisateur peut filtrer les résultat
 
 |=======
 |Test |Attendu |Résultat
+
 |Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | Ok
 |Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | Ok
 |Recherche d'un produit existant puis filtre par catégorie|Affichage des produits avec ce nom et la catégorie correspondante| Ok
@@ -71,6 +76,7 @@ L'utilisateur peut accéder aux informations d'un produit en cliquant dessus.
 
 |=======
 |Test |Attendu |Résultat
+
 |Cliquer sur un produit|Ouverture de la page du produit|Ok
 |=======
 
@@ -80,6 +86,7 @@ L'utilisateur peut enregistrer plusieurs articles dans son panier. Il peut aussi
 
 |=======
 |Test |Attendu |Résultat
+
 |L'utilisateur consulte son panier|La page affiche les éléments du panier s'il y en a|Ok
 |Ajout d'un produit via le bouton "Ajouter au panier" depuis la page produit.php|Le produit est ajouté au panier et est visible |Ok
 |Modification de la quantité|Le panier est actualisé avec la nouvelle valeur de quantité |Ok
@@ -94,6 +101,7 @@ Un utilisateur connecté, via un formulaire, peut modifier les informations de s
 
 |=======
 |Test |Attendu |Résultat
+
 |Accès à la page de modification du compte depuis "Mon Compte"|Affichage du formulaire de modification du compte| Ok
 |Modifier les informations à l'aide du formulaire |Redirection vers la page "Mon Compte" avec session et BD mises à jour | Ok
 |Enregistrement avec des champs non remplis |Aucune redirection, indication du champ non remplit à l'utilisateur | Ok
@@ -105,8 +113,12 @@ Une fois connecté, un agriculteur peut remplir un formulaire pour ajouter ses p
 
 |=======
 |Test |Attendu |Résultat
-| | |
-| | | 
+
+|Accès à la page en étant déconnecté|Redirection vers la page de connexion|OK
+|Accès à la page en étant connecté en tant que client basique|Redirection vers l'index|OK
+|Accès à la page en étant connecté en tant que agriculteur|Affichage de la page|OK
+|Remplir tout les champs correctement et appuyer sur le bouton de création|Redirection vers la page produit|OK
+|Remplir tout les champs avec des erreurs et appuyer sur le bouton de création|Affiche un message en rouge par rapport à l'erreur|OK
 |=======
 
 == Test 10: un agriculteur peut consulter et modifier les produits ajoutés
@@ -115,6 +127,15 @@ Un agriculteur connecté peut accéder à la liste de ses produits et les modifi
 
 |=======
 |Test |Attendu |Résultat
-| | |
-| | | 
+
+|Accès à la page en étant déconnecté|Redirection vers la page de connexion|OK
+|Accès à la page en étant connecté en tant que client basique|Redirection vers l'index|OK
+|Accès à la page en étant connecté en tant que agriculteur|Affichage de la page|OK
+|La page liste tous les produits créés par l'agriculteur connecté|Affichage de la liste de tous les produits créés|OK
+|Création d'un nouveau produit|Le nouveau produit s'ajoute à la liste|OK
+|Appuie sur le bouton de suppression|Le produit est supprimé|OK
+|Appuie sur le bouton de suppression d'un produit commandé par des clients|Le produit n'est pas supprimé et un message s'affiche en rouge|OK
+|Appuie sur le bouton d'affichage d'un produit|La page du produit est affichée|OK
+|Appuie sur le bouton de modification d'un produit|L'agriculteur est redirigé vers une page de modification où il y a toutes les informations du produit affichées et il peut les modifier|OK
+|Accès à la page en ayant jamais créé de produit|La page indique que l'agriculteur n'a pas créé de produits|PAS OK
 |=======
