@@ -40,9 +40,9 @@ Ainsi, dans ce test, un compte peut être "correct" ou "incorrect".
 |=======
 |Test |Attendu |Résultat
 
-|Création compte client correct |Redirection vers accueil avec modification du header | A TESTER
-|Création compte agriculteur correct |Redirection vers accueil avec modification du header | A TESTER
-|Création compte incorrect |Redirection vers formulaire avec message d'erreur | A TESTER
+|Création compte client correct |Redirection vers accueil avec modification du header | Ok
+|Création compte agriculteur correct |Redirection vers accueil avec modification du header | Ok
+|Création compte incorrect |Redirection vers formulaire avec message d'erreur | Ok
 |=======
 
 == Test 4: rechercher un produit par son nom
