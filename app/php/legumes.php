@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>Nos légumes</title>
-    <link rel="stylesheet" href="include/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="stylesheet" href="include/style/general.css">
+    <link rel="stylesheet" href="include/style/legumes.css">
 </head>
 
 <?php
@@ -86,7 +87,7 @@
 
 <body>
 
-    <h1 class="produits-titre">Nos légumes: </h1>
+    <h1 class="produits-titre">Nos légumes</h1>
 
     <div class="saison">
         

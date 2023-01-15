@@ -3,32 +3,372 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="include/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Recherche de produit</title>
+    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="stylesheet" href="include/style/general.css">
+    <link rel="stylesheet" href="include/style/recherche.css">
 </head>
 
 <?php
-include("include/header.php");
+    include("include/header.php");
+    require_once("include/connect.inc.php");
+?>
+
+<?php 
+
+    // Création du formulaire de recherche
+    $formulaire = "<div class='recherche-form'>
+                        <p>Filtres de recherche:</p>
+                        <form method='post' action ='recherche.php'>
+                            <select name='categorie'>
+                                <option value=''>-- Choisir une catégorie --</option>";
+
+    // Requête pour récupérer les catégories
+    $req = "Select * from Categorie Where idcategorie != 1 and idcategorie != 2 and idcategorie != 3";
+    $categorie = oci_parse($connect, $req);
+    $result = oci_execute($categorie);
+    while(($donnees = oci_fetch_assoc($categorie)) != false){
+        //$idCategorie = $donnees["IDCATEGORIE"].
+        $nomCategorie = $donnees["NOM"];
+        $formulaire .= '<option>' . $nomCategorie . '</option>';
+    }
+    oci_free_statement($categorie);
+
+    $formulaire .= "</select> <select name='region'> <option value=''>-- Choisir une région --</option>";
+
+    // Requête pour récupérer les régions
+    $req = "Select unique region from Produit";
+    $region = oci_parse($connect, $req);
+    $result = oci_execute($region);
+    while(($donnees = oci_fetch_assoc($region)) != false){
+        $nomRegion = $donnees["REGION"];
+        $formulaire .= '<option>' . $nomRegion . '</option>';
+    }
+    oci_free_statement($region);
+
+    $formulaire .= "</select> <input type='submit' name='validerForm' value='Valider'> </form> </div>";
+
+
+    // Accès à la page depuis le header
+    if(isset($_POST["valider"]) && isset($_POST["search"])){
+
+        // L'utilisateur a entré un mot-clé
+        if($_POST["search"] != ""){
+
+            // On met en minuscules le mot-clé 
+            // puis on met la première lette en majuscules
+            $nom = ucfirst(strtolower($_POST["search"]));
+
+            $recherche = "Recherche de: " . $nom;
+            $_SESSION["recherche"] = $nom;
+
+            // Recherche du nom dans la BD
+            $req = "Select * from Produit Where nom like :nom";
+            $produits = oci_parse($connect, $req);
+            $nomProduit = "%" . $nom . "%";
+            oci_bind_by_name($produits, ":nom", $nomProduit);
+            $result = oci_execute($produits);
+
+            if(!$result){
+                oci_free_statement($produits);
+            }
+            else{
+                // On crée un compteur pour faire des lignes de 4 produits
+                $affichage = "<div class='saison-ligne'>";
+                $cpt = 0;
+
+                while(($donnees = oci_fetch_assoc($produits)) != false) {
+                    $nom = $donnees["NOM"];
+                    $prix = $donnees["PRIX"];
+
+                    if($cpt != 4){
+
+                        $nomRegex = preg_replace('" "', '%20', $nom);
+                        $image = $nomRegex.'.png';
+                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+
+                        $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+
+                        $cpt++;
+                    }
+                    else{
+                        // On ferme la ligne et on en crée une nouvelle
+                        $affichage = $affichage.'</div> <div class="saison-ligne">';
+
+                        $nomRegex = preg_replace('" "', '%20', $nom);
+                        $image = $nomRegex.'.png';
+                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+
+                        $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+
+                        $cpt = 1;
+                    } 
+                }
+            }
+        }
+        else{
+            $recherche = "Recherchez un produit avec les filtres suivants:";
+            $_SESSION["recherche"] = "";
+        }
+    }
+
+    // Accès à la page depuis le formulaire de recherche
+    if(isset($_POST["validerForm"])){
+
+        // L'utilisateur filtre sur son résultat précédent
+        if(isset($_SESSION["recherche"]) && $_SESSION["recherche"] != ""){
+
+            $nom = $_SESSION["recherche"];
+            $filtre = "";
+            $idCateg = "";
+            $recherche = "Recherche de " . $_SESSION["recherche"];
+
+            // On récupère l'id de la catégorie choisie par l'utlisateur
+            if($_POST["categorie"] != ''){
+                $req = "Select * from Categorie Where nom = :nomC";
+                $categ = oci_parse($connect, $req);
+                oci_bind_by_name($categ, ":nomC", $_POST["categorie"]);
+                $result = oci_execute($categ);
+                $donnees = oci_fetch_assoc($categ);
+                $idCateg = $donnees["IDCATEGORIE"];
+                oci_free_statement($categ);
+            }
+
+            // Si l'utilisateur filtre sur la région
+            if($_POST["categorie"] == '' && $_POST["region"] != ''){
+                $req = "Select * from Produit Where region = :nomR and nom like :nomP";
+                $filtre = oci_parse($connect, $req);
+                $nomProduit = "%" . $nom . "%";
+                oci_bind_by_name($filtre, ":nomR", $_POST["region"]);
+                oci_bind_by_name($filtre, ":nomP", $nomProduit);
+                $recherche .= " + " . $_POST["region"];
+            }
+
+            // Si l'utilisateur filtre sur la catégorie
+            if($_POST["categorie"] != '' && $_POST["region"] == ''){
+                $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP";
+                $filtre= oci_parse($connect, $req);
+                $nomProduit = "%" . $nom . "%";
+                oci_bind_by_name($filtre, ":idC", $idCateg);
+                oci_bind_by_name($filtre, ":nomP", $nomProduit);
+                $recherche .= " + " . $_POST["categorie"];
+            }
+
+            // Si l'utilisateur filtre sur la catégorie et la région
+            if($_POST["categorie"] != '' && $_POST["region"] != ''){
+
+                $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and region = :nomR";
+                $filtre= oci_parse($connect, $req);
+                $nomProduit = "%" . $nom . "%";
+                oci_bind_by_name($filtre, ":idC", $idCateg);
+                oci_bind_by_name($filtre, ":nomP", $nomProduit);
+                oci_bind_by_name($filtre, ":nomR", $_POST["region"]);
+                $recherche .= " + " . $_POST["categorie"] . " + " . $_POST["region"];
+            } 
+
+            // Exécution de la requête
+            $result = oci_execute($filtre);
+        
+            if(!$result){
+                oci_free_statement($filtre);
+            }
+            else{
+                $affichage = "<div class='saison-ligne'>";
+                $cpt = 0;
+                    
+                while(($donnees = oci_fetch_assoc($filtre)) != false) {
+                    $nom = $donnees["NOM"];
+                    $prix = $donnees["PRIX"];
+
+                    if($cpt != 4){
+                        $nomRegex = preg_replace('" "', '%20', $nom);
+                        $image = $nomRegex.'.png';
+                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+
+                        $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        $cpt++;
+                    }
+                    else{
+                        $affichage = $affichage.'</div> <div class="saison-ligne">';
+
+                        $nomRegex = preg_replace('" "', '%20', $nom);
+                        $image = $nomRegex.'.png';
+                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+
+                        $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+
+                        $cpt = 1;
+                    } 
+                }
+
+            }
+            oci_free_statement($filtre);
+
+            
+        }
+        else{
+
+            $produit = "";
+
+            // Si l'utilisateur n'a pas entré de mot-clé et recherche par région
+            if($_POST["categorie"] == '' && $_POST["region"] != ''){
+                $req = "Select * from Produit Where region = :nomR";
+                $produit = oci_parse($connect, $req);
+                oci_bind_by_name($produit, ":nomR", $_POST["region"]);
+
+                $result = oci_execute($produit);
+        
+                if(!$result){
+                    oci_free_statement($produit);
+                }
+                else{
+                    $affichage = "<div class='saison-ligne'>";
+                    $cpt = 0;
+                    while(($donnees = oci_fetch_assoc($produit)) != false) {
+                        $nom = $donnees["NOM"];
+                        $prix = $donnees["PRIX"];
+    
+                        if($cpt != 4){
+                            $nomRegex = preg_replace('" "', '%20', $nom);
+                            $image = $nomRegex.'.png';
+                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+    
+                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                            $cpt++;
+                        }
+                        else{
+                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+    
+                            $nomRegex = preg_replace('" "', '%20', $nom);
+                            $image = $nomRegex.'.png';
+                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+    
+                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+    
+                            $cpt = 1;
+                        } 
+                    }
+                }
+                oci_free_statement($produit);
+            }
+
+            // Si l'utilisateur n'a pas entré de mot-clé et recherche par catégorie
+            if($_POST["categorie"] != '' && $_POST["region"] == ''){
+
+                // Requête pour récupérer les catégories
+                $req = "Select * from Categorie Where nom = :nomCat";
+                $categorie = oci_parse($connect, $req);
+                oci_bind_by_name($categorie, ":nomCat", $_POST["categorie"]);
+                $result = oci_execute($categorie);
+                $donnees = oci_fetch_assoc($categorie);
+                $idCategorie = $donnees["IDCATEGORIE"]; 
+                oci_free_statement($categorie);
+
+                $req = "Select * from Produit Where idcategorie = :idCat";
+                $produit = oci_parse($connect, $req);
+                oci_bind_by_name($produit, ":idCat", $idCategorie);
+
+                $result = oci_execute($produit);
+        
+                if(!$result){
+                    oci_free_statement($produit);
+                }
+                else{
+                    $affichage = "<div class='saison-ligne'>";
+                    $cpt = 0;
+                    while(($donnees = oci_fetch_assoc($produit)) != false) {
+                        $nom = $donnees["NOM"];
+                        $prix = $donnees["PRIX"];
+    
+                        if($cpt != 4){
+                            $nomRegex = preg_replace('" "', '%20', $nom);
+                            $image = $nomRegex.'.png';
+                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+    
+                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                            $cpt++;
+                        }
+                        else{
+                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+    
+                            $nomRegex = preg_replace('" "', '%20', $nom);
+                            $image = $nomRegex.'.png';
+                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+    
+                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+    
+                            $cpt = 1;
+                        } 
+                    }
+                }
+                oci_free_statement($produit);
+            }
+
+            // Si l'utilisateur n'a pas entré de mot-clé et recherche par catégorie et par région
+            if($_POST["categorie"] != '' && $_POST["region"] != ''){
+
+                // Requête pour récupérer les catégories
+                $req = "Select * from Categorie Where nom = :nomCat";
+                $categorie = oci_parse($connect, $req);
+                oci_bind_by_name($categorie, ":nomCat", $_POST["categorie"]);
+                $result = oci_execute($categorie);
+                $donnees = oci_fetch_assoc($categorie);
+                $idCategorie = $donnees["IDCATEGORIE"]; 
+                oci_free_statement($categorie);
+
+                $req = "Select * from Produit Where region = :nomR and idcategorie = :idCat";
+                $produit = oci_parse($connect, $req);
+                oci_bind_by_name($produit, ":nomR", $_POST["region"]);
+                oci_bind_by_name($produit, ":idCat", $idCategorie);
+                $result = oci_execute($produit);
+        
+                if(!$result){
+                    oci_free_statement($produit);
+                }
+                else{
+                    $affichage = "<div class='saison-ligne'>";
+                    $cpt = 0;
+                    while(($donnees = oci_fetch_assoc($produit)) != false) {
+                        $nom = $donnees["NOM"];
+                        $prix = $donnees["PRIX"];
+    
+                        if($cpt != 4){
+                            $nomRegex = preg_replace('" "', '%20', $nom);
+                            $image = $nomRegex.'.png';
+                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+    
+                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                            $cpt++;
+                        }
+                        else{
+                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+    
+                            $nomRegex = preg_replace('" "', '%20', $nom);
+                            $image = $nomRegex.'.png';
+                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+    
+                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+    
+                            $cpt = 1;
+                        } 
+                    }
+                }
+                oci_free_statement($produit);
+            }
+        } 
+    }
+
 ?>
 
 <body>
 
-    <h1 class="recherche-nom">Recherche: ... </h1>
+    <h1 class="recherche-nom"> <?php if(isset($recherche)) echo $recherche; ?> </h1>
 
-    <!-- Pour la recherche par catégorie et sous-catégorie, ajouter un formulaire -->
+    <h3 class="recherche-nom" style="font-style: italic;"> S'il n'y a pas de résultats, essayez sans 's' final ou sans accents. </h3>
 
-    <table>
-        <tr>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-            <td><img src="img/pommes.png" alt="image produit"></td>
-        </tr>
-    </table>
-
-
-
-
+    <?php echo $formulaire; ?>
+    
+    <?php if(isset($affichage)) echo $affichage; ?>
+    
 </body>
-
 </html>

@@ -1,19 +1,22 @@
 <!doctype html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="include/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Modifier mon compte</title>
+    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="stylesheet" href="include/style/general.css">
+    <link rel="stylesheet" href="include/style/modifierCompte.css">
 </head>
 
 <?php
-    include("include/header.php");
-    require_once("include/connect.inc.php");
-?>
+  include("include/header.php");
+  require_once("include/connect.inc.php");
 
-<?php
+  if ((empty($_SESSION["connecte"]) || $_SESSION["connecte"] != "oui")) {
+    header("location: connexion.php");
+    die();
+  }
+
     
     $id_client = $_SESSION['idClient'];
     $nomBefore = $_SESSION["nom"];
@@ -43,10 +46,12 @@
       oci_execute($modif);
       if (isset($_POST['new-mdp']) and isset($_POST['confirm-area'])) {
         if ($_POST['new-mdp'] == $_POST['confirm-area']) {
-          $newMdp = password_hash($_POST['new-mdp'], PASSWORD_DEFAULT);
-          $req3 = "Update Client Set mdp = '$newMdp' where idclient = '$id_client'";
-          $modif2 = oci_parse($connect, $req3);
-          oci_execute($modif2);
+          if ($_POST['new-mdp'] != "") {
+            $newMdp = password_hash($_POST['new-mdp'], PASSWORD_DEFAULT);
+            $req3 = "Update Client Set mdp = '$newMdp' where idclient = '$id_client'";
+            $modif2 = oci_parse($connect, $req3);
+            oci_execute($modif2);
+          }
         } else {
           // afficher message d'erreur
         }
@@ -75,13 +80,15 @@
     </div>
     <div class="modifier-mdp">
       <label for="new-mdp">Entrez le nouveau mot de passe :</label>
-      <input type="password" name="new-mdp" id="new-mdp" required placeholder="Nouveau mot de passe">
+      <input type="password" name="new-mdp" id="new-mdp" placeholder="Nouveau mot de passe">
     </div>
     <div class="confirm-mdp">
       <label for="confirm-area" id="label-confirm">Confirmez le nouveau mot de passe :</label>
-      <input type="password" name="confirm-area" id="confirm-area" required placeholder="Confirmation du mot de passe">
+      <input type="password" name="confirm-area" id="confirm-area" placeholder="Confirmation du mot de passe">
     </div>
-    <button type="submit" class='bouton-enregistrer' name="save" value="Enregistrer">Enregistrer</button>
+    <div class="bouttons">
+      <button type="submit" id='bouton-jaune' name="save" value="Enregistrer">Enregistrer</button>
+    </div>
   </form> 
 </div>
 

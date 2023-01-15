@@ -2,11 +2,7 @@
 
 session_start();
 
-if (isset($_SESSION["connecte"])) {
-  if ($_SESSION["connecte"] == "oui") {
-    $_SESSION["connecte"] = "non";
-  }
-}
+session_destroy();
 
 header("location:index.php");
 

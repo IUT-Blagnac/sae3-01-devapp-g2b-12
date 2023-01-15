@@ -4,12 +4,19 @@
 <head>
   <meta charset="utf-8">
   <title>Connexion</title>
-  <link rel="stylesheet" href="include/style.css">
+  <link rel="icon" type="image/png" href="img/icon/favicon.png">
+  <link rel="stylesheet" href="include/style/general.css">
+  <link rel="stylesheet" href="include/style/connexion.css">
 </head>
 
 <?php
   include("include/header.php"); 
   require_once("include/connect.inc.php");
+
+  if ((isset($_SESSION["connecte"]) && $_SESSION["connecte"] == "oui")) {
+    header("location: index.php");
+    die();
+  }
 
   if(isset($_COOKIE["cookConnexion"])){
     $login = $_COOKIE["cookConnexion"];
@@ -21,22 +28,24 @@
   }
 
   if(isset($_SESSION["erreur"]) && $_SESSION["erreur"] == "oui"){
-    $erreur = "Email ou mot de passe invalide.";
-    $_SESSION["erreur"] = "non";
+    $_SESSION["erreur"] = "Email ou mot de passe invalide.";
   }
   else{
-    $erreur = "";
+    $_SESSION["erreur"] = "";
   }
   
 ?>
 
-<div style="text-align: center;">
-  <p> <?php echo $erreur ?> </p>
+<div class="erreur">
+  <?php
+    echo $_SESSION["erreur"];
+    $_SESSION["erreur"] = "";
+  ?>
 </div>
 
 <form method="post">
-  <div class="box">
-      <div class="connexion">Connexion</div>
+  <div class="boite-contour">
+      <div class="texte-contour">Connexion</div>
       <div class="email">
         <label for="email">Email :</label>
         <input type="text" name="email" required value=<?php echo "$login" ?>>
@@ -45,11 +54,9 @@
         <label for="accepterCookie">Rester connecté</label>
         <input type="checkbox" name="accepterCookie" <?php echo $cookie ?> checked>
       </div>
-      <div class="bco"><!-- bco = Bouton connexion-->
-          <input type="submit" value="Se connecter" name="valider" id="form-connexion">
-          <div style="margin-top: 26px">
-            <a href="inscription.php" id="buttonCreerCompte"> Créer un compte </a>
-          </div>
+      <div class="contain-boutons">
+        <input type="submit" value="Se connecter" name="valider" id="bouton-jaune">
+        <a href="inscription.php" id="bouton-creerCompte">Créer un compte</a>
       </div>
     </div>
 </form>
@@ -97,7 +104,7 @@ if(isset($_POST["valider"]) && isset($_POST["email"]) && isset($_POST["mdp"])){
         setcookie('cookConnexion', $login, time() + 3600);
       }
 
-      $_SESSION["erreur"] = "non";
+      $_SESSION["erreur"] = "";
       header("location:index.php");
     }
     else{

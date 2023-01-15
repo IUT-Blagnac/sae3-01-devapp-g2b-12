@@ -1,0 +1,141 @@
+/* --- PAGES EN GENERAL --- */
+
+body {
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://rsms.me/inter/font-files/Inter-Regular.woff2?v=3.19") format("woff2");
+}
+
+:root {
+    font-family: 'Inter', sans-serif;
+}
+
+
+/* --- FORMULAIRES --- */
+
+/* Boîte avec un contour noir */
+.boite-contour {
+    background-color: rgb(238, 244, 242);
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+/* Texte affiché sur le centre haut d'une div */
+.texte-contour {
+    display: block;
+    position: relative;
+    text-align: center;
+    font-family: calibri;
+    font-weight: bold;
+    font-size: 30px;
+    transform: translateY(-20px);
+    margin: 0 auto;
+    background: #fff;
+}
+
+.formulaire-deux-colonnes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sous-formulaire {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+
+
+/* Bouton jaune corresondant à la charte graphique */
+#bouton-jaune {
+    background-color: rgb(245, 163, 27);
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: 0;
+    border-radius: 3px;
+    text-decoration: none;
+}
+#bouton-jaune:hover {
+    background-color: #da9227;
+}
+
+/* Bouton rouge corresondant à la charte graphique */
+#bouton-rouge {
+    background-color: rgb(211, 39, 39);
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: 0;
+    border-radius: 3px;
+    text-decoration: none;
+}
+#bouton-rouge:hover {
+    background-color: black;
+}
+
+/* Bouton vert corresondant à la charte graphique */
+.bouton-vert {
+    background-color: rgb(25, 135, 12);
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: 0;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.bouton-vert:hover {
+    background-color: #69b345;
+}
+
+
+.erreur {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+/* Boîte (lien "a") contenant les infos d'un produit */
+.boite-produit {
+    margin: 1em;
+    text-decoration: none;
+    color: black;
+    background-color: #bbb7b7;
+    border-radius: 20px;
+    width: calc(300px + 1.5em);
+}
+.boite-produit:hover {
+    background-color: #13a527;
+}
+
+/* Boîte (div) contenant les infos d'un produit */
+.produit {
+    padding: .5em;
+    text-align: center;
+    font-size: 1.5em;
+}
+.produit img {
+    border-radius: 20px;
+    height: 300px;
+    width: 300px;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.produits-titre{
+    color: #13a527;
+    text-shadow: 3px 2px #B7B7B7;
+    text-align: center; 
+    margin-top: 30px;
+    font-size: 50px;
+}

@@ -1,0 +1,77 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    background-color: #edf4f2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 2px solid grey;
+    z-index: 1;
+}
+
+nav .bas, nav .haut {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+nav .haut a {
+    color: black;
+    text-decoration: none;
+}
+
+nav .haut img.item {
+	height: 100px;
+}
+
+nav .haut .item {
+    margin: 0 1vw;
+}
+
+nav .haut .panier {
+    height: 50px;
+    margin: 0 1vw;
+}
+
+nav .bas {
+    height: 50px;
+}
+
+nav .bas .item {
+    margin: 0 1vw;
+}
+
+nav .bas a {
+    text-decoration: none;
+    color: #13a527;
+    font-size: 20px;
+}
+
+nav .bas .bouton-orange {
+    background-color: #f8a62c;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+nav .bas a:hover {
+    text-decoration: underline;
+}
+
+nav .bas .bouton-orange:hover {
+    background-color: #da9227;
+    text-decoration: none;
+}
+
+/* bouton déconnexion */
+nav .bas .bouton-rouge {
+    background-color: #ff0303;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+nav .bas .bouton-rouge:hover {
+    text-decoration: none;
+}

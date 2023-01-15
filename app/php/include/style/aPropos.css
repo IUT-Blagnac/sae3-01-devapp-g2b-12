@@ -1,0 +1,16 @@
+.a-propos-text{
+    border: solid 2px;
+    border-radius: 20px;;
+    margin: 3%;
+}
+
+.a-propos-text p{
+    margin-left: 3%;
+}
+
+.a-propos-text h1{
+	color: #13a527;
+    text-shadow: 3px 2px #B7B7B7; 
+    margin-top: 30px;
+    margin-left: 3%;
+}

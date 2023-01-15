@@ -1,0 +1,44 @@
+table, h2 {
+	text-align: center;
+}
+
+table {
+	width: 80%;
+	margin: 1em 1em 1em 50%;
+	transform: translateX(-50%);
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#highlighted td {
+	background-color: red !important;
+}
+
+#highlighted button:hover {
+	background-color: rgb(183, 15, 21) !important;
+}
+
+th {
+	background-color: #87c890;
+	border: 1px solid black;
+}
+
+td {
+	background-color: #ddd;
+	border-right: 1px solid black;
+}
+
+th, td {
+	padding: .5em;
+}
+
+table button, table a {
+	background: none;
+	border: 0;
+	border-radius: 1em;
+}
+
+table button:hover, table a:hover {
+	background-color: #c8c8c8;
+	cursor: pointer;
+}

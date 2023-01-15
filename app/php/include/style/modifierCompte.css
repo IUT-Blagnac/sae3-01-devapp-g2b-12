@@ -1,0 +1,124 @@
+.boxModifierCompte {
+	width: 600px;
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150px;
+	border-radius: 10px;
+	background-color: #edf4f2;
+}
+
+#titre-modif-compte {
+	display: block;
+	position: relative;
+	text-align: center;
+	font-family: calibri;
+	width: 250px;
+	height: 16px;
+	font-size: 22px;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -16px;
+	background: #fff;
+}
+
+.modifier-nom {
+	display: inline-flex;
+	margin-top: 25px;
+	margin-left: 50px;
+}
+
+.modifier-nom label{
+	width: 160px;
+}
+
+.modifier-nom input {
+	margin-left: 20px;
+	height: 15px;
+}
+
+.modifier-prenom {
+	display: inline-flex;
+	margin-top: 25px;
+	margin-left: 50px;
+}
+
+.modifier-prenom input {
+	margin-left: 20px;
+	height: 15px;
+}
+
+.modifier-prenom label {
+	width: 180px;
+}
+
+.modifier-email {
+	display: inline-flex;
+	margin-top: 25px;
+	margin-left: 50px;
+}
+
+.modifier-email input {
+	margin-left: 20px;
+	height: 15px;
+	width: 200px;
+}
+
+.modifier-email label {
+	width: 225px;
+}
+
+.bouton-enregistrer {
+	text-decoration: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 35px;
+	height: 45px;
+	width: 175px;
+	font-size: 15px;
+	background-color: #f8a62c;
+	color: white;
+	padding: 8px;
+	border-color: #f8a62c;
+}
+
+#bouton-enregistrer:hover {
+	background-color: #da9227;
+}
+
+#lien-enregistrer {
+	text-decoration: none;
+}
+
+#form-modif{
+	display: inline-block;
+}
+
+.modifier-mdp {
+	display: inline-flex;
+	margin-top: 25px;
+	margin-left: 50px;
+}
+
+.modifier-mdp input{
+	margin-left: 20px;
+	width: 200px;
+}
+
+.confirm-mdp {
+	display: inline-flex;
+	margin-top: 25px;
+	margin-left: 50px;
+}
+
+.confirm-mdp input{
+	margin-left: 20px;
+	width: 200px;
+}
+
+.bouttons {
+	text-align: center;
+	margin: 25px 0;
+}

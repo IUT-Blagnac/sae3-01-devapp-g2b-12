@@ -1,19 +1,22 @@
 <!doctype html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="include/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Mon compte</title>
+    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="stylesheet" href="include/style/general.css">
+    <link rel="stylesheet" href="include/style/monCompte.css">
 </head>
 
 <?php
-    include("include/header.php");
-    require_once("include/connect.inc.php");
-?>
+  include("include/header.php");
+  require_once("include/connect.inc.php");
 
-<?php
+  if ((empty($_SESSION["connecte"]) || $_SESSION["connecte"] != "oui")) {
+    header("location: connexion.php");
+    die();
+  }
+
 	
 	  $nom = $_SESSION["nom"];
     $prenom = $_SESSION["prenom"];
@@ -32,7 +35,8 @@
 
     if ($agriculteur == 1) {
       $agriculteur = "Ce compte est inscrit en tant qu'agriculteur.";
-      $consult = "<a href='consultationProduit.php' id='lien-consult'><input type='submit' value='Consulter vos produits' name='consulter' id='bouton-consulter-produits'></a>";
+      // $consult = "<a href='listeProduitMisEnVente.php' id='lien-consult'><input type='submit' value='Consulter vos produits' name='consulter' id='bouton-consulter-produits'></a>";
+      $consult = '<a href="listeProduitMisEnVente.php" class="bouton-vert">Consulter vos produits</a>';
      } else {
         $agriculteur = "Ce compte n'est pas inscrit en tant qu'agriculteur.";
         $consult = "";
@@ -57,10 +61,12 @@
    <div id="emailCompte"><?php echo $email; ?></div>
   </div>
   <div id="compteAgriculteur"><?php echo $agriculteur; ?></div>
-  <a href="modifierCompte.php" id="lien-modif"><input type="submit" value="Modifier les informations du compte" name="modif" id="bouton-modifierCompte"></a>
+  <!-- <a href="modifierCompte.php" id="lien-modif"><input type="submit" value="Modifier les informations du compte" name="modif" id="bouton-modifierCompte"></a> -->
+  <div class="boutons">
+    <a href="modifierCompte.php" id="bouton-jaune">Modifier les informations du compte</a>
+    <?php echo $consult; ?>
+  </div>
 </div>
 
-<?php echo $consult; ?>
-
-
 </body>
+</html>

@@ -1,0 +1,28 @@
+/* Boîte avec un contour noir, contient générallement un formulaire*/
+.boite-contour {
+    width: 700px;
+    margin: 50px auto;
+}
+
+/* Texte affiché sur le centre haut d'une div */
+.texte-contour {
+    height: 20px;
+    width: 250px;
+}
+
+.sous-formulaire input {
+    width: 300px;
+}
+
+.sous-formulaire .sous-formulaire {
+    margin-right: 10px;
+}
+
+.sous-formulaire .sous-formulaire input {
+    width: auto;
+}
+
+#bouton-jaune {
+    margin: 20px 0 20px 50%;
+    transform: translateX(-50%);
+}
