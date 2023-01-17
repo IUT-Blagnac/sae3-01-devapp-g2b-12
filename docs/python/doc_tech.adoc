@@ -31,7 +31,7 @@ toc::[]
 
 Ce programme sert à enregistrer des informations récupérées de capteurs d'un réseau MQTT et à alerter de dépassement de seuils.
 
-On peut paramétrer sont comportement, pour cela référez-vous à la section {baseURL}/blob/master/docs/python/python_doc.adoc#configuration[Configuration].
+On peut paramétrer sont comportement, pour cela référez-vous à la section {baseURL}/blob/master/docs/python/doc_tech.adoc#configuration[Configuration].
 
 == Structure du code
 
@@ -61,7 +61,7 @@ Une fois le projet créé, vous pouvez mettre le fichier du programme {baseURL}/
 
 Après avoir mis le fichier vous pouvez retourner sur IntelliJ IDEA et oubrir `Python Packages`, situé en bas de la fenêtre, dans la barre de recherche tappez `paho-mqtt` et installer le paquet portant ce nom, avec le bouton `Install package` à droite.
 
-Vous pouvez maintenant passer à la section {baseURL}/blob/master/docs/python/python_doc.adoc#utilisation[Utilisation] qui vous permettra de lancer le programme.
+Vous pouvez maintenant passer à la section {baseURL}/blob/master/docs/python/doc_tech.adoc#utilisation[Utilisation] qui vous permettra de lancer le programme.
 
 === Standalone (autonome)
 
@@ -69,11 +69,11 @@ Ce programme est codé en Python, il vous faut donc installer Python, ouvrez un 
 
 Ensuite entrez la commande `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
 
-Vous pouvez maintenant passer à la section {baseURL}/blob/master/docs/python/python_doc.adoc#utilisation[Utilisation] qui vous permettra de lancer le programme.
+Vous pouvez maintenant passer à la section {baseURL}/blob/master/docs/python/doc_tech.adoc#utilisation[Utilisation] qui vous permettra de lancer le programme.
 
 == Utilisation
 
-Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire, vous pouvez utilisé {baseURL}/raw/master/app/python/config.json[celui-ci] (clique droit et `Enregistrer sous` pour l'enregistrer), ou voir la section {baseURL}/blob/master/docs/python/python_doc.adoc#configuration[Configuration] pour en créer une vous-même.
+Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire, vous pouvez utilisé {baseURL}/raw/master/app/python/config.json[celui-ci] (clique droit et `Enregistrer sous` pour l'enregistrer), ou voir la section {baseURL}/blob/master/docs/python/doc_tech.adoc#configuration[Configuration] pour en créer une vous-même.
 
 === Lancement
 
@@ -83,7 +83,7 @@ Une fois l'installation terminée vous pouvez lancer le programme sans soucis av
 
 Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
 
-Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section {baseURL}/blob/master/docs/python/python_doc.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
+Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section {baseURL}/blob/master/docs/python/doc_tech.adoc#données[Donnée(s)]) et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
 
 === Erreurs possibles
 
