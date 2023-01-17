@@ -118,13 +118,11 @@ Sources de la version 6 : {baseURL}/tree/v6/app/php/[ici]
 
 === IoT
 
-- Documentation technique du programme Python : {baseURL}/blob/v6/docs/python/python_tech.adoc[ici]
+- Documentation technique du programme Python : {baseURL}/blob/master/docs/python/doc_tech.adoc[ici]
 
 WARNING: LES DOCUMENTATIONS JAVA NE SONT PAS ENCORE ÉCRITES, ELLES SONT MARQUÉES ICI À TITRE INDICATIF
 
-- Documentation utilisateur de l'application Java : {baseURL}/blob/v6/docs/java/java_user.adoc[ici] (pas encore fait)
-
-- Documentation technique de l'application Java : {baseURL}/blob/v6/docs/java/java_tech.adoc[ici] (pas encore fait)
+- Documentation technique de l'application Java : {baseURL}/blob/master/docs/java/doc_tech.adoc[ici] (pas encore fait)
 
 === Site web
 
