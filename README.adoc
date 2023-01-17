@@ -203,6 +203,14 @@ Test ok mais je n'ai pas de date de Mise à jour du document pour le site Web.
 
 J'ai pas de comits ... comment travaillez-vous depuis les vacances ???
 
+==== Retour Sprint 6
+
+Doc : Pensez au sommaire et à numéroter les paragraphes dans les docs.
+
+Manque IOT Release Web commenté OK.
+
+US : ok mais il manque encore les finalités pour certaines : en tant que .... je veux ... afin de .... Les US doivent être déclinées en tâches/Issues dans les spints.
+
 == Tests
 
 === IoT
