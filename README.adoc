@@ -120,9 +120,9 @@ Sources de la version 6 : {baseURL}/tree/v6/app/php/[ici]
 
 - Documentation technique du programme Python : {baseURL}/blob/master/docs/python/doc_tech.adoc[ici]
 
-WARNING: LES DOCUMENTATIONS JAVA NE SONT PAS ENCORE ÉCRITES, ELLES SONT MARQUÉES ICI À TITRE INDICATIF
-
 - Documentation technique de l'application Java : {baseURL}/blob/master/docs/java/doc_tech.adoc[ici] (pas encore fait)
+
+- Javadoc de l'application Java : https://IUT-Blagnac.github.io/sae3-01-devapp-g2b-12[ici]
 
 === Site web
 
