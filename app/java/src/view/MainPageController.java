@@ -233,7 +233,7 @@ public class MainPageController implements Initializable {
     		if (i == devices.size()-1) {
     			createDevice(null, devices.get(i).getAsString(), "+");
     		} else {
-    			createDevice(null, devices.get(i).getAsString(), " -");
+    			createDevice(null, devices.get(i).getAsString(), " - ");
     		}
     	}
 
@@ -251,10 +251,10 @@ public class MainPageController implements Initializable {
 
         	NumberAxis xAxis = new NumberAxis();
         	xAxis.setLabel("N° valeur");
-        	xAxis.setTickLabelFont(new Font("Arial", 10));
+        	xAxis.setTickLabelFont(new Font("DejaVu Sans Condensed", 10));
     		NumberAxis yAxis = new NumberAxis();
     		yAxis.setLabel(dataChartName.get(dataWanted.get(i).getAsString()));
-    		yAxis.setTickLabelFont(new Font("Arial", 10));
+    		yAxis.setTickLabelFont(new Font("DejaVu Sans Condensed", 10));
 
     		@SuppressWarnings({ "unchecked", "rawtypes" })
 			LineChart<Integer, Double> graph = new LineChart(xAxis, yAxis);
@@ -464,15 +464,16 @@ public class MainPageController implements Initializable {
     	TextField newTF = new TextField();
     	newTF.setText(value);
 		newTF.setLayoutY(nextDeviceY);
-		newTF.setFont(new Font("Arial", 12));
+		newTF.setPrefWidth(152);
+		newTF.setFont(new Font("DejaVu Sans Condensed", 12));
 		// création du Button
 		Button newAddBT = new Button();
 		newAddBT.setText(button);
-		newAddBT.setLayoutX(150);
+		newAddBT.setLayoutX(152);
 		newAddBT.setLayoutY(nextDeviceY);
-		newAddBT.setFont(new Font("Arial", 12));
+		newAddBT.setFont(new Font("DejaVu Sans Condensed", 12));
 		// type de bouton
-		if (button == " -") {
+		if (button == " - ") {
 			newAddBT.setOnAction( e -> deleteDevice(e) );
 		} else {
 			newAddBT.setOnAction( e -> createDevice(e, "", "+") );
@@ -483,7 +484,7 @@ public class MainPageController implements Initializable {
 		// change le texte du bouton appellant
 		if (event != null) {
 			Button source = (Button) event.getSource();
-			source.setText(" -");
+			source.setText(" - ");
 			source.setOnAction( e -> deleteDevice(e) );
 		}
 		// augmente la hauteur Y en pixel à laquelle sera créer le prochain capteur
@@ -503,7 +504,7 @@ public class MainPageController implements Initializable {
     	int indexBT = devicesAP.getChildren().indexOf(source);
     	devicesAP.getChildren().remove(indexBT);
     	devicesAP.getChildren().remove(indexBT-1);
-    	
+
     	// décalle le reste des éléments pour ne laisser aucun trous
     	int layoutY = 0;
     	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
@@ -525,7 +526,7 @@ public class MainPageController implements Initializable {
 	/**
      * Déclenché lors d'une action sur une CheckBox
      * Gère le TextField associé à celui-ci
-     * @param event
+     * @param event évennement déclencheur
      */
     @FXML
     private void onActionCheckBox(ActionEvent event) {

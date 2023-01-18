@@ -36,14 +36,14 @@ public class DetailSurvolePoint extends StackPane {
 
 	/**
 	 * Retourne un Label avec une valeur donnée et un contour
-	 * @param value
+	 * @param value Texte du Label
 	 * @return le Label créé
 	 */
 	private Label createLabel(double value) {
 		Label label = new Label(value + "");
 		label.getStyleClass().addAll("chart-line-symbol");
 		label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-		label.setFont(new Font("Arial", 12));
+		label.setFont(new Font("DejaVu Sans Condensed", 12));
 		return label;
 	}
 
