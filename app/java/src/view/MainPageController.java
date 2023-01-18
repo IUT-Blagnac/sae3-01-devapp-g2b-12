@@ -16,7 +16,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import model.HoveredThresholdNode;
+import javafx.scene.text.Font;
+import model.DetailSurvolePoint;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,8 +36,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
 /**
- * Classe contrôleur gérant la seule page de l'application
- * @author Rémy Guibert
+ * Classe contrôleur gérant la page de l'application
+ * @author Groupe 12
  */
 public class MainPageController implements Initializable {
 
@@ -56,27 +57,27 @@ public class MainPageController implements Initializable {
     private JsonObject config;
 
     /**
-     * Map reliant le nom technique des données à leurs graphiques
+     * Map reliant le nom technique d'une donnée à son graphique
      */
     private HashMap<String, LineChart<Integer, Double>> dataChart = new HashMap<>();
 
     /**
-     * Map reliant le nom technique des données aux noms à afficher sur les graphiques
+     * Map reliant le nom technique d'une donnée au nom à afficher sur son graphique
      */
     private HashMap<String, String> dataChartName = new HashMap<>();
 
     /**
-     * Map reliant le nom technique des données à leurs liste de valeurs du graphiques
+     * Map reliant le nom technique d'une donnée à sa liste de valeurs de graphique
      */
     private HashMap<String, XYChart.Series<Integer, Double>> dataSeries = new HashMap<>();
 
     /**
-     * Map reliant le nom technique des données à leurs CheckBox respectives
+     * Map reliant le nom technique d'une donnée à sa CheckBox
      */
     private HashMap<String, CheckBox> dataCB = new HashMap<>();
 
     /**
-     * Map reliant les CheckBox des données à leurs TextField
+     * Map reliant les CheckBox d'une donnée à son TextField
      */
     private HashMap<CheckBox, TextField> dataCBtoTF = new HashMap<>();
 
@@ -250,8 +251,10 @@ public class MainPageController implements Initializable {
 
         	NumberAxis xAxis = new NumberAxis();
         	xAxis.setLabel("N° valeur");
+        	xAxis.setTickLabelFont(new Font("Arial", 10));
     		NumberAxis yAxis = new NumberAxis();
     		yAxis.setLabel(dataChartName.get(dataWanted.get(i).getAsString()));
+    		yAxis.setTickLabelFont(new Font("Arial", 10));
 
     		@SuppressWarnings({ "unchecked", "rawtypes" })
 			LineChart<Integer, Double> graph = new LineChart(xAxis, yAxis);
@@ -461,11 +464,13 @@ public class MainPageController implements Initializable {
     	TextField newTF = new TextField();
     	newTF.setText(value);
 		newTF.setLayoutY(nextDeviceY);
+		newTF.setFont(new Font("Arial", 12));
 		// création du Button
 		Button newAddBT = new Button();
 		newAddBT.setText(button);
-		newAddBT.setLayoutX(149);
+		newAddBT.setLayoutX(150);
 		newAddBT.setLayoutY(nextDeviceY);
+		newAddBT.setFont(new Font("Arial", 12));
 		// type de bouton
 		if (button == " -") {
 			newAddBT.setOnAction( e -> deleteDevice(e) );
@@ -482,7 +487,7 @@ public class MainPageController implements Initializable {
 			source.setOnAction( e -> deleteDevice(e) );
 		}
 		// augmente la hauteur Y en pixel à laquelle sera créer le prochain capteur
-		nextDeviceY += 25;
+		nextDeviceY += 23;
 		// adapte l'AnchorPane et le ScrollPane à la nouvelle hauteur
 		devicesAP.setPrefHeight(nextDeviceY);
 		devicesSP.setHmax(devicesAP.getPrefHeight());
@@ -504,14 +509,14 @@ public class MainPageController implements Initializable {
     	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
     		Node nodeTF = devicesAP.getChildren().get(i);
     		Node nodeBT = devicesAP.getChildren().get(i+1);
-			if (nodeTF.getLayoutY()-layoutY == 25) {
+			if (nodeTF.getLayoutY()-layoutY == 23) {
 				nodeTF.setLayoutY(layoutY);
 				nodeBT.setLayoutY(layoutY);
 			}
-			layoutY += 25;
+			layoutY += 23;
 		}
     	// réduit la hauteur Y en pixel à laquelle sera créer le prochain capteur
-    	nextDeviceY -= 25;
+    	nextDeviceY -= 23;
     	// adapte l'AnchorPane et le ScrollPane à la nouvelle hauteur
 		devicesAP.setPrefHeight(nextDeviceY);
 		devicesSP.setHmax(devicesAP.getPrefHeight());
@@ -558,7 +563,7 @@ public class MainPageController implements Initializable {
 	            		// ajoute la nouvelle valeur à la série
 	            		int newX = series.getData().size();
 	            		XYChart.Data<Integer, Double> newData = new XYChart.Data<Integer, Double>(newX, newValue);
-	            		newData.setNode(new HoveredThresholdNode(newValue));
+	            		newData.setNode(new DetailSurvolePoint(newValue));
 	            		Platform.runLater( () -> series.getData().add(newData) );
             		}
             	}

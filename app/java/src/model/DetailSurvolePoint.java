@@ -3,19 +3,20 @@ package model;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 
 /**
- * Classe pour afficher la valeur d'un point lorsqu'on le survole
- * @author Rémy Guibert
+ * Classe permettant l'affichage de la valeur d'un point de graphique lorsqu'on le survole
+ * @author Groupe 12
  */
-public class HoveredThresholdNode extends StackPane {
+public class DetailSurvolePoint extends StackPane {
 
 	/**
 	 * Créer un Label qui sera affiché lorsqu'on survole le point
 	 * et ne sera plus visible dans les autres cas
-	 * @param value Valeur a afficher
+	 * @param value Texte à afficher
 	 */
-	public HoveredThresholdNode(double value) {
+	public DetailSurvolePoint(double value) {
 		// taille du point
 		setPrefSize(10, 10);
 
@@ -42,6 +43,7 @@ public class HoveredThresholdNode extends StackPane {
 		Label label = new Label(value + "");
 		label.getStyleClass().addAll("chart-line-symbol");
 		label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+		label.setFont(new Font("Arial", 12));
 		return label;
 	}
 

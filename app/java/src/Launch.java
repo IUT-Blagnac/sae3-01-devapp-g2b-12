@@ -9,10 +9,10 @@ import view.MainPageController;
 import java.io.IOException;
 
 /**
- * Classe principale servant à lancer l'application
- * @author Rémy Guibert
+ * Classe servant à lancer l'application
+ * @author Groupe 12
  */
-public class Main extends Application {
+public class Launch extends Application {
 
 	/**
 	 * Contrôleur de l'application
@@ -29,14 +29,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view/MainPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("view/MainPage.fxml"));
 
         AnchorPane vueListe = fxmlLoader.load();
         ctrl = fxmlLoader.getController();
 
         Scene scene = new Scene(vueListe, 1050, 575);
 
-        stage.getIcons().add(new Image(Main.class.getResource("resources/icon.png").toExternalForm()));
+        stage.getIcons().add(new Image(Launch.class.getResource("icon.png").toExternalForm()));
         stage.setTitle("Visualisation des données de l'entrepôt");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -44,7 +44,7 @@ public class Main extends Application {
     }
 
     /**
-     * Met fin à la planification afin d'arrêter les Thread et de fermer l'application
+     * Met fin à la planification afin d'arrêter le Thread et fermer l'application
      */
     @Override
     public void stop(){
