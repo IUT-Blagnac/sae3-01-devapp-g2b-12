@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import view.MainPageController;
+import view.MainFrameController;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class Launch extends Application {
 	/**
 	 * Contrôleur de l'application
 	 */
-	private MainPageController ctrl;
+	private MainFrameController ctrl;
 
     public static void main(String[] args) {
         launch();
@@ -29,7 +29,7 @@ public class Launch extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("view/MainPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("view/MainFrame.fxml"));
 
         AnchorPane vueListe = fxmlLoader.load();
         ctrl = fxmlLoader.getController();

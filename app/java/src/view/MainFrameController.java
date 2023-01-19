@@ -39,7 +39,7 @@ import com.google.gson.JsonPrimitive;
  * Classe contrôleur gérant la page de l'application
  * @author Groupe 12
  */
-public class MainPageController implements Initializable {
+public class MainFrameController implements Initializable {
 
 	/**
 	 * Objet qui s'occupe de la màj des graphiques en parallèle
