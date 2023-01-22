@@ -21,7 +21,7 @@
         <p>Sur notre site, vous pouvez acheter des fruits et des légumes de qualité! Vos achats soutiennent directement les producteurs locaux.</p>
     </div>
 
-    <h1 class="index-h1">Produits populaires</h1>
+    <h1 class="titre">Produits populaires</h1>
 
     <!-- Produits choisis manuellement -->
 
@@ -31,7 +31,7 @@
             <div class="produit">
                 <img src="img/vide.png" style="background-image: url('img/Betterave%20potagère.png')">
                 <p>Betteraves potagères</p>
-                <strong>6.28€</strong>
+                <strong>6.28 €</strong>
             </div>
         </a>
 
@@ -39,7 +39,7 @@
             <div class="produit">
                 <img src="img/vide.png" style="background-image: url('img/Tomates%20Rose%20de%20Berne.png')">
                 <p>Tomates Roses de Berne</p>
-                <strong>2.59€</strong>
+                <strong>2.59 €</strong>
             </div>
         </a>
 
@@ -47,13 +47,13 @@
             <div class="produit">
                 <img src="img/vide.png" style="background-image: url('img/Pomme%20Granny%20Smith.png')">
                 <p>Pommes Granny Smith</p>
-                <strong>2.49€</strong>
+                <strong>2.49 €</strong>
             </div>
         </a>
 
     </div>
 
-    <h1 class="index-h1">Nos produits de saison</h1>
+    <h1 class="titre">Nos produits de saison</h1>
 
     <?php
 
@@ -64,19 +64,19 @@
             $req = "Select * from Produit Where idproduit != 1 
                     and idproduit != 9 and idproduit != 17 
                     and idproduit != 44 and idproduit != 2
-                    and idproduit != 42 and idproduit != 43";
+                    and idproduit != 42 and idproduit != 43
+                    and stock > 0";
             $produit = oci_parse($connect, $req);
             $result = oci_execute($produit);
 
             if (!$result){
-                header("location:index.php");
                 exit();
             }
             else{
 
                 // On crée un compteur pour faire des lignes de 4 produits
 
-                $affichage = "<div class='saison-ligne'>";
+                $affichage = "<div class='flex-row'>";
                 $cpt = 0;
 
                 while(($donnees = oci_fetch_assoc($produit)) != false) {
@@ -100,7 +100,7 @@
                                 <div class='produit'>
                                     <img src='img/vide.png' style='background-image: url(\"".$image."\")'>
                                     <p>".$nom."</p>
-                                    <strong>".$prix."€</strong>
+                                    <strong>".$prix." €</strong>
                                 </div>
                             </a>";
 
@@ -110,7 +110,7 @@
                     else {
                         // On ferme la ligne et on en crée une nouvelle
 
-                        $affichage = $affichage.'</div> <div class="saison-ligne">';
+                        $affichage = $affichage.'</div> <div class="flex-row">';
 
                         if (file_exists("img/".$nom.".png")) {
                             $nomRegex = preg_replace('" "', '%20', $nom);
@@ -124,7 +124,7 @@
                                 <div class='produit'>
                                     <img src='img/vide.png' style='background-image: url(\"".$image."\")'>
                                     <p>".$nom."</p>
-                                    <strong>".$prix."€</strong>
+                                    <strong>".$prix." €</strong>
                                 </div>
                             </a>";
 
@@ -143,17 +143,17 @@
 
     ?>
 
-    <div class="saison">
+    <div class="flex-column">
 
         <!-- Produits choisis manuellement -->
         
-        <div class="saison-ligne">
+        <div class="flex-row">
 
             <a href="produit.php?nom=Laitue%20frisée%20amérique" class="boite-produit">
                 <div class="produit">
                     <img src="img/vide.png" style="background-image: url('img/Laitue%20frisée%20amérique.png')">
                     <p>Cagette de laitues frisées</p>
-                    <strong>4.50€</strong>
+                    <strong>4.50 €</strong>
                 </div>
             </a>
 
@@ -161,7 +161,7 @@
                 <div class="produit">
                     <img src="img/vide.png" style="background-image: url('img/Chou-fleur%20Sud-Ouest.png')">
                     <p>Cagette de chou-fleur Sud-Ouest</p>
-                    <strong>3.49€</strong>
+                    <strong>3.49 €</strong>
                 </div>
             </a>
 
@@ -169,14 +169,14 @@
                 <div class="produit">
                     <img src="img/vide.png" style="background-image: url('img/Pomme%20Gala%20bio.png')">
                     <p>Pommes Gala Bio</p>
-                    <strong>1.99€</strong>
+                    <strong>1.99 €</strong>
                 </div>
 
             <a href="produit.php?nom=Pomme%20Golden%20bio" class="boite-produit">
                 <div class="produit">
                     <img src="img/vide.png" style="background-image: url('img/Pomme%20Golden%20bio.png')">
                     <p>Pommes Golden Bio</p>
-                    <strong>1.33€</strong>
+                    <strong>1.33 €</strong>
                 </div>
             </a>
 
@@ -194,7 +194,7 @@
         
         if(!isset($_GET["affich"])){
 
-            echo '<a href="index.php?affich=more" id="index-plus-produits">Voir tout les produits</a>';
+            echo '<a href="index.php?affich=more" class="bouton-vert">Voir tout les produits</a>';
         }
 
         ?>

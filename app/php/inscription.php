@@ -41,10 +41,10 @@
 				$_SESSION["erreur"] = "L'adresse email doit être comprise entre 2 et 128 charactères, et ne doit pas commencer ou finir par un espace blanc.";
 	}
 	if (!preg_match("#^\S.{10,126}\S$#", $mdp)){
-				$_SESSION["erreur"] = "Le mot de passe doit être compris entre 12 et 128 charactères, et ne doit pas commencer ou finir par un espace blanc.";
+        $_SESSION["erreur"] = "Le mot de passe doit être compris entre 12 et 128 charactères, et ne doit pas commencer ou finir par un espace blanc.";
 	}
 	if (!preg_match("#^\S.{10,126}\S$#", $confirmMdp)){
-				$_SESSION["erreur"] = "Le mot de passe doit être compris entre 12 et 128 charactères, et ne doit pas commencer ou finir par un espace blanc.";
+        $_SESSION["erreur"] = "Le mot de passe doit être compris entre 12 et 128 charactères, et ne doit pas commencer ou finir par un espace blanc.";
 	}
 
 	if ($_SESSION["erreur"] == "") {
@@ -124,13 +124,20 @@
     <input type="password" name="confirmMdp" required>
    </div>
    <div id="check">
-    <input type="checkbox" name="agriculteur" id="agriculteur">
-    <label for="agriculteur">Utilisateur agriculteur ?</label>
+    <p><input type="checkbox" name="agriculteur" id="agriculteur">
+    <label for="agriculteur">Utilisateur agriculteur ?</label></p>
+    <p><input type="checkbox" name="check-conditions" required id="check-conditions">
+    <label for="check-conditions">J'accepte les conditions d'utilisation</label></p>
    </div>
    </div>
   </div>
  <button type="submit" name="create-acc" id="bouton-jaune">Créer un compte</button>
 </div>
 </form>
+
+<div style="border: solid 2px; border-radius: 20px; margin: 3%;">
+	<h1 style="color: #13a527; text-shadow: 3px 2px #B7B7B7; margin-top: 30px; margin-left: 3%;">Conditions d'utilisation</h1>
+	<p style="margin-left: 3%;">En créant un compte, vous acceptez que vos données personnelles soit stockées et traitées. Les informations demandées à l'inscription sont nécessaires et obligatoires pour la création de ce compte. Nous assurons une collecte et un traitement de vos informations personnelles conformes à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.</p>
+</div>
 
 </html> 

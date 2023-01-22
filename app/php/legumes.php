@@ -18,20 +18,18 @@
 
 // Requête pour récupérer l'ensemble des produits
 
-    $req = "Select * from Produit Where idcategorie = 4 or idcategorie = 5 or idcategorie = 6 or idcategorie = 7 or idcategorie = 8 
-            or idcategorie = 9 or idcategorie = 10 or idcategorie = 11"; 
+    $req = "Select * from Produit Where (idcategorie = 4 or idcategorie = 5 or idcategorie = 6 or idcategorie = 7 or idcategorie = 8 or idcategorie = 9 or idcategorie = 10 or idcategorie = 11) and stock > 0";
     $produit = oci_parse($connect, $req);
     $result = oci_execute($produit);
 
     if (!$result){
-        header("location:legumes.php");
         exit();
     }
     else{
 
         // On crée un compteur pour faire des lignes de produits
 
-        $affichage = " <div class='saison-ligne'>";
+        $affichage = " <div class='flex-row'>";
         $cpt = 0;
 
         while(($donnees = oci_fetch_assoc($produit)) != false) {
@@ -43,17 +41,21 @@
                 // On remplace les espaces dans le nom du produit par leur code pour créer un lien valide
                 // Oignon rouge --> Oignon%20rouge
 
-                $nomRegex = preg_replace('" "', '%20', $nom);
-                $image = $nomRegex.'.png';
+                if (file_exists("img/".$nom.".png")) {
+                    $nomRegex = preg_replace('" "', '%20', $nom);
+                } else {
+                    $nomRegex = "produit/inconnu";
+                }
+                $image = "img/".$nomRegex.".png";
 
-                $lien = "
-                    <a href='produit.php?nom=$nomRegex'>
-                        <img src='img/$image'>
+                $affichage = $affichage."
+                    <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                        <div class='produit'>
+                            <img src='img/vide.png' style='background-image: url(\"".$image."\")'>
+                            <p>".$nom."</p>
+                            <strong>".$prix." €</strong>
+                        </div>
                     </a>";
-
-                // On ajoute le produit dans la ligne
-
-                $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
 
                 $cpt++;
 
@@ -61,17 +63,23 @@
             else{
                 // On ferme la ligne et on en crée une nouvelle
 
-                $affichage = $affichage.'</div> <div class="saison-ligne">';
+                $affichage = $affichage.'</div> <div class="flex-row">';
 
-                $nomRegex = preg_replace('" "', '%20', $nom);
-                $image = $nomRegex.'.png';
+                if (file_exists("img/".$nom.".png")) {
+                    $nomRegex = preg_replace('" "', '%20', $nom);
+                } else {
+                    $nomRegex = "produit/inconnu";
+                }
+                $image = "img/".$nomRegex.".png";
 
-                $lien = "
-                    <a href='produit.php?nom=$nomRegex'>
-                        <img src='img/$image'>
+                $affichage = $affichage."
+                    <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                        <div class='produit'>
+                            <img src='img/vide.png' style='background-image: url(\"".$image."\")'>
+                            <p>".$nom."</p>
+                            <strong>".$prix." €</strong>
+                        </div>
                     </a>";
-
-                $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
 
                 $cpt = 1;
 

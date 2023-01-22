@@ -63,6 +63,7 @@ body {
     border: 0;
     border-radius: 3px;
     text-decoration: none;
+    transition: .2s;
 }
 #bouton-jaune:hover {
     background-color: #da9227;
@@ -77,6 +78,7 @@ body {
     border: 0;
     border-radius: 3px;
     text-decoration: none;
+    transition: .2s;
 }
 #bouton-rouge:hover {
     background-color: black;
@@ -87,16 +89,18 @@ body {
     background-color: rgb(25, 135, 12);
     color: white;
     font-weight: bold;
-    padding: 10px 5px;
+    padding: 10px;
     border: 0;
     border-radius: 3px;
     text-decoration: none;
+    transition: .2s;
 }
 .bouton-vert:hover {
     background-color: #69b345;
 }
 
 
+/* Message d'erreur */
 .erreur {
     color: red;
     text-align: center;
@@ -112,6 +116,7 @@ body {
     background-color: #bbb7b7;
     border-radius: 20px;
     width: calc(300px + 1.5em);
+    transition: .2s;
 }
 .boite-produit:hover {
     background-color: #13a527;
@@ -132,10 +137,24 @@ body {
     background-repeat: no-repeat;
 }
 
-.produits-titre{
+.produits-titre {
     color: #13a527;
     text-shadow: 3px 2px #B7B7B7;
     text-align: center; 
     margin-top: 30px;
     font-size: 50px;
+}
+
+/* Flex column */
+.flex-column {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Flex row */
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

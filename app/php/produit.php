@@ -49,28 +49,34 @@
 
 <body>
 	<div class="div-centree">
+		<p id="titreProduitConsultation"><?php echo $nom; ?></p>
 		<div class="consultation">
 
 			<img src="img/vide.png" style="background-image: url('img/<?php echo $image ?>');" alt="image produit">
 
 			<div class="description-produit">
-				<p id="titreProduitConsultation"><?php echo $nom; ?></p>
-				<p>Description : <?php echo $description; ?></p>
-				<p>Catégorie : <?php echo $nomCategorie; ?></p>
-				<p>Région : <?php echo $region; ?></p>
-				<p>Poids : <?php echo $poids; ?> kg</p>
-				<h2>Prix : <?php echo $prix; ?> €</h2>
+				
+				<p><strong>Description</strong> : <?php echo $description; ?></p>
+				<p><strong>Catégorie</strong> : <?php echo $nomCategorie; ?></p>
+				<p><strong>Région</strong> : <?php echo $region; ?></p>
+				<p><strong>Poids</strong> : <?php echo $poids; ?> kg</p>
+				<h2><strong>Prix</strong> : <?php echo $prix; ?> €</h2>
 
 				<div class="consultation-bouttons">
 					<form method="post" action="panier.php">
 						<!-- Champ caché pour envoyer l'id du produit -->
-						<input type="hidden" name="id-produit" value= <?php echo $id; ?> >
+						<input type="hidden" name="id-produit" value= <?php echo $id; ?>>
 						<label for="quantite">Quantité</label>
 						<input type="number" id="quantite" min="1" name="quantite" value="1">
-						<input type="submit" name="valider" value="Ajouter au panier" class="bouton-vert">
+						<p><?php
+							if ($_SESSION["idClient"] != $idclient) {
+								echo '<input type="submit" name="valider" value="Ajouter au panier" class="bouton-vert">';
+							}
+						?></p>
+						
 						<?php
 							if (!empty($_SESSION["agriculteur"]) && !empty($_SESSION["idClient"]) && $_SESSION["agriculteur"] == "1" && $_SESSION["idClient"] == $idclient) {
-								echo '<a href="listeProduitMisEnVente.php?idprod='.$id.'#highlighted" id="bouton-jaune">Actions</a>';
+								echo '<a href="listeProduitMisEnVente.php?idprod='.$id.'#highlighted" id="bouton-jaune">Gérer votre produit</a>';
 							}
 						?>
 					</form>

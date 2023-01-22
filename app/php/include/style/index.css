@@ -1,16 +1,16 @@
 /* --- BASELINE --- */
 
-.baseline{
+.baseline {
     border-style: solid;
     border-color: #bbb7b7;
 }
 
-.baseline h1{
+.baseline h1 {
     font-size: 30px;
     margin-left: 1%;
 }
 
-.baseline p{
+.baseline p {
     font-size: 22px;
     margin-left: 1%;
     margin-top: 5%;
@@ -29,44 +29,12 @@
 
 /* --- PRODUITS DE SAISON --- */
 
-.index-h1 {
+.titre {
     font-size: 30px;
     margin-top: .5em;
     text-align: center;
 }
 
-.saison {
-    margin-top: 2em;
-    display: flex;
-    flex-direction: column;
-}
-
-.saison-ligne{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-#index-plus-produits {
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    background-color: #13a527;
-    color: white;
-    border-width: 5px;
-    border-color: #13a527;
-    font-size: 20px;
-    width: auto;
-    height: auto;
-    padding: 10px 15px;
-    border-radius: 7px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 75px;
-    margin-bottom: 10px;
-    transition-duration: .20s;
-}
-
-#index-plus-produits:hover {
-   background-color: #0b6116;
+.bouton-vert {
+    margin: 40px auto;
 }

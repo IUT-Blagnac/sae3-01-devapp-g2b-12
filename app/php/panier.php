@@ -67,7 +67,9 @@
             oci_bind_by_name($panier, ":idclient", $_SESSION["idClient"]);
             oci_bind_by_name($panier, ":idproduit", $_POST["id-produit"]);
             oci_bind_by_name($panier, ":qt", $_POST["quantite"]);
+            error_reporting(0);
             $result = oci_execute($panier);
+            error_reporting(22527);
             oci_commit($connect);
             oci_free_statement($panier);
             $_SESSION["commande-passee"] = "non";
