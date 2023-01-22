@@ -59,27 +59,27 @@ public class MainFrameController implements Initializable {
     /**
      * Map reliant le nom technique d'une donnée à son graphique
      */
-    private HashMap<String, LineChart<Integer, Double>> dataChart = new HashMap<>();
+    private Map<String, LineChart<Integer, Double>> dataChart = new HashMap<>();
 
     /**
      * Map reliant le nom technique d'une donnée au nom à afficher sur son graphique
      */
-    private HashMap<String, String> dataChartName = new HashMap<>();
+    private Map<String, String> dataChartName = new HashMap<>();
 
     /**
      * Map reliant le nom technique d'une donnée à sa liste de valeurs de graphique
      */
-    private HashMap<String, XYChart.Series<Integer, Double>> dataSeries = new HashMap<>();
+    private Map<String, XYChart.Series<Integer, Double>> dataSeries = new HashMap<>();
 
     /**
      * Map reliant le nom technique d'une donnée à sa CheckBox
      */
-    private HashMap<String, CheckBox> dataCB = new HashMap<>();
+    private Map<String, CheckBox> dataCB = new HashMap<>();
 
     /**
      * Map reliant les CheckBox d'une donnée à son TextField
      */
-    private HashMap<CheckBox, TextField> dataCBtoTF = new HashMap<>();
+    private Map<CheckBox, TextField> dataCBtoTF = new HashMap<>();
 
     /**
      * Hauteur Y en pixel à laquelle doit être créer la prochaine entrée de "Device"
@@ -209,7 +209,7 @@ public class MainFrameController implements Initializable {
 		try {
 			config = JsonParser.parseReader(new FileReader("config.json")).getAsJsonObject();
 		} catch (FileNotFoundException e) {
-			// affiche un message d'information
+			// affiche un message d'information dans une fenêtre à part
 			System.out.println("Fichier \"config.json\" introuvable, impossible de charger la configuration.");
 	    	Alert alert = new Alert(AlertType.INFORMATION);
 	    	alert.setTitle("Pas de configuration");
@@ -228,7 +228,7 @@ public class MainFrameController implements Initializable {
     	String host = config.get("host").getAsString();
     	int port = config.get("port").getAsInt();
 
-    	// devices
+    	// ajoute les capteurs dans la vue
     	for (int i = 0; i < devices.size(); i ++) {
     		if (i == devices.size()-1) {
     			createDevice(null, devices.get(i).getAsString(), "+");
@@ -237,18 +237,21 @@ public class MainFrameController implements Initializable {
     		}
     	}
 
-    	// pour savoir où mettre les graphiques
+    	// deux entiers pour savoir où mettre les graphiques
+    	// Voir à la fin du for en dessus
     	int gridX = 0;
     	int gridY = 0;
 
-    	// data wanted + alert values
+    	// initialise les données voulues et leurs valeurs max
     	for (int i = 0; i < dataWanted.size(); i ++) {
+    		// coche la CheckBox correspondante et met la charge la valeur max
     		CheckBox ckbx = dataCB.get(dataWanted.get(i).getAsString());
         	TextField txfd = dataCBtoTF.get(ckbx);
         	ckbx.setSelected(true);
         	txfd.setDisable(false);
         	txfd.setText(alertValues.get(i).getAsString());
 
+        	// créer des axes X et Y pour le graphique
         	NumberAxis xAxis = new NumberAxis();
         	xAxis.setLabel("N° valeur");
         	xAxis.setTickLabelFont(new Font("DejaVu Sans Condensed", 10));
@@ -256,17 +259,23 @@ public class MainFrameController implements Initializable {
     		yAxis.setLabel(dataChartName.get(dataWanted.get(i).getAsString()));
     		yAxis.setTickLabelFont(new Font("DejaVu Sans Condensed", 10));
 
+    		// créer le graphique
     		@SuppressWarnings({ "unchecked", "rawtypes" })
 			LineChart<Integer, Double> graph = new LineChart(xAxis, yAxis);
 
+    		// créer la série de valeurs pour le graphique
     		XYChart.Series<Integer, Double> series = new XYChart.Series<Integer, Double>();
 
+    		// lie la série de donnée au graphique
     		graph.getData().add(series);
 
+    		// ajoute le graphique dans un dictionnaire afin d'y accéder facilement
     		dataChart.put(dataWanted.get(i).getAsString(), graph);
 
+    		// ajoute la série dans un dictionnaire afin d'y accéder facilement
     		dataSeries.put(dataWanted.get(i).getAsString(), series);
 
+    		// ajoute le graphique dans le GridPane
     		graphGP.add(graph, gridX, gridY);
     		if (gridX == 2) {
     			gridY ++;
@@ -276,13 +285,13 @@ public class MainFrameController implements Initializable {
     		}
     	}
 
-    	// frequency
+    	// initialise la fréquence
     	frequencyV.setText(String.valueOf(frequency));
 
-    	// host
+    	// initialise le nom de serveur
     	hostV.setText(String.valueOf(host));
 
-    	// port
+    	// initialise le numéro de port
     	portV.setText(String.valueOf(port));
 
 		// Lecture répétée du fichier JSON, toutes les 45 secondes si la fréquence est à 0
@@ -301,7 +310,7 @@ public class MainFrameController implements Initializable {
     	JsonObject config = new JsonObject();
     	config.add("devices", new JsonArray());
 
-    	// devices
+    	// sauvegarde les capteurs
     	JsonArray devices = config.getAsJsonArray("devices");
     	TextField device;
     	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
@@ -310,24 +319,26 @@ public class MainFrameController implements Initializable {
     			devices.add(device.getText());
     		}
     	}
+    	// si aucun capteurs n'a été choisi, alors on garde la valeur par défaut qui est le croisillon
     	if (devices.size() == 0) {
     		devices.add("#");
     		device = (TextField) devicesAP.getChildren().get(0);
     		device.setText("#");
     	}
 
-    	// data wanted + alert values
+    	// sauvegarde les données voulues et leurs valeurs max
     	config.add("data_wanted", new JsonArray());
     	config.add("alert_values", new JsonArray());
     	JsonArray data_wanted = config.getAsJsonArray("data_wanted");
     	JsonArray alert_values = config.getAsJsonArray("alert_values");
-    	for (Entry<String, CheckBox> me : dataCB.entrySet()) {
-    		if (me.getValue().isSelected()) {
-    			data_wanted.add(me.getKey());
-    			TextField dataTF = dataCBtoTF.get(me.getValue());
-    			if (dataTF.getText().equals("")) {
-    				dataTF.setText("0");
-    			}
+    	// parmi toute les données possible
+    	for (Entry<String, CheckBox> data_entry : dataCB.entrySet()) {
+    		// si l'utilisateur l'a sélectionnée
+    		if (data_entry.getValue().isSelected()) {
+    			// alors on l'ajoute au JSON
+    			data_wanted.add(data_entry.getKey());
+    			TextField dataTF = dataCBtoTF.get(data_entry.getValue());
+    			// ainsi que sa valeur max
     			try {
     				alert_values.add(new JsonPrimitive(Integer.valueOf(dataTF.getText())));
 				} catch (Exception e) {
@@ -340,44 +351,39 @@ public class MainFrameController implements Initializable {
 				}
     		}
     	}
+    	// si aucune donnée n'a été sélectionnée alors on les sélectionnne toutes par défaut
     	if (data_wanted.size() == 0) {
-    		for (String me : dataCB.keySet()) {
-        		data_wanted.add(me);
+    		for (String data_name : dataCB.keySet()) {
+        		data_wanted.add(data_name);
         		alert_values.add(0);
     		}
     	}
 
-    	// frequency
+    	// sauvegarde la fréquence
     	int frequency;
-    	if (frequencyV.getText().equals("")) {
-    		frequencyV.setText("10");
-    	}
     	try {
     		frequency = Integer.valueOf(frequencyV.getText());
 		} catch (Exception e) {
+			// si elle est mal configurée, alors on considère 10
 			frequency = 10;
-			frequencyV.setText("10");
 		}
     	config.add("frequency", new JsonPrimitive(frequency));
 
-    	// host
+    	// sauvegarde le nom de domaine du serveur
     	String host = hostV.getText();
+    	// si rien n'a été mis alors on sauvegarde le serveur de l'IUT
     	if (host.equals("")) {
     		host = "chirpstack.iut-blagnac.fr";
-    		//hostV.setText(host);
     	}
     	config.add("host", new JsonPrimitive(host));
 
-    	// port
+    	// sauvegarde le port du serveur
     	int port;
-    	if (portV.getText().equals("")) {
-    		portV.setText("1883");
-    	}
     	try {
     		port = Integer.valueOf(portV.getText());
 		} catch (Exception e) {
+			// si il est mal configuré, alors on met celui par défaut
 			port = 1883;
-			portV.setText("1883");
 		}
     	config.add("port", new JsonPrimitive(port));
 
@@ -409,14 +415,15 @@ public class MainFrameController implements Initializable {
     	alert.showAndWait();
 
     	// actualise la vue
-    	clearVue();
+    	clearView();
 		loadConfig();
     }
 
     /**
      * Réinitialise la vue et les données enregistrées
+     * Nécessaire pour pouvoir charger dynamiquement la configuration
      */
-    private void clearVue() {
+    private void clearView() {
     	// graphiques
     	dataSeries.clear();
     	graphGP.getChildren().clear();
@@ -424,10 +431,10 @@ public class MainFrameController implements Initializable {
     	// séries
     	dataChart.clear();
 
-    	// devices
+    	// capteurs
     	nextDeviceY = 0;
 
-    	// data wanted + alert values
+    	// données voulues + valeurs max
     	devicesAP.getChildren().clear();
     	tvocCB.setSelected(false);
     	activityCB.setSelected(false);
@@ -439,16 +446,16 @@ public class MainFrameController implements Initializable {
     	infraredCB.setSelected(false);
     	pressureCB.setSelected(false);
 
-    	// frequency
+    	// fréquence
     	frequencyV.setText("");
 
-    	// host
+    	// hôte
     	hostV.setText("");
 
     	// port
     	portV.setText("");
 
-    	// task
+    	// tache
     	chartUpdater.cancel();
     	chartUpdater = new ChartUpdater();
 	}
@@ -491,7 +498,7 @@ public class MainFrameController implements Initializable {
 		nextDeviceY += 23;
 		// adapte l'AnchorPane et le ScrollPane à la nouvelle hauteur
 		devicesAP.setPrefHeight(nextDeviceY);
-		devicesSP.setHmax(devicesAP.getPrefHeight());
+		devicesSP.setHmax(nextDeviceY);
     }
 
     /**
@@ -504,7 +511,6 @@ public class MainFrameController implements Initializable {
     	int indexBT = devicesAP.getChildren().indexOf(source);
     	devicesAP.getChildren().remove(indexBT);
     	devicesAP.getChildren().remove(indexBT-1);
-
     	// décalle le reste des éléments pour ne laisser aucun trous
     	int layoutY = 0;
     	for (int i = 0; i < devicesAP.getChildren().size(); i += 2) {
@@ -520,7 +526,7 @@ public class MainFrameController implements Initializable {
     	nextDeviceY -= 23;
     	// adapte l'AnchorPane et le ScrollPane à la nouvelle hauteur
 		devicesAP.setPrefHeight(nextDeviceY);
-		devicesSP.setHmax(devicesAP.getPrefHeight());
+		devicesSP.setHmax(nextDeviceY);
     }
 
 	/**
@@ -575,7 +581,7 @@ public class MainFrameController implements Initializable {
     }
 
     /**
-     * Met fin à la planification afin d'arrêter les Threads et de fermer l'application
+     * Met fin à la planification afin d'arrêter le Thread et de fermer l'application
      */
     public void cancelScheduling() {
         chartUpdater.cancel();
