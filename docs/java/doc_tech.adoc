@@ -18,7 +18,11 @@
 
 = Documentation technique V1 de l'application Java
 
+<<<
+
 toc::[]
+
+<<<
 
 == Équipe
 
