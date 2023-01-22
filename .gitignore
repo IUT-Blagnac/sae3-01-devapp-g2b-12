@@ -11,6 +11,7 @@
 .classpath
 .project
 .settings/
+build.fxbuild
 
 # Intellij
 .idea/
