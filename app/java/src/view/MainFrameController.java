@@ -214,7 +214,7 @@ public class MainFrameController implements Initializable {
 	    	Alert alert = new Alert(AlertType.INFORMATION);
 	    	alert.setTitle("Pas de configuration");
 	    	alert.setHeaderText("Aucun fichier de configuration à charger.");
-	    	alert.setContentText("Vous pouvez en générer un en appuyant sur 'Enregistrer'.");
+	    	alert.setContentText("Vous pouvez en générer un en appuyant sur le bouton 'Enregistrer et appliquer'.");
 	    	alert.showAndWait();
 	    	createDevice(null, "", "+");
 			return;
