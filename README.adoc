@@ -24,9 +24,9 @@ image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL
 
 TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
-- Version courante : {baseURL}/releases/tag/v6[v6]
-- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 39 % (7/18)
-- Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici], reste 17 % (4/24)
+- Version courante : {baseURL}/releases/tag/v7[v7]
+- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 0 % (0/18)
+- Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici], reste 0 % (0/24)
 - Backlog produit et backlog de sprint : https://github.com/orgs/IUT-Blagnac/projects/23[ici]
 
 toc::[]
@@ -84,16 +84,16 @@ Vous pouvez configurer plusieurs choses :
 
 Pour exécuter cette application il vous faut deux fichiers :
 
-- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/v6/app/java/main.jar[main.jar]
+- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar]
 
-- un fichier Python qui recouillera les données des capteurs : {baseURL}/blob/v6/app/python/main.py[main.py]
+- un fichier Python qui recouillera les données des capteurs : {baseURL}/blob/master/app/python/main.py[main.py]
 
 IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
 Sources de la version 6 :
 
-- {baseURL}/tree/v6/app/java/src/[Java]
-- {baseURL}/tree/v6/app/python/[Python]
+- {baseURL}/tree/master/app/java/src/[Java]
+- {baseURL}/tree/master/app/python/[Python]
 
 === Site web
 
@@ -102,17 +102,17 @@ Lien du site web :
 - http://192.168.224.139/~SAESYS12/[Réseau filaire de l'IUT] 
 - http://193.54.227.164/~SAESYS12/[Autre réseau]
 
-Sources de la version 6 : {baseURL}/tree/v6/app/php/[ici]
+Sources de la version 6 : {baseURL}/tree/master/app/php/[ici]
 
 === Base de données
 
-- Le script de création de la base de données se trouve {baseURL}/blob/v6/app/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
+- Le script de création de la base de données se trouve {baseURL}/blob/master/app/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
 
-- Le script d'insertion dans la base de données se trouve {baseURL}/blob/v6/app/bd/Script%20d%27insertion%20dans%20la%20base.sql[ici].
+- Le script d'insertion dans la base de données se trouve {baseURL}/blob/master/app/bd/Script%20d%27insertion%20dans%20la%20base.sql[ici].
 
-- Le script de la procédure se trouve {baseURL}/blob/v6/app/bd/Script%20de%20la%20procédure%20Commander.sql[ici].
+- Le script de la procédure se trouve {baseURL}/blob/master/app/bd/Script%20de%20la%20procédure%20Commander.sql[ici].
 
-- Le script du trigger se trouve {baseURL}/blob/v6/app/bd/Script%20du%20trigger%20t_i_quantite.sql[ici].
+- Le script du trigger se trouve {baseURL}/blob/master/app/bd/Script%20du%20trigger%20t_i_quantite.sql[ici].
 
 == Documentations
 
@@ -120,35 +120,37 @@ Sources de la version 6 : {baseURL}/tree/v6/app/php/[ici]
 
 - Documentation technique du programme Python : {baseURL}/blob/master/docs/python/doc_tech.adoc[ici]
 
-- Documentation technique de l'application Java : {baseURL}/blob/master/docs/java/doc_tech.adoc[ici] (pas encore fait)
+- Documentation technique de l'application Java : {baseURL}/blob/master/docs/java/doc_tech.adoc[ici]
 
 - Javadoc de l'application Java : https://IUT-Blagnac.github.io/sae3-01-devapp-g2b-12[ici]
 
+- Diagramme de classe : {baseURL}/blob/master/docs/java/Diagramme%20de%20classe.svg[ici]
+
 === Site web
 
-- Documentation utilisateur : {baseURL}/raw/v6/docs/php/Documentation%20utilisateur.pdf[ici]
+- Documentation utilisateur : {baseURL}/raw/master/docs/php/Documentation%20utilisateur.pdf[ici]
 
-- Charte graphique : {baseURL}/raw/v6/docs/php/Charte%20graphique.pdf[ici]
+- Charte graphique : {baseURL}/raw/master/docs/php/Charte%20graphique.pdf[ici]
 
-- Schéma d'enchaînement des pages : {baseURL}/raw/v6/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
+- Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
 
-- Code commenté de l'authentification : {baseURL}/raw/v6/docs/php/Authentification.pdf[ici]
+- Code commenté de l'authentification : {baseURL}/raw/master/docs/php/Authentification.pdf[ici]
 
-- Code commenté consultation produits et modification compte : {baseURL}/raw/v6/docs/php/Affichage%20produits%20et%20modification%20compte.pdf[ici]
+- Code commenté consultation produits et modification compte : {baseURL}/raw/master/docs/php/Affichage%20produits%20et%20modification%20compte.pdf[ici]
 
-- Code commenté du développement en semaine 2 : {baseURL}/raw/v6/docs/php/D%C3%A9veloppement%20semaine%202.pdf[ici]
+- Code commenté du développement en semaine 2 : {baseURL}/raw/master/docs/php/D%C3%A9veloppement%20semaine%202.pdf[ici]
 
-- Analyse d'impact : https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/php/Analyse%20impact.pdf[ici]
+- Analyse d'impact : https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/raw/master/docs/php/Analyse%20impact.pdf[ici]
 
 === Base de données
 
-- Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/v6/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
+- Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
 
-- Le document de création et d'insertion se trouve {baseURL}/raw/v6/docs/bd/Cr%C3%A9ation%20et%20insertion%20de%20la%20base.pdf[ici].
+- Le document de création et d'insertion se trouve {baseURL}/raw/master/docs/bd/Cr%C3%A9ation%20et%20insertion%20de%20la%20base.pdf[ici].
 
-- Le document concernant le trigger et la procédure se trouve {baseURL}/raw/v6/docs/bd/Trigger%20et%20procédure.pdf[ici].
+- Le document concernant le trigger et la procédure se trouve {baseURL}/raw/master/docs/bd/Trigger%20et%20procédure.pdf[ici].
 
-- Le document concernant l'utilisation de la procédure et les modifications apportées à la base de données depuis sa création se trouve {baseURL}/raw/v6/docs/bd/Utilisation%20de%20la%20proc%C3%A9dure%20et%20modifications.pdf[ici]
+- Le document concernant l'utilisation de la procédure et les modifications apportées à la base de données depuis sa création se trouve {baseURL}/raw/master/docs/bd/Utilisation%20de%20la%20proc%C3%A9dure%20et%20modifications.pdf[ici]
 
 
 === Évaluations hebdomadaires
@@ -215,12 +217,12 @@ US : ok mais il manque encore les finalités pour certaines : en tant que .... j
 
 === IoT
 
-Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/blob/v6/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/v6/docs/python/python_tech.adoc#tests[ici].
+Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/blob/master/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc#tests[ici].
 
 === Site web
 
-Vous pouvez retrouver les tests du site web {baseURL}/blob/v6/tests/php/tests-php.adoc[ici].
+Vous pouvez retrouver les tests du site web {baseURL}/blob/master/tests/php/tests-php.adoc[ici].
 
 === Base de données
 
-Des scripts de test pour le trigger et la procédure sont disponible {baseURL}/blob/v6/tests/bd/Procédure%20Commander.sql[ici] et {baseURL}/blob/v6/tests/bd/Trigger%20t_i_quantite.sql[ici]
+Des scripts de test pour le trigger et la procédure sont disponible {baseURL}/blob/master/tests/bd/Procédure%20Commander.sql[ici] et {baseURL}/blob/master/tests/bd/Trigger%20t_i_quantite.sql[ici]
