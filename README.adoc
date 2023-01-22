@@ -138,6 +138,8 @@ Sources de la version 6 : {baseURL}/tree/v6/app/php/[ici]
 
 - Code commenté du développement en semaine 2 : {baseURL}/raw/v6/docs/php/D%C3%A9veloppement%20semaine%202.pdf[ici]
 
+- Analyse d'impact : https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/blob/master/docs/php/Analyse%20impact.pdf[ici]
+
 === Base de données
 
 - Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/v6/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
