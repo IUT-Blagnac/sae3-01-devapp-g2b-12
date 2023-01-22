@@ -20,44 +20,166 @@
 
 toc::[]
 
-== Rédacteurs
+== Équipe
 
-Documentation rédigée par :
+- https://github.com/PattateDouce[Rémy Guibert]
+- https://github.com/Falettiattendre[Léo Faletti]
+- https://github.com/ludovic-estival[Ludovic Estival]
 
-* Rémy GUIBERT
+== Contexte
 
-== Utilisation
+Cette documentation présente l'aspect technique de l'application Java, servant à afficher des données issues de capteurs, situés dans un entrepôt, via des graphiques.
+Elle dispose aussi d'une partie de configuration des données à afficher.
+Son but est donc d'assurer un bon stockage des produits de l'entrepôt, et d'éviter les pertes.
 
-Cette application sert à afficher des données reçues pour le programme Python et a les affichées sous forme de graphiques.
+L'application est a destination des personnes surveillant les stocks dans les entrepôts.
 
-Elle dispose d'une interface pour paramétrer le comportement de l'application Python et d'elle même, pour cela référez-vous à la section {baseURL}/blob/master/docs/java/java_tech.adoc#modification%20de%20la%20configuration[Modification de la configuration].
+Cette application a été conçue pour fonctionner avec une {baseURL}/blob/master/app/python/main.py[autre application], écrite en Python, celle-ci servant à récupérer les données des capteurs et à les enregistrer dans un fichier `data.json`, ce dernier étant lu par l'application Java pour mettre à jour les graphiques.
+Le configuration des applications est possible via l'application Java, qui permet de la modifier de façon simple et de la sauvegarder dans un fichier `config.json`.
 
-Pour utiliser ce programme assurez-vous d'avoir installé le logiciel listé dans la partie `Installation` juste en dessous, ensuite il faut simplement double cliquer sur le fichier.
+== Installation
 
-=== Installation
+=== Standalone (autonome)
 
-==== Standalone
+L'application nécessite Java 8 ainsi que JavaFX 8, pour avoir cela il faut installer le JRE 8 officiel d'Oracle :
 
-L'application nécessite Java 8 ainsi que JavaFX 8, pour avori cela il faut installer le JRE officiel d'Oracle disponible https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247136_10e8cce67c7843478f41411b7003171c[ici].
+- https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247947_0ae14417abb444ebb02b9815e2103550[Windows 64 bits]
 
-==== Pour Eclipse
+- https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247939_0ae14417abb444ebb02b9815e2103550[Mac OS X 64 bits]
 
-Pour travailler sur l'application avec Eclipse, il faut d'abord installer l'extension `E(fx)clipe` via l'`Eclipse Marketplace`, ensuite il faut créer un projet JavaFX, y retirer le code par défaut et y copier les dossiers `lib` et `src` de {baseURL}/tree/master/app/java/[ce dossier], 
+- https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247938_0ae14417abb444ebb02b9815e2103550[Linux 64 bits]
 
-=== Erreurs
+Une fois le JRE 8 installé vous devriez pouvoir lancer l'application en double-cliquant sur le JAR ou en exécutant la commande `java -jar main.jar`.
 
-=== Lancement
+=== Eclipse
 
-=== Fonctionnalités
+Pour travailler sur l'application avec Eclipse, il faut d'abord installer l'extension `E(fx)clipe` via l'Eclipse Marketplace, ensuite il faut créer un projet JavaFX avec Java 8, y retirer le code par défaut et y copier les dossiers `lib` et `src` de {baseURL}/tree/master/app/java/[ce dossier], il faut aussi ajouter le JRE 8 dans les paramètre d'Eclipse.
 
-==== Modification de la configuration
+Afin de créer des vues efficacement, il faut installer SceneBuilder pour Java 8, vous trouverez les fichiers d'installation en bas de https://gluonhq.com/products/scene-builder/#download[cette page], vous devez choisir celui qui correspond à votre OS.
 
-==== Affichage des données
+Ensuite vous devez configurer SceneBuilder dans Eclipse en allant dans `Window` -> `Preferences` -> `JavaFX` -> `SceneBuilder executable` et y selectionner l'exécutable de SceneBuilder que vous venez d'installer.
+
+Vous êtes fin près pour développer cette application.
 
 == Architecture de l'application
 
-=== Packages
+=== Générale
 
-=== Diagramme de classe
+==== Diagramme de classe
 
-=== Rôle des classes
+image::{baseURL}/raw/master/docs/java/Diagramme%20de%20classe.svg[Diagramme de classe de l'application Java,600,701]
+
+==== Rôle des classes
+
+- `Launch` : classe qui est appellée au démarrage de l'application et qui sert à charger la vue et le controlleur, ainsi qu'a mettre fin au thread lorsque l'on ferme l'application.
+
+- `DetailSurvolePoint` : classe servant à afficher la valeur exacte d'un point lorsqu'on le survole avec la souris
+
+- `MainFrameController` : contrôleur de l'application, gérant les fonctionnalités de l'application : le chargement de la configuration, l'enregistrement de la configuration et l'affichage des valeurs via des graphiques.
+
+==== Autres fichiers
+
+Icône de l'application : `icon.png`
+
+Vue de l'application : `MainFrame.fxml`
+
+Fichier de configuration : `config.json`, fichier créé par l'application Java
+
+Fichier de données : `data.json`, fichier créé par l'application Python
+
+=== Ressources externes
+
+Notre application ne dépend que d'une bibliothèque externe, le reste est disponible de le JRE 8 officiel.
+
+==== GSON
+
+Cette bibliothèque sert à gérer des données JSON avec Java.
+
+Version utilisée : 2.10
+
+Code source : https://github.com/google/gson[GitHub]
+
+Documentation : https://www.javadoc.io/doc/com.google.code.gson/gson/2.10/com.google.gson/module-summary.html[JavaDoc]
+
+=== Structuration en packages
+
+Notre application est structurée en trois packages :
+
+- `Package par défaut` : classe principale et icône
+  * Launch.java
+  * icon.png
+
+- `model` : classe réutilisée par le contrôleur
+  * DetailSurvolePoint.java
+
+- `view` : fichier de vue et son contrôleur
+  * MainFrameController.java
+  * MainFrame.fxml
+
+==== MVC
+
+Pour notre application, nous avons utiliser le pattern MVC (Modèle-Vue-Contrôleur) car c'est celui que nous connaissions le mieux, nous avons qu'une seule vue donc un seul contrôleur et avons créé qu'un seul modèle, voici les fichiers impliqués :
+
+- `Modèle` : DetailSurvolePoint.java
+
+- `Vue` : MainFrame.fxml
+
+- `Contrôleur` : MainFrameController.java
+
+=== Éléments essentiels
+
+L'application est réalisée avec Java 8 car cela permet une plus grande compatibilité, puisque la version par défaut fournie par Oracle et téléchargée sur le plus grand nombre de PC est la 8, qui embarque JavaFX 8.
+
+== Fonctionnalités
+
+==== Chargement de la configuration
+
+===== Classes impliquées
+
+Dans le package `view` : `MainFrameController`.
+
+===== Éléments essentiels
+
+Le chargement de la configuration s'effectue automatiquement pendant l'appel de `initialize(...)`.
+
+La méthode impliquée est `loadConfig()`, dans un premier temps on essai de lire le fichier de configuration, si ce n'est pas possible alors on affiche un message à l'écran de l'utilisateur indiquant qu'il n'y a pas de configuration, mais cela n'empêche pas l'application de se lancer, car on peut tout de même créer une configuration via l'interface.
+
+Dans le cas où l'application parvient à lire le fichier, on récupère dans des variables les 6 valeurs du fichier (les capteurs, les données voulues, les valeurs maximales, la fréquence de rafraîchissement, le nom du serveur et son port) et pour chacune on modifie la vue en conséquence, pour les données voulues on créer un graphique, pour la fréquence on change la valeur du TextField, etc, et finallement on programme le thread en fonction de la fréquence voulue.
+
+Lors qu'on modifie la configuration via l'interface et qu'on enregistre, la vue est réinitialisée avant d'être chargée, cela est fait par la méthode `clearView()` qui vide les objets et les éléments de la vue afin de revenir à l'état lors que l'application s'est affichée pour la première fois.
+
+==== Enregistrement de la configuration
+
+===== Classes impliquées
+
+Dans le package `view` : `MainFrameController`.
+
+===== Éléments essentiels
+
+La méthode impliquée est `saveConfig()`, elle est appellée lorsqu'on clique sur le bouton d'enregistrement, cette méthode fait l'inverse de `loadConfig()`, c'est-à-dire qu'elle créer des objets JSON à partir des éléments de la vue, et fini par enregistrer cette nouvelle configuration dans le fichier `config.json`.
+
+Dans le cas où la vue a une valeur incorrecte, alors elle est remplacée par une valeur pas défaut.
+
+==== Affichage des données
+
+===== Classes impliquées
+
+Dans le package `view` : `MainFrameController`.
+
+Dans la classe `MainFrameController` du package `view` : `ChartUpdater`.
+
+===== Éléments essentiels
+
+Les graphiques sont créés lors du chargement, par la méthode `loadConfig()`, puis ils sont mis à jour par la classe `ChartUpdater`, qui lit le fichier de données `data.json`, et ajoute chaque nouvelle valeur dans le graphique correspondant, l'ajout de la donnée dans le graphique se fait avec `Platform.runLater()` afin d'être réalisé par le thread JavaFX.
+
+==== Affichage détaillé d'une donnée
+
+===== Classes impliquées
+
+Dans la classe `MainFrameController` du package `view` : `ChartUpdater`.
+
+Dans le package `model` : `DetailSurvolePoint`.
+
+===== Éléments essentiels
+
+Lors de la création d'un nouveau point, on lui associe une nouvel objet `DetailSurvolePoint` en lui spécifiant la valeur du point, cet objet crée un Label, qui sera affiché lorsqu'on survolera le point et disparaîtra lorsqu'on ne le survolera plus.
