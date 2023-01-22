@@ -1,0 +1,45 @@
+@startuml SAE DevApp Application Java groupe 12
+
+class Application {
+}
+
+class Launch {
+	-ctrl: MainFrameController
+	+{static} main(args: String[]): void
+	+start(stage: Stage): void
+	+stop(): void
+}
+
+class StackPane {
+}
+
+class DetailSurvolePoint {
+	+DetailSurvolePoint(value: double)
+	-createLabel(value: double): Label
+}
+
+interface Initializable {
+}
+
+class MainFrameController {
+	-chartUpdater: TimerTask
+	-scheduler: Timer
+	-config: JsonObject
+    -+30 other fields
+	+initialize(location: URL, resources: ResourceBundle): void
+	-loadConfig(): void
+	-saveConfig(): void
+	-clearView(): void
+	-createDevice(event: ActionEvent, value: String, button: String): void
+	-deleteDevice(event: ActionEvent): void
+	-onActionCheckBox(event: ActionEvent): void
+	+cancelScheduling(): void
+}
+
+Application <|-- Launch
+StackPane <|-- DetailSurvolePoint
+Initializable <|.. MainFrameController
+MainFrameController <.. Launch
+DetailSurvolePoint <.. MainFrameController
+
+@enduml
