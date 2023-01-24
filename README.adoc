@@ -90,7 +90,7 @@ Pour exécuter cette application il vous faut deux fichiers :
 
 IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
-Sources de la version 6 :
+Sources de la version 7 :
 
 - {baseURL}/tree/master/app/java/src/[Java]
 - {baseURL}/tree/master/app/python/[Python]
@@ -102,7 +102,7 @@ Lien du site web :
 - http://192.168.224.139/~SAESYS12/[Réseau filaire de l'IUT] 
 - http://193.54.227.164/~SAESYS12/[Autre réseau]
 
-Sources de la version 6 : {baseURL}/tree/master/app/php/[ici]
+Sources de la version 7 : {baseURL}/tree/master/app/php/[ici]
 
 === Base de données
 
