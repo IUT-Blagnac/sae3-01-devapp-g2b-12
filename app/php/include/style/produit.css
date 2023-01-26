@@ -16,13 +16,12 @@
 
 .consultation img{
     border-radius: 20px;
-    object-fit: cover;
-    object-position: center;
     height: 400px;
     width: 400px;
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
+    border: 1px solid #fff0;
 }
 
 .description-produit{

@@ -115,7 +115,7 @@ body {
     color: black;
     background-color: #bbb7b7;
     border-radius: 20px;
-    width: calc(300px + 1.5em);
+    width: calc(250px + 1.5em);
     transition: .2s;
 }
 .boite-produit:hover {
@@ -126,12 +126,13 @@ body {
 .produit {
     padding: .5em;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 .produit img {
     border-radius: 20px;
-    height: 300px;
-    width: 300px;
+    border: 1px solid #fff0;
+    height: 250px;
+    width: 250px;
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Panier</title>
-    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
     <link rel="stylesheet" href="include/style/general.css">
     <link rel="stylesheet" href="include/style/panier.css">
     <script type="text/javascript">
@@ -108,7 +108,7 @@
             while(($donnees2 = oci_fetch_assoc($article)) != false){
                 $nomProduit = $donnees2["NOM"];
                 $idCateg = $donnees2["IDCATEGORIE"];
-                $prix = $donnees2["PRIX"];
+                $prix = $donnees2["PRIX"] * (1-($donnees2["SOLDE"]/100));
             }
 
             oci_free_statement($article);
@@ -125,17 +125,21 @@
 
             oci_free_statement($categ);
 
-            //Regex pour remplacer les espaces du nom du produit
-            $nomRegex = preg_replace('" "', '%20', $nomProduit);
-            $lien = $nomRegex . '.png';
+            if (file_exists("uploads/img/produit/".$nomProduit.".png")) {
+                //Regex pour remplacer les espaces du nom du produit
+                $nomRegex = "produit/".preg_replace('" "', '%20', $nomProduit);
+            } else {
+                $nomRegex = "inconnu";
+            }
+            $lien = "uploads/img/".$nomRegex.".png";
 
             //Affichage du produit
             $tableauPanier .= "<table class='panier-table'> 
                             <tr> 
-                                <td style='background-color: #bbb7b7'> <img src='img/" . $lien ."' alt='image article' width='70%' height='70%'> </td>
+                                <td style='background-color: #bbb7b7'> <img src='" . $lien ."' alt='image article' width='70%' height='70%'> </td>
                                 <td> <p style='text-align: center;'>" . $nomProduit . "</p> </td>
                                 <td> <p style='text-align: center;'>" . $nomCategorie . "</p> </td>
-                                <td> <a style='margin-left: 30%;' href=\"panier.php?suppr=$idProd\"><img src='img/icon/retirer_du_panier.png' id='icon'></a> </td>
+                                <td> <a style='margin-left: 30%;' href=\"panier.php?suppr=$idProd\"><img src='uploads/img/icon/retirer_du_panier.png' id='icon'></a> </td>
                                 <td> 
                                     <form method='post' action='panier.php'>
                                         <input type='number' min='1' value='" . $quantiteProduit ."' name='nvlle-qt'>
@@ -191,7 +195,7 @@
 
             while(($donnees = oci_fetch_assoc($produit)) != false){
                 $idCategorie = $donnees["IDCATEGORIE"];
-                $prix = $donnees["PRIX"];
+                $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
                 $nom = $donnees["NOM"];
             }
 
@@ -205,18 +209,22 @@
                 $nomCategorie = $donnees["NOM"];
             }
 
-            //Regex pour remplacer les espaces du nom du produit
-            $nomRegex = preg_replace('" "', '%20', $nom);
-            $lien = $nomRegex . '.png';
+            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                //Regex pour remplacer les espaces du nom du produit
+                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+            } else {
+                $nomRegex = "inconnu";
+            }
+            $lien = "uploads/img/".$nomRegex.".png";
 
             //Affichage du produit
 
             $tableauPanier .= "<table class='panier-table'> 
                                 <tr> 
-                                    <td style='background-color: #bbb7b7'> <img src='img/" . $lien ."' alt='image article' width='70%' height='70%'> </td>
+                                    <td style='background-color: #bbb7b7'> <img src='" . $lien ."' alt='image article' width='70%' height='70%'> </td>
                                     <td> <p style='text-align: center;'>" . $nom . "</p> </td>
                                     <td> <p style='text-align: center;'>" . $nomCategorie . "</p> </td>
-                                    <td> <a style='margin-left: 30%;' href=\"panier.php?suppr=$idProduit\"><img src='img/icon/retirer_du_panier.png' id='icon'></a> </td>
+                                    <td> <a style='margin-left: 30%;' href=\"panier.php?suppr=$idProduit\"><img src='uploads/img/icon/retirer_du_panier.png' id='icon'></a> </td>
                                     <td> 
                                         <form method='post' action='panier.php'>
                                             <input type='number' min='1' value='" . $quantiteProduit ."' name='nvlle-qt'>
@@ -262,7 +270,7 @@
             while(($donnees = oci_fetch_assoc($article)) != false){
                 $nom = $donnees["NOM"];
                 $idCategorie = $donnees["IDCATEGORIE"];
-                $prix = $donnees["PRIX"];
+                $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
             }
             oci_free_statement($article);
 
@@ -276,18 +284,22 @@
             }
             oci_free_statement($categorie);
 
-            //Regex pour remplacer les espaces du nom du produit
-            $nomRegex = preg_replace('" "', '%20', $nom);
-            $lien = $nomRegex . '.png';
+            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                //Regex pour remplacer les espaces du nom du produit
+                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+            } else {
+                $nomRegex = "inconnu";
+            }
+            $lien = "uploads/img/".$nomRegex.".png";
 
             //Affichage du produit
 
             $tableauPanier .= "<table class='panier-table'> 
                                 <tr> 
-                                    <td style='background-color: #bbb7b7'> <img src='img/" . $lien ."' alt='image article' width='70%' height='70%'> </td>
+                                    <td style='background-color: #bbb7b7'> <img src='" . $lien ."' alt='image article' width='70%' height='70%'> </td>
                                     <td> <p style='text-align: center;'>" . $nom . "</p> </td>
                                     <td> <p style='text-align: center;'>" . $nomCategorie . "</p> </td>
-                                    <td> <a style='margin-left: 30%;' href=\"panier.php?suppr=$idProduit\"><img src='img/icon/retirer_du_panier.png' id='icon'></a> </td>
+                                    <td> <a style='margin-left: 30%;' href=\"panier.php?suppr=$idProduit\"><img src='uploads/img/icon/retirer_du_panier.png' id='icon'></a> </td>
                                     <td> 
                                         <form method='post' action='panier.php'>
                                             <input type='number' min='1' value='" . $quantiteProduit ."' name='nvlle-qt'>

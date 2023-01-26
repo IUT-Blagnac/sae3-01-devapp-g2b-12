@@ -42,14 +42,14 @@ if(!isset($_SESSION["panier"])){
 
 <nav>
     <div class="haut">
-        <a href="index.php"><img src="img/icon/logo.png" alt="Logo LéguMania" class="item"></a>
+        <a href="index.php"><img src="uploads/img/icon/logo.png" alt="Logo LéguMania" class="item"></a>
         <a href="index.php"><h1 class="item">LéguMania</h1></a>
 
         <form action="recherche.php" method="post" class="item search">
-            <input type="text" placeholder="Recherchez ici" name="search"><button type="submit" name="valider"><img src="img/icon/loupe.png" height="13px"></button>
+            <input type="text" placeholder="Recherchez ici" name="search"><button type="submit" name="valider"><img src="uploads/img/icon/loupe.png" height="13px"></button>
         </form>
 
-        <a href="panier.php"><img src="img/icon/panier.png" alt="Icône panier" class="panier"></a>
+        <a href="panier.php"><img src="uploads/img/icon/panier.png" alt="Icône panier" class="panier"></a>
 
         <div>
           <a href="monCompte.php">

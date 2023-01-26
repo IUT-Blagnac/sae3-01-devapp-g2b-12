@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Mon compte</title>
-    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
     <link rel="stylesheet" href="include/style/general.css">
     <link rel="stylesheet" href="include/style/monCompte.css">
 </head>

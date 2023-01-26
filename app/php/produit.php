@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Consultation d'un produit</title>
-	<link rel="icon" type="image/png" href="img/icon/favicon.png">
+	<link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
 	<link rel="stylesheet" href="include/style/general.css">
 	<link rel="stylesheet" href="include/style/produit.css">
 </head>
@@ -25,16 +25,17 @@
 			$idclient = $donnees["IDCLIENT"];
 			$description = $donnees["DESCRIPTION"];
 			$poids = $donnees["POIDS"];
-			$prix = $donnees["PRIX"];
+			// change le prix en fonction du % soldé
+			$prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
 			$region = $donnees["REGION"];
 			$nomCategorie = $donnees["NOM"];
 
 			oci_free_statement($reqprep);
 
-			if (file_exists("img/".$nom.".png")) {
-				$image = $nom.".png";
+			if (file_exists("uploads/img/produit/".$nom.".png")) {
+				$image = "produit/".$nom;
 			} else {
-				$image = "produit/inconnu.png";
+				$image = "inconnu";
 			}
 			
 		} else {
@@ -52,7 +53,7 @@
 		<p id="titreProduitConsultation"><?php echo $nom; ?></p>
 		<div class="consultation">
 
-			<img src="img/vide.png" style="background-image: url('img/<?php echo $image ?>');" alt="image produit">
+			<img style="background-image: url('uploads/img/<?php echo $image ?>.png');">
 
 			<div class="description-produit">
 				
@@ -64,17 +65,20 @@
 
 				<div class="consultation-bouttons">
 					<form method="post" action="panier.php">
-						<!-- Champ caché pour envoyer l'id du produit -->
-						<input type="hidden" name="id-produit" value= <?php echo $id; ?>>
-						<label for="quantite">Quantité</label>
-						<input type="number" id="quantite" min="1" name="quantite" value="1">
-						<p><?php
-							if ($_SESSION["idClient"] != $idclient) {
+						<?php
+							if ((isset($_SESSION["idClient"]) && $_SESSION["idClient"] != $idclient) or !isset($_SESSION["idClient"])) {
+								echo "<!-- Champ caché pour envoyer l'id du produit -->";
+								echo '<input type="hidden" name="id-produit" value='.$id.'>';
+								echo '<label for="quantite">Quantité</label>';
+								echo '<input type="number" id="quantite" min="1" name="quantite" value="1">';
+							}
+						?>
+						<p></p>
+						<?php
+							if ((isset($_SESSION["idClient"]) && $_SESSION["idClient"] != $idclient) or !isset($_SESSION["idClient"])) {
 								echo '<input type="submit" name="valider" value="Ajouter au panier" class="bouton-vert">';
 							}
-						?></p>
-						
-						<?php
+
 							if (!empty($_SESSION["agriculteur"]) && !empty($_SESSION["idClient"]) && $_SESSION["agriculteur"] == "1" && $_SESSION["idClient"] == $idclient) {
 								echo '<a href="listeProduitMisEnVente.php?idprod='.$id.'#highlighted" id="bouton-jaune">Gérer votre produit</a>';
 							}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Recherche de produit</title>
-    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
     <link rel="stylesheet" href="include/style/general.css">
     <link rel="stylesheet" href="include/style/recherche.css">
 </head>
@@ -23,6 +23,8 @@
         unset($_SESSION["recherche-categorie"]);
         unset($_SESSION["affichage-recherche"]);
         unset($_SESSION["idCat"]);
+        //unset($_SESSION["rechercheBio"]);
+        $_SESSION["rechercheBio"] = false;
         $_SESSION["tab-categorie"] = array();
 
         // L'utilisateur a entré un mot-clé
@@ -53,7 +55,7 @@
             oci_bind_by_name($categories, ":nom", $nomCategorie);
             $result = oci_execute($categories);
 
-            $affichage = "<div class='saison-ligne'>";
+            $affichage = "<div class='flex-row'>";
             $cpt = 0;
 
             // On entre dans cette boucle uniquement si le mot-clé saisi est une catégorie
@@ -67,14 +69,14 @@
                 $_SESSION["idCat"] = $idCateg;  // Sert uniquement pour la recherche categorie + bio
                
                 if($_SESSION["rechercheBio"] == true){
-                    $req = "Select * from Produit Where idcategorie = :id and nom like :nom";
+                    $req = "Select * from Produit Where idcategorie = :id and nom like :nom and stock > 0";
                     $nomProduit = "%" . "bio" . "%";
                     $produits = oci_parse($connect, $req);
                     oci_bind_by_name($produits, ":id", $idCateg);
                     oci_bind_by_name($produits, ":nom", $nomProduit);
                 }
                 else{
-                    $req = "Select * from Produit Where idcategorie = :id";
+                    $req = "Select * from Produit Where idcategorie = :id and stock > 0";
                     $produits = oci_parse($connect, $req);
                     oci_bind_by_name($produits, ":id", $idCateg);
 
@@ -87,26 +89,40 @@
                 while(($donnees2 = oci_fetch_assoc($produits)) != false) {
 
                     $nom = $donnees2["NOM"];
-                    $prix = $donnees2["PRIX"];
+                    $prix = $donnees2["PRIX"] * (1-($donnees2["SOLDE"]/100));
 
-                    if($cpt != 4){
+                    if($cpt != 6){
 
-                        $nomRegex = preg_replace('" "', '%20', $nom);
-                        $image = $nomRegex.'.png';
-                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+                        if (file_exists("uploads/img/produit/".$nom.".png")) {
+                            $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                        } else {
+                            $nomRegex = "inconnu";
+                        }
+                        $image = "uploads/img/".$nomRegex.".png";
 
-                        $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        $affichage = $affichage."
+                            <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                <div class='produit'>
+                                    <img style='background-image: url(\"".$image."\")'>
+                                    <p>".$nom."</p>
+                                    <strong>".$prix." €</strong>
+                                </div>
+                            </a>";
 
                         $cpt++;
                     }
                     else{
                         // On ferme la ligne et on en crée une nouvelle
-                        $affichage = $affichage.'</div> <div class="saison-ligne">';
+                        $affichage = $affichage.'</div> <div class="flex-row">';
 
-                        $nomRegex = preg_replace('" "', '%20', $nom);
-                        $image = $nomRegex.'.png';
-                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
+                        if (file_exists("uploads/img/produit/".$nom.".png")) {
+                            $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                        } else {
+                            $nomRegex = "inconnu";
+                        }
+                        $image = "uploads/img/".$nomRegex.".png";
 
+                        $lien = "<a href='produit.php?nom=$nomRegex'> <img src='$image'> </a>";
                         $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
 
                         $cpt = 1;
@@ -130,7 +146,7 @@
 
                 // Recherche des produits bio d'une catégorie
                 if($_SESSION["rechercheBio"] == true && isset($_SESSION["idCat"])){
-                    $req = "Select * from Produit Where nom like :nom and idcategorie = :id";
+                    $req = "Select * from Produit Where nom like :nom and idcategorie = :id and stock > 0";
                     $produits = oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%";
                     oci_bind_by_name($produits, ":nom", $nomProduit);
@@ -141,7 +157,7 @@
                     // Recherche d'un produit bio
                     if($_SESSION["rechercheBio"] == true){
 
-                        $req = "Select * from Produit Where nom like :nom";
+                        $req = "Select * from Produit Where nom like :nom and stock > 0";
                         $produits = oci_parse($connect, $req);
                         $nomProduit = "%" . $nom . "%" . "bio";
                         oci_bind_by_name($produits, ":nom", $nomProduit);
@@ -150,7 +166,7 @@
                     else{
 
                         // Recherche uniquement sur le nom
-                        $req = "Select * from Produit Where nom like :nom";
+                        $req = "Select * from Produit Where nom like :nom and stock > 0";
                         $produits = oci_parse($connect, $req);
                         $nomProduit = "%" . $nom . "%";
                         oci_bind_by_name($produits, ":nom", $nomProduit);
@@ -168,32 +184,50 @@
                 }
                 else{
                     // On crée un compteur pour faire des lignes de 4 produits
-                    $affichage = "<div class='saison-ligne'>";
+                    $affichage = "<div class='flex-row'>";
                     $cpt = 0;
 
                     while(($donnees = oci_fetch_assoc($produits)) != false) {
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
 
-                        if($cpt != 4){
+                        if($cpt != 6){
 
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
 
                             $cpt++;
                         }
                         else{
                             // On ferme la ligne et on en crée une nouvelle
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
 
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
 
                             $cpt = 1;
                         } 
@@ -206,20 +240,22 @@
     // Accès à la page depuis le formulaire des filtres
     // Le traitement change si l'utilisateur a entré ou non un mot-clé
     // Recherche non bio
-    if(isset($_POST["validerForm"]) && $_SESSION["rechercheBio"] = false){
+   
+    if(isset($_POST["validerForm"]) && $_SESSION["rechercheBio"] == false){
 
-        $affichage = "<div class='saison-ligne'>";
+        $affichage = "<div class='flex-row'>";
         $cpt = 0;
 
         // L'utilisateur a cherché une catégorie
         // Il filtre par région
+
         if(isset($_SESSION["recherche-categorie"])){
-        
+            
             if($_POST["region"] != ""){
 
                 $_SESSION["affichage-recherche"].= " + " . $_POST["region"];
                 foreach($_SESSION["tab-categorie"] as $id){
-                    $req = "Select * from Produit Where idcategorie = :id and region = :region";
+                    $req = "Select * from Produit Where idcategorie = :id and region = :region and stock > 0";
                     $produit = oci_parse($connect, $req);
                     oci_bind_by_name($produit, ":id", $id);
                     oci_bind_by_name($produit, ":region", $_POST["region"]);
@@ -228,24 +264,42 @@
                     while(($donnees = oci_fetch_assoc($produit)) != false){
 
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         }  
@@ -257,7 +311,6 @@
         // L'utilisateur a cherché un produit
         // Il peut filtrer par région et catégorie
         if(isset($_SESSION["recherche-produit"])){
-           
             if($_SESSION["recherche-produit"] != ""){
                 $nom = $_SESSION["recherche-produit"];
                 $filtre = "";
@@ -276,7 +329,7 @@
     
                 // Si l'utilisateur filtre sur la région
                 if($_POST["categorie"] == '' && $_POST["region"] != ''){
-                    $req = "Select * from Produit Where region = :nomR and nom like :nomP";
+                    $req = "Select * from Produit Where region = :nomR and nom like :nomP and stock > 0";
                     $filtre = oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%";
                     oci_bind_by_name($filtre, ":nomR", $_POST["region"]);
@@ -286,7 +339,7 @@
     
                 // Si l'utilisateur filtre sur la catégorie
                 if($_POST["categorie"] != '' && $_POST["region"] == ''){
-                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP";
+                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and stock > 0";
                     $filtre= oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%";
                     oci_bind_by_name($filtre, ":idC", $idCateg);
@@ -296,7 +349,7 @@
     
                 // Si l'utilisateur filtre sur la catégorie et la région
                 if($_POST["categorie"] != '' && $_POST["region"] != ''){
-                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and region = :nomR";
+                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and region = :nomR and stock > 0";
                     $filtre= oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%";
                     oci_bind_by_name($filtre, ":idC", $idCateg);
@@ -312,29 +365,47 @@
                     oci_free_statement($filtre);
                 }
                 else{
-                    $affichage = "<div class='saison-ligne'>";
+                    $affichage = "<div class='flex-row'>";
                     $cpt = 0;
                         
                     while(($donnees = oci_fetch_assoc($filtre)) != false) {
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         } 
@@ -349,7 +420,7 @@
 
             // Si l'utilisateur n'a pas entré de mot-clé et recherche par région
             if($_POST["categorie"] == '' && $_POST["region"] != ''){
-                $req = "Select * from Produit Where region = :nomR";
+                $req = "Select * from Produit Where region = :nomR and stock > 0";
                 $produit = oci_parse($connect, $req);
                 oci_bind_by_name($produit, ":nomR", $_POST["region"]);
                 $_SESSION["affichage-recherche"] = $_POST["region"];
@@ -360,28 +431,46 @@
                     oci_free_statement($produit);
                 }
                 else{
-                    $affichage = "<div class='saison-ligne'>";
+                    $affichage = "<div class='flex-row'>";
                     $cpt = 0;
                     while(($donnees = oci_fetch_assoc($produit)) != false) {
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         } 
@@ -403,7 +492,7 @@
                 $idCategorie = $donnees["IDCATEGORIE"]; 
                 oci_free_statement($categorie);
 
-                $req = "Select * from Produit Where idcategorie = :idCat";
+                $req = "Select * from Produit Where idcategorie = :idCat and stock > 0";
                 $produit = oci_parse($connect, $req);
                 oci_bind_by_name($produit, ":idCat", $idCategorie);
 
@@ -413,28 +502,46 @@
                     oci_free_statement($produit);
                 }
                 else{
-                    $affichage = "<div class='saison-ligne'>";
+                    $affichage = "<div class='flex-row'>";
                     $cpt = 0;
                     while(($donnees = oci_fetch_assoc($produit)) != false) {
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         } 
@@ -457,7 +564,7 @@
                 $idCategorie = $donnees["IDCATEGORIE"]; 
                 oci_free_statement($categorie);
 
-                $req = "Select * from Produit Where region = :nomR and idcategorie = :idCat";
+                $req = "Select * from Produit Where region = :nomR and idcategorie = :idCat and stock > 0";
                 $produit = oci_parse($connect, $req);
                 oci_bind_by_name($produit, ":nomR", $_POST["region"]);
                 oci_bind_by_name($produit, ":idCat", $idCategorie);
@@ -467,28 +574,46 @@
                     oci_free_statement($produit);
                 }
                 else{
-                    $affichage = "<div class='saison-ligne'>";
+                    $affichage = "<div class='flex-row'>";
                     $cpt = 0;
                     while(($donnees = oci_fetch_assoc($produit)) != false) {
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         } 
@@ -502,9 +627,9 @@
 
     // Accès à la page depuis le formulaire des filtres
     // Recherche bio
-    if(isset($_POST["validerForm"]) && $_SESSION["rechercheBio"] = true){
+    if(isset($_POST["validerForm"]) && $_SESSION["rechercheBio"] == true){
 
-        $affichage = "<div class='saison-ligne'>";
+        $affichage = "<div class='flex-row'>";
         $cpt = 0;
 
         // L'utilisateur a cherché une catégorie
@@ -515,7 +640,7 @@
 
                 $_SESSION["affichage-recherche"].= " + " . $_POST["region"];
                 foreach($_SESSION["tab-categorie"] as $id){
-                    $req = "Select * from Produit Where idcategorie = :id and region = :region and nom like :nom";
+                    $req = "Select * from Produit Where idcategorie = :id and region = :region and nom like :nom and stock > 0";
                     $produit = oci_parse($connect, $req);
                     $nomP = "%" . "bio" . "%";
                     oci_bind_by_name($produit, ":id", $id);
@@ -526,24 +651,42 @@
                     while(($donnees = oci_fetch_assoc($produit)) != false){
 
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         }  
@@ -574,7 +717,7 @@
     
                 // Si l'utilisateur filtre sur la région
                 if($_POST["categorie"] == '' && $_POST["region"] != ''){
-                    $req = "Select * from Produit Where region = :nomR and nom like :nomP";
+                    $req = "Select * from Produit Where region = :nomR and nom like :nomP and stock > 0";
                     $filtre = oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%" . "bio";
                     oci_bind_by_name($filtre, ":nomR", $_POST["region"]);
@@ -584,7 +727,7 @@
     
                 // Si l'utilisateur filtre sur la catégorie
                 if($_POST["categorie"] != '' && $_POST["region"] == ''){
-                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP";
+                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and stock > 0";
                     $filtre= oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%" . "bio";
                     oci_bind_by_name($filtre, ":idC", $idCateg);
@@ -594,7 +737,7 @@
     
                 // Si l'utilisateur filtre sur la catégorie et la région
                 if($_POST["categorie"] != '' && $_POST["region"] != ''){
-                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and region = :nomR";
+                    $req = "Select * from Produit Where idcategorie = :idC and nom like :nomP and region = :nomR and stock > 0";
                     $filtre= oci_parse($connect, $req);
                     $nomProduit = "%" . $nom . "%" . "bio";
                     oci_bind_by_name($filtre, ":idC", $idCateg);
@@ -610,29 +753,47 @@
                     oci_free_statement($filtre);
                 }
                 else{
-                    $affichage = "<div class='saison-ligne'>";
+                    $affichage = "<div class='flex-row'>";
                     $cpt = 0;
                         
                     while(($donnees = oci_fetch_assoc($filtre)) != false) {
                         $nom = $donnees["NOM"];
-                        $prix = $donnees["PRIX"];
+                        $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
     
-                        if($cpt != 4){
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . '€</p></div>';
+                        if($cpt != 6){
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
                             $cpt++;
                         }
                         else{
-                            $affichage = $affichage.'</div> <div class="saison-ligne">';
+                            $affichage = $affichage.'</div> <div class="flex-row">';
     
-                            $nomRegex = preg_replace('" "', '%20', $nom);
-                            $image = $nomRegex.'.png';
-                            $lien = "<a href='produit.php?nom=$nomRegex'> <img src='img/$image'> </a>";
-    
-                            $affichage = $affichage . '<div class="produit">' . $lien . '<p>' . $nom . '</p> <p>' . $prix . ' €</p></div>';
+                            if (file_exists("uploads/img/produit/".$nom.".png")) {
+                                $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
+                            } else {
+                                $nomRegex = "inconnu";
+                            }
+                            $image = "uploads/img/".$nomRegex.".png";
+                            $affichage = $affichage."
+                                <a href='produit.php?nom=".$nom."' class='boite-produit'>
+                                    <div class='produit'>
+                                        <img style='background-image: url(\"".$image."\")'>
+                                        <p>".$nom."</p>
+                                        <strong>".$prix." €</strong>
+                                    </div>
+                                </a>";
     
                             $cpt = 1;
                         } 

@@ -23,6 +23,11 @@
 		error_reporting(22527);
 		if ($result) {
 			oci_free_statement($reqprep);
+			// supprime l'image du produit si il y en a une
+			$nom = htmlspecialchars($_POST["nom"]);
+			if (file_exists("uploads/img/produit/".$nom.".png")) {
+				unlink("uploads/img/produit/".$nom.".png");
+			}
 			header("location: listeProduitMisEnVente.php");
 			die();
 		} else {
@@ -44,7 +49,7 @@
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
-	<link rel="icon" type="image/png" href="img/icon/favicon.png">
+	<link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
 	<link rel="stylesheet" href="include/style/general.css">
 	<link rel="stylesheet" href="include/style/gestionProduit.css">
 </head>
@@ -102,8 +107,10 @@
 			if (!preg_match("#^\S.{0,126}\S$#", $region)) {
 				$_SESSION["erreur"] = "Le région doit être compris entre 2 et 128 charactères, et ne doit pas commencer ou finir par un espace blanc.";
 			}
-			if ($image["error"] != 0 || !in_array($imageinfo["extension"], $allowed_extensions) || $image["size"] > 1000000) {
-				$_SESSION["erreur"] = "L'image s'est mal envoyée ou elle n'est pas d'un type autorisé ou alors sa taille est supérieur à 1 000 000 octets autorisés.";
+			if ($image["size"] > 0) {
+				if ($image["error"] != 0 || !in_array($imageinfo["extension"], $allowed_extensions) || $image["size"] > 1000000) {
+					$_SESSION["erreur"] = "L'image s'est mal envoyée ou elle n'est pas d'un type autorisé ou alors sa taille est supérieur à 1 000 000 octets autorisés.";
+				}
 			}
 
 			// si il n'y a pas eu d'erreur
@@ -111,6 +118,17 @@
 				// insertion ou mise à jour
 				if ($mode == "U") {
 					$idproduit = htmlspecialchars($_POST["idprod"]);
+					// récupère l'ancien nom dans le cas où le nom du produit change
+					$req = "SELECT NOM FROM PRODUIT WHERE IDPRODUIT = :idprod";
+					$reqprep = oci_parse($connect, $req);
+					oci_bind_by_name($reqprep, ":idprod", $idproduit);
+					error_reporting(0);
+					$result = oci_execute($reqprep);
+					error_reporting(22527);
+					while (($donnees = oci_fetch_assoc($reqprep)) != false) {
+						$ancien_nom = $donnees["NOM"];
+					}
+					// requête d'insertion
 					$req = "UPDATE PRODUIT SET IDCATEGORIE = :idcat, NOM = :nom, DESCRIPTION = :description, POIDS = :poids, PRIX = :prix, STOCK = :stock, SOLDE = :solde, REGION = :region WHERE IDCLIENT = :idclient AND IDPRODUIT = :idprod";
 					$reqprep = oci_parse($connect, $req);
 					oci_bind_by_name($reqprep, ":idprod", $idproduit);
@@ -132,11 +150,19 @@
 				error_reporting(22527);
 				if ($result) {
 					oci_free_statement($reqprep);
-					// enregistre l'image
-					copy($image["tmp_name"], "uploads/".$nom.".png");
+					if ($mode == "U") {
+						// change le nom de l'image si le nom du produit change
+						if ($ancien_nom != $nom && file_exists("uploads/img/produit/".$ancien_nom.".png")) {
+							rename("uploads/img/produit/".$ancien_nom.".png", "uploads/img/produit/".$nom.".png");
+						}
+					}
+					// enregistre/écrase l'image si l'agriculteur en fourni une
+					if ($image["size"] > 0) {
+						copy($image["tmp_name"], "uploads/img/produit/".$nom.".png");
+					}
 					// redirige
 					if ($mode == "U") {
-						header("location: listeProduitMisEnVente.php");
+						header("location: listeProduitMisEnVente.php?idprod=".$idproduit."#highlighted");
 					} else {
 						header("location: produit.php?nom=".$nom);
 					}
@@ -219,7 +245,7 @@
 					</div>
 
 					<label for="img">Image du produit</label>
-					<input type="file" name="image" id="img" accept="image/png, image/jpeg, image/webp" required>
+					<input type="file" name="image" id="img" accept="image/png, image/jpeg, image/webp">
 					<label for="region">Région d'origine</label>
 					<select name="region" id="region" required>
 						<option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Inscription</title>
-  <link rel="icon" type="image/png" href="img/icon/favicon.png">
+  <link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
   <link rel="stylesheet" href="include/style/general.css">
   <link rel="stylesheet" href="include/style/inscription.css">
   

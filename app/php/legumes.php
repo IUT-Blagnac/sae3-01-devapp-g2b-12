@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Nos légumes</title>
-    <link rel="icon" type="image/png" href="img/icon/favicon.png">
+    <link rel="icon" type="image/png" href="uploads/img/icon/favicon.png">
     <link rel="stylesheet" href="include/style/general.css">
-    <link rel="stylesheet" href="include/style/legumes.css">
 </head>
 
 <?php
@@ -18,7 +17,7 @@
 
 // Requête pour récupérer l'ensemble des produits
 
-    $req = "Select * from Produit Where (idcategorie = 4 or idcategorie = 5 or idcategorie = 6 or idcategorie = 7 or idcategorie = 8 or idcategorie = 9 or idcategorie = 10 or idcategorie = 11) and stock > 0";
+    $req = "Select * from Produit Where (idcategorie = 1 or idcategorie = 4 or idcategorie = 5 or idcategorie = 6 or idcategorie = 7 or idcategorie = 8 or idcategorie = 9 or idcategorie = 10 or idcategorie = 11) and stock > 0";
     $produit = oci_parse($connect, $req);
     $result = oci_execute($produit);
 
@@ -34,24 +33,25 @@
 
         while(($donnees = oci_fetch_assoc($produit)) != false) {
             $nom = $donnees["NOM"];
-            $prix = $donnees["PRIX"];
+            // change le prix en fonction du % soldé
+            $prix = $donnees["PRIX"] * (1-($donnees["SOLDE"]/100));
 
-            if($cpt != 4){
+            if($cpt != 6){
 
                 // On remplace les espaces dans le nom du produit par leur code pour créer un lien valide
                 // Oignon rouge --> Oignon%20rouge
 
-                if (file_exists("img/".$nom.".png")) {
-                    $nomRegex = preg_replace('" "', '%20', $nom);
+                if (file_exists("uploads/img/produit/".$nom.".png")) {
+                    $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
                 } else {
-                    $nomRegex = "produit/inconnu";
+                    $nomRegex = "inconnu";
                 }
-                $image = "img/".$nomRegex.".png";
+                $image = "uploads/img/".$nomRegex.".png";
 
                 $affichage = $affichage."
                     <a href='produit.php?nom=".$nom."' class='boite-produit'>
                         <div class='produit'>
-                            <img src='img/vide.png' style='background-image: url(\"".$image."\")'>
+                            <img style='background-image: url(\"".$image."\")'>
                             <p>".$nom."</p>
                             <strong>".$prix." €</strong>
                         </div>
@@ -65,17 +65,17 @@
 
                 $affichage = $affichage.'</div> <div class="flex-row">';
 
-                if (file_exists("img/".$nom.".png")) {
-                    $nomRegex = preg_replace('" "', '%20', $nom);
+                if (file_exists("uploads/img/produit/".$nom.".png")) {
+                    $nomRegex = "produit/".preg_replace('" "', '%20', $nom);
                 } else {
-                    $nomRegex = "produit/inconnu";
+                    $nomRegex = "inconnu";
                 }
-                $image = "img/".$nomRegex.".png";
+                $image = "uploads/img/".$nomRegex.".png";
 
                 $affichage = $affichage."
                     <a href='produit.php?nom=".$nom."' class='boite-produit'>
                         <div class='produit'>
-                            <img src='img/vide.png' style='background-image: url(\"".$image."\")'>
+                            <img style='background-image: url(\"".$image."\")'>
                             <p>".$nom."</p>
                             <strong>".$prix." €</strong>
                         </div>
