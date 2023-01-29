@@ -1,0 +1,52 @@
+form{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+
+.panier-table{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.panier-table table{
+    border: 1px solid;
+}
+
+.panier-table td{
+    border: 1px solid;
+    width: 20%;
+}
+
+.panier-table img {
+    height: 75px;
+    width: 75px;
+}
+
+img#icon {
+    height: 48px;
+    width: 48px;
+}
+
+.panier-form-column{
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+}
+
+.panier-form-column #prix-panier{
+    margin-top: 20%;
+    font-size: 20px;
+}
+
+.panier-form-column input[type=submit]{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}

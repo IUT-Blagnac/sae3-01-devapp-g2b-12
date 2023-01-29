@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="575.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainFrameController">
+   <children>
+      <Text layoutX="15.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Configuration de l'application">
+         <font>
+            <Font name="DejaVu Sans Condensed Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="25.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capteurs">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <ScrollPane fx:id="devicesSP" layoutX="84.0" layoutY="41.0" prefHeight="83.0" prefWidth="200.0">
+        <content>
+          <AnchorPane fx:id="devicesAP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="175.0" />
+        </content>
+      </ScrollPane>
+      <Text layoutX="25.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Données">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <Text layoutX="235.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valeurs max">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="tvocCB" layoutX="35.0" layoutY="170.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Composants organiques volatils">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="tvocV" disable="true" layoutX="230.0" layoutY="167.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppb">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="activityCB" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Activité">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="activityV" disable="true" layoutX="230.0" layoutY="192.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <CheckBox fx:id="illuminationCB" layoutX="35.0" layoutY="220.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Éclairage">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="illuminationV" disable="true" layoutX="230.0" layoutY="217.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="co2CB" layoutX="35.0" layoutY="245.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Concentration en CO2">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="co2V" disable="true" layoutX="230.0" layoutY="242.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ppm">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="temperatureCB" layoutX="35.0" layoutY="270.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Température ambiante">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="temperatureV" disable="true" layoutX="230.0" layoutY="267.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="°C">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="humidityCB" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Taux d'humidité">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="humidityV" disable="true" layoutX="230.0" layoutY="292.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RH">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="infraredAndVisibleCB" layoutX="35.0" layoutY="320.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge et lumière visible">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="infraredAndVisibleV" disable="true" layoutX="230.0" layoutY="317.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="infraredCB" layoutX="35.0" layoutY="345.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Infrarouge">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="infraredV" disable="true" layoutX="230.0" layoutY="342.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lux">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <CheckBox fx:id="pressureCB" layoutX="35.0" layoutY="370.0" mnemonicParsing="false" onAction="#onActionCheckBox" text="Pression atmosphérique">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></CheckBox>
+      <TextField fx:id="pressureV" disable="true" layoutX="230.0" layoutY="367.0" prefHeight="25.0" prefWidth="50.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="283.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hPa">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <Text layoutX="25.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fréquence">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <TextField fx:id="frequencyV" layoutX="91.0" layoutY="406.0" prefHeight="25.0" prefWidth="45.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="143.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minute(s)">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <Text layoutX="25.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serveur">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <TextField fx:id="hostV" layoutX="91.0" layoutY="442.0" prefHeight="25.0" prefWidth="190.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Text layoutX="27.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Text>
+      <TextField fx:id="portV" layoutX="91.0" layoutY="478.0" prefHeight="25.0" prefWidth="45.0">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></TextField>
+      <Button layoutX="90.0" layoutY="529.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="150.0" text="Enregistrer et appliquer">
+         <font>
+            <Font name="DejaVu Sans Condensed" size="12.0" />
+         </font></Button>
+      <Text layoutX="324.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphiques des données">
+         <font>
+            <Font name="DejaVu Sans Condensed Bold" size="12.0" />
+         </font>
+      </Text>
+      <GridPane fx:id="graphGP" layoutX="300.0" layoutY="44.0" prefHeight="525.0" prefWidth="750.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

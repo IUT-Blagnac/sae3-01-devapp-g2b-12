@@ -1,0 +1,199 @@
+//----------------------------------------
+
+// Table of content
+:toc: macro
+:toc-title: Sommaire
+:numbered:
+
+// Icons
+:tip-caption: :bulb:
+:note-caption: :paperclip:
+:warning-caption: :warning:
+:important-caption: :exclamation:
+:caution-caption: :fire:
+
+:baseURL: https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12
+:mainpy: {baseURL}/blob/master/app/python/main.py
+
+//----------------------------------------
+
+= Documentation technique V2 de l'application Python
+
+<<<
+
+toc::[]
+
+<<<
+
+== Équipe
+
+- https://github.com/PattateDouce[Rémy Guibert]
+- https://github.com/Falettiattendre[Léo Faletti]
+- https://github.com/ludovic-estival[Ludovic Estival]
+
+== Contexte
+
+Ce programme sert à enregistrer des informations récupérées de capteurs d'un réseau MQTT et à alerter de dépassement de seuils.
+
+On peut paramétrer sont comportement, pour cela référez-vous à la section <<Configuration>>.
+
+== Structure du code
+
+- {mainpy}#L1-L5[Lignes 1 à 5] : imports des bibliothèques nécessaires au fonctionnement du programme.
+- {mainpy}#L7-L44[Lignes 7 à 44] : chargement du fichier de configuration et vérification de son intégrité.
+- {mainpy}#L46-L62[Lignes 46 à 62] : initialisation de variables pour stocker les données reçus et afficher les messages de dépassement de valeur de seuil.
+- {mainpy}#L65-L79[Lignes 65 à 79] : fonction "on_connecte" s'occupant de s'abonner au capteurs.
+- {mainpy}#L82-L97[Lignes 82 à 97] : focntion "on_message" s'occupant d'enregistrer (dans la mémoire du programme) les données reçues.
+- {mainpy}#L100-L127[Lignes 100 à 127] : fonction "save_data" s'occupant d'afficher les dépassements de valeur et de sauvegarde les données dans un fichier
+- {mainpy}#L130-L144[Lignes 130 à 144] : création du client MQTT
+
+== Installation
+
+IMPORTANT: Ce programme ne fonctionne que sur les systèmes UNIX, car il utilise le signal SIGALRM, voir https://docs.python.org/3.10/library/signal.html#signal.alarm[cette page] pour plus d'informations.
+
+=== IntelliJ IDEA
+
+Ce programme est codé en Python, il vous faut donc installer Python, ouvrez un terminal et entrez-y la commande suivante `sudo apt install python3`.
+
+Lancer IntelliJ IDAE et aller dans l'onglet `Plugins`, puis dans le sous onglet `Marketplace` situé en haut de l'écran, cherchez-y `python` et installez le plugin nommé `Python Community Edition`.
+
+Une fois installé vous pouvez créer un nouveau projet en allant dans l'onglet `Projects` et en appuyant sur le bouton `New Project`.
+
+Ceci ouvrira une fenêtre de configuration qui vous permettra de configurer l'IDE sur Python en le sélectionnant dans la liste `Language`, il faut sélectionner `New` pour l'environnement et `VirtualEnv` pour le type d'environnement, à côté de 'Base interpreter' vous devez sélectionner `/usr/bin/python3` et finallement appuyer sur `Create` afin de créer un projet vierge.
+
+Une fois le projet créé, vous pouvez mettre le fichier {baseURL}/raw/master/app/python/main.py[main.py] (clique droit et `Enregistrer sous` pour l'enregistrer) dans le dossier du projet, accessible en faisant un clique droit sur le nom du projet en haut à gauche, en passnt sa souris sur `Open In` puis sur `File Manager`, ceci ouvrira le gestionnaire de fichier qui vous permettra de mettre le fichier Python.
+
+Après avoir mis le fichier vous pouvez retourner sur IntelliJ IDEA et oubrir `Python Packages`, situé en bas de la fenêtre, dans la barre de recherche tappez `paho-mqtt` et installer le paquet portant ce nom, avec le bouton `Install package` à droite.
+
+Vous pouvez maintenant passer à la section <<Utilisation>> qui vous permettra de lancer le programme.
+
+=== Standalone (autonome)
+
+Ce programme est codé en Python, il vous faut donc installer Python, ouvrez un terminal et entrez-y la commande suivante `sudo apt install python3`.
+
+Ensuite entrez la commande `pip install paho-mqtt`, cela installera la bibliothèque nécessaire au fonctionnement du programme.
+
+Vous pouvez maintenant passer à la section <<Utilisation>> qui vous permettra de lancer le programme.
+
+== Utilisation
+
+Pour utiliser ce programme assurez-vous qu'un fichier de configuration bien formaté se trouve dans le même répertoire, vous pouvez utilisé {baseURL}/raw/master/app/python/config.json[celui-ci] (clique droit et `Enregistrer sous` pour l'enregistrer), ou voir la section <<Configuration>> pour en créer une vous-même.
+
+=== Lancement
+
+Une fois l'installation terminée vous pouvez lancer le programme sans soucis avec la commande : `python3 main.py` ou en faisant un clique droit sur le fichier `main.py` à gauche de la fenêtre suivi d'un clic sur `Run main`.
+
+À la connexion au serveur MQTT le programme affichera un message.
+
+Le programme affichera aussi un message au cas où une donnée dépasse sa valeur maximale, indiquant quelle donnée à dépassée son seuil et de combien.
+
+Les données reçues des capteurs sont enregistrées dans le fichier `data.json` dans un object JSON sous la forme `"<nom_donnée>" : <valeur_donnée>`, où `<nom_donnée>` est le nom technique de la donnée (voir section <<Donnée(s)>> et `<valeur_donnée>` est la valeur envoyés d'un capteur pouvant être un nombre entier ou décimal.
+
+=== Erreurs possibles
+
+Le programme est fait pour ne pas fonctionner dans le cas où le fichier de configuration n'existe pas, si le script n'a pas le droit de le lire ou si il n'est pas correctement formaté.
+
+Il affichera dans la console le message suivant : `Le fichier de configuration ("config.json") est manquant, le script n'a pas le droit de lecture ou la configuration est mal écrite.`.
+
+Il est aussi programmé pour se fermer dans le cas où un fichier `data.json` existe mais qu'il est incapable d'écrire dedans.
+
+Dans ce cas le programme affichera le message : `Le fichier de données ("data.json") existe mais le script n'a pas le droit d'écriture sur le fichier.`.
+
+À part ces deux cas il ne devrait pas y avoir d'erreurs.
+
+== Configuration
+
+Le programme est configurable via le fichier `config.json`.
+
+Ce fichier permet de paramétrer 6 options correspondant à 6 couples clé-valeur dans l'objet JSON :
+
+|===
+| Clé | Valeur | Type Valeur | Configurable via l'application Java
+
+| `devices` | Quels capteurs doivent être pris en comptes | Liste de chaînes | Oui
+| `data_wanted` | Quelles données seront enregistrées | Liste de chaînes | Oui
+| `alert_values` | Pour chaque donnée, son seuil d'alerte | Liste de nombres | Oui
+| `frequency`| Fréquence en minutes à laquelle les données sont enregistrées | Entier | Oui
+| `host`| Nom de domaine du serveur MQTT | Chaîne | Oui
+| `port`| Port du serveur MQTT | Entier | Oui
+|===
+
+=== Appareil(s)
+
+Pour paramétrer de quel(s) appareil(s) on récupère les informations il faut changer la valeur de `devices`.
+
+Cette valeur doit être une liste d'une ou plusieurs chaînes.
+
+Les chaînes correspondent à l'adresse MAC d'un capteur.
+
+Pour prendre en compte les données de tous les capteurs il suffit de mette `"#"` dans cette liste.
+
+=== Donnée(s)
+
+Le programme est capable d'extraire 9 données des capteurs :
+
+|===
+| Nom | Valeur | Unité
+
+| `activity` | Activité dans un rayon de 5 mètre autour du capteur | Pas d'unité (valeur de 0 à 65535)
+| `co2` | Concentration en CO2 | ppm
+| `humidity` | Taux d'humidité | RH
+| `illumination` | Éclairage | lux
+| `infrared`| Infrarouge | lux
+| `infrared_and_visible`| Infrarouge et lumière visible | lux
+| `pressure`| Pression atmosphérique | hPa
+| `temperature`| Température ambiante | °C
+| `tvoc`| Composants organiques volatils | ppb
+|===
+
+Pour paramétrer quelles données sont prisent en compte il faut changer la valeur de `data_wanted`.
+
+Cette valeur doit être une liste d'une ou plusieurs chaînes.
+
+Les chaînes correspondent au nom d'une donnée dans le tableau ci-dessus.
+
+=== Valeur(s) max
+
+Chaque valeur ajoutée dans `data_wanted` doit avoir une valeur max.
+
+La valeur max peut être un nombre entier ou décimal.
+
+La première valeur de la liste `alert_values` correspond à la valeur max pour la première donnée de `data_wanted`, la deuxième valeur à la deuxième donnée, etc.
+
+=== Fréquence
+
+Pour paramétrer à quelle fréquence les données sont enregistrées il faut changer la valeur de `frequency`.
+
+Cette valeur doit être un entier.
+
+Cela correspond au nombre de minute entre chaque enregistrement.
+
+Si la valeur est mise à `0` il n'y aura pas de délai avant chaque enregistrement.
+
+Si aucune données n'a été reçues avant le premier enregistrement, les informations voulues seront enregistrées à `0`.
+
+=== Hôte
+
+Le nom de domaine du serveur MQTT peut être paramétré en changeant la valeur de `host`.
+
+Par défaut il est paramétré sur `chirpstack.iut-blagnac.fr`.
+
+=== Port
+
+Le port du serveur MQTT peut être paramétré en changeant la valeur de `port`.
+
+Le port par défaut est `1883`.
+
+== Tests
+
+Les fichiers de test sont dans un répertoire différent se trouvant {baseURL}/tree/master/tests/python[ici].
+
+Ce répertoire contient 3 fichiers de configurations, servant à tester différentes choses, et le programme Python modifié pour pouvoir tester son fonctionnement.
+
+Pour vérifier que les données sont biens issues des capteurs demandés, le nom du capteur est affihcer à l'écran lorsque le script reçoit des données, de cette manière on peut vérifier avec la configuration si sela correspond bien.
+
+Pour vérifier que les données reçues sont biens celles demandées, lorsqu'un capteurs envoit des données elles sont affichées à l'écran avec leurs valeurs, à ce moment là on peut vérifier avec la configuration si c'est bien celles demandées.
+
+Les valeurs d'alerte sont affiché à l'écran lors d'un enregistrement, de cette magnière on peut vérifier avec la configuration si c'est bien celles définies.
+
+Lors d'un enregistrement, comme lorsque des données sont reçues, l'heure, les minutes et les secondes sont affichés, on peut alors regarder les différents moment où il y a eu un enregistrement et vérifier avec la configuration qu'il y a bien le bon nombre de minute entre chaque enregistrement.

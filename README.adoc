@@ -1,106 +1,228 @@
-= SAÉ 3.01 2022-2023
-:icons: font
-:models: models
-:experimental:
-:incremental:
-:numbered:
+//----------------------------------------
+
+// Table of content
 :toc: macro
-:window: _blank
-:correction!:
+:toc-title: Sommaire
+:numbered:
 
-// Useful definitions
-:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
-:icongit: icon:git[]
-:git: http://git-scm.com/[{icongit}]
-:plantuml: https://plantuml.com/fr/[plantUML]
-:vscode: https://code.visualstudio.com/[VS Code]
-
-ifndef::env-github[:icons: font]
-// Specific to GitHub
-ifdef::env-github[]
-:correction:
-:!toc-title:
-:caution-caption: :fire:
-:important-caption: :exclamation:
-:note-caption: :paperclip:
+// Icons
 :tip-caption: :bulb:
+:note-caption: :paperclip:
 :warning-caption: :warning:
-:icongit: Git
-endif::[]
+:important-caption: :exclamation:
+:caution-caption: :fire:
 
-// /!\ A MODIFIER !!!
-:baseURL: https://github.com/IUT-Blagnac/sae3-01-template
+:baseURL: https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12
+
+//----------------------------------------
+
+= SAÉ 3.01 2022-2023
 
 // Tags
-image:{baseURL}/actions/workflows/blank.yml/badge.svg[Bidon] 
-image:{baseURL}/actions/workflows/build.yml/badge.svg[Build] 
-image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests] 
-image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License: MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
-//---------------------------------------------------------------
+image:{baseURL}/actions/workflows/codeql-python.yml/badge.svg[Quality Python]
+image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 
-TIP: Pensez à mettre à jour les infos dans ce fichier pour que les badges pointent sur les résultats effectifs de vos intégrations continue ou sur la bonne licence logicielle.
+TIP: Ce dépôt présente le projet développé dans le cadre de la SAÉ 3.01 du BUT 2 Informatique de l'IUT de Blagnac.
 
-WARNING: Ce dépôt présente le projet à développer dans le cadre de la SAÉ 3.01 du BUT1 Informatique de l'IUT de Blagnac.
-
-Ce fichier `README.adoc` (dont vous lisez sûrement le rendu HTML automatiquement effectué par GitHUb), fait partie du dépôt initial cloné à partir du lien GitHub classroom qui vous a été donné en cours (https://classroom.github.com/a/OUF7gxEa).
-Vous trouverez le dépôt "template" qui a servi de base ici : https://github.com/IUT-Blagnac/sae3-01-template. En complément du cours Moodle de la SAE 3.01 (cf. <<liensUtiles>>), ce dépôt template vous permet d'accéder à des exemples d'https://github.com/IUT-Blagnac/sae3-01-template/issues[issues], de https://github.com/IUT-Blagnac/sae3-01-template/releases[releases], ou d'autres artefacts à venir.
+- Version courante : {baseURL}/releases/tag/v7[v7]
+- User Stories : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3AUS[ici], reste 0 % (0/18)
+- Tâches : {baseURL}/issues?q=is%3Aopen+is%3Aissue+label%3ATâche[ici], reste 0 % (0/24)
+- Backlog produit et backlog de sprint : https://github.com/orgs/IUT-Blagnac/projects/23[ici]
 
 toc::[]
 
-== Equipe
+== Équipe
 
-Projet est réalisé par::
+Projet réalisé par :
 
-- https://github.com/janeDoe[Jane Doe]
-- https://github.com/johnSmith[John Smith]
-...
+- https://github.com/PattateDouce[Rémy Guibert]
+- https://github.com/Falettiattendre[Léo Faletti]
+- https://github.com/ludovic-estival[Ludovic Estival]
 
-Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
+Tuteur enseignant de l’équipe :
 
-== Contexte général
+- mailto:teste@irit.fr[Olivier Teste]
 
-TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
+== Hiérarchie du dépôt
 
-=== Dépôt initial
+- `.gitignore` => fichier des éléments à ne pas pousser (en général) sur le dépôt
+- `.github` => répertoire qui contient des éléments de gestion de projet :
+** `ISSUE_TEMPLATE` => repertoire qui contient quelques templates pour les issues :
+*** `us.yml` => template pour les User Stories
+*** `bug.yml` => template pour les issues de bug report
+** `workflows` => repertoire qui contient les actions à lancer à chaque push sur le repo :
+*** `codeql-python.yml` => script pour analyser l'application Python avec https://docs.github.com/fr/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql[CodeQL]
+- `app` => répertoire contenant le code des applications :
+** `bd` => scripts SQL de la BD
+** `java` => code de l'application Java
+** `php` => sources du site web
+** `python` => code de l'application Python
+- `docs` => répertoire contenant les documents/documentations :
+** `moa` => documents de la MOA
+** `bd` => documents en lien avec la base de données
+** `java` => documentation utilisateur et technique de l'application Java
+** `php` => documents en lien avec le site web
+** `python` => documentation technique de l'application Python
+- `tests` => répertoire contenant les tests :
+** `bd` => script de test de la procédure et du trigger
+** `php` => tests en lien avec le site web
+** `python` => version de test de l'application Python
 
-Ce dépôt initial a été créé pour que tous les groupes de 2ème année aient les mêmes informations de départ.
 
-Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pas utiles :
+== Applications
 
-- `.gitignore` => un fichier minimaliste des éléments à ne pas pousser en général sur vos dépôts (utiliser la commande `git add -f` pour forcer l'ajout d'un fichier Jar qui ne bougera plus, pour archive par exemple).
-- `.github` => le répertoire qui contient des éléments de gestion de projet :
-** `workflows` => le repertoire qui contient les actions à lancer à chaque push sur votre repo. 
-*** `blank.yml` => un exemple bidon mais dont vous pourrez vérifier l’exécution correcte (1er tag)
-** `ISSUE_TEMPLATE` => le repertoire qui contient quelques templates pour vos issues.
-*** `us.yml` => Exemple de template pour les User Stories
-*** `bug.yml` => Exemple de template pour les issues de bug report
+=== IoT
 
-TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-vous en pour en ajouter.
+Cette application donne les informations des capteurs de votre entrepôt via des graphiques.
 
-[[liensUtiles]]
-=== Liens utiles
+Vous pouvez configurer plusieurs choses :
 
-- Le https://webetud.iut-blagnac.fr/course/view.php?id=841[cours Moodle] sur la SAE
-- Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
-- Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
+- quels capteurs doivent être pris en comptes,
+- quelles données seront affichées,
+- pour chaque donnée, le seuil d'alerte,
+- et la fréquence à laquelle les données sont actualisées
 
-TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
+Pour exécuter cette application il vous faut deux fichiers :
 
-== Réalisations 
+- un fichier JAR a exécuter pour afficher les informations des capteurs : {baseURL}/raw/master/app/java/main.jar[main.jar]
 
-TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+- un fichier Python qui recouillera les données des capteurs : {baseURL}/blob/master/app/python/main.py[main.py]
 
-== Gestion de projet & Qualité
+IMPORTANT: Ces deux fichier doivent impérativement se trouver dans le même répertoire
 
-Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
-Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
+Sources de la version 7 :
 
-De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
+- {baseURL}/tree/master/app/java/src/[Java]
+- {baseURL}/tree/master/app/python/[Python]
 
-- Version courante : https://github.com/IUT-Blagnac/sae3-01-template/releases/tag/v0.1.2[v0.1.2]
-- Lien vers la doc technique
-- Lien vers la doc utilisateur
-- Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant
-- Tests unitaires et plans de test
-- Indicateurs de qualité du code (dette technique)
-- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
+=== Site web
+
+Lien du site web :
+
+- http://192.168.224.139/~SAESYS12/[Réseau filaire de l'IUT] 
+- http://193.54.227.164/~SAESYS12/[Autre réseau]
+
+Sources de la version 7 : {baseURL}/tree/master/app/php/[ici]
+
+=== Base de données
+
+- Le script de création de la base de données se trouve {baseURL}/blob/master/app/bd/Script%20de%20cr%C3%A9ation%20de%20la%20base.sql[ici].
+
+- Le script d'insertion dans la base de données se trouve {baseURL}/blob/master/app/bd/Script%20d%27insertion%20dans%20la%20base.sql[ici].
+
+- Le script de la procédure se trouve {baseURL}/blob/master/app/bd/Script%20de%20la%20procédure%20Commander.sql[ici].
+
+- Le script du trigger se trouve {baseURL}/blob/master/app/bd/Script%20du%20trigger%20t_i_quantite.sql[ici].
+
+== Documentations
+
+=== IoT
+
+- Documentation technique du programme Python : {baseURL}/blob/master/docs/python/doc_tech.adoc[ici]
+
+- Documentation technique de l'application Java : {baseURL}/blob/master/docs/java/doc_tech.adoc[ici]
+
+- Javadoc de l'application Java : https://IUT-Blagnac.github.io/sae3-01-devapp-g2b-12[ici]
+
+- Diagramme de classe : {baseURL}/blob/master/docs/java/Diagramme%20de%20classe.svg[ici]
+
+=== Site web
+
+- Documentation utilisateur finalisée : {baseURL}/raw/master/docs/php/Documentation%20utilisateur.pdf[ici]
+
+- Charte graphique : {baseURL}/raw/master/docs/php/Charte%20graphique.pdf[ici]
+
+- Schéma d'enchaînement des pages : {baseURL}/raw/master/docs/php/Schéma%20d%27Enchaînement%20des%20Pages.pdf[ici]
+
+- Code commenté de l'authentification : {baseURL}/raw/master/docs/php/Authentification.pdf[ici]
+
+- Code commenté consultation produits et modification compte : {baseURL}/raw/master/docs/php/Affichage%20produits%20et%20modification%20compte.pdf[ici]
+
+- Code commenté du développement en semaine 2 : {baseURL}/raw/master/docs/php/D%C3%A9veloppement%20semaine%202.pdf[ici]
+
+- Analyse d'impact : https://github.com/IUT-Blagnac/sae3-01-devapp-g2b-12/raw/master/docs/php/Analyse%20impact.pdf[ici]
+
+=== Base de données
+
+- Le diagramme de classes, le dictionnaire de données et le schéma relationnel sont regroupé dans {baseURL}/raw/master/docs/bd/Conception%20de%20la%20base%20de%20donn%C3%A9es.pdf[la conception de la base de données]
+
+- Le document de création et d'insertion se trouve {baseURL}/raw/master/docs/bd/Cr%C3%A9ation%20et%20insertion%20de%20la%20base.pdf[ici].
+
+- Le document concernant le trigger et la procédure se trouve {baseURL}/raw/master/docs/bd/Trigger%20et%20procédure.pdf[ici].
+
+- Le document concernant l'utilisation de la procédure et les modifications apportées à la base de données depuis sa création se trouve {baseURL}/raw/master/docs/bd/Utilisation%20de%20la%20proc%C3%A9dure%20et%20modifications.pdf[ici]
+
+
+=== Évaluations hebdomadaires
+
+NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
+
+ifdef::env-github[]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image]
+endif::[]
+
+ifndef::env-github[]
+++++
+<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=935875429&format=image"></iframe>
+++++
+endif::[]
+
+==== Retour Sprint 3
+
+Liens à jour dans le readme.
+
+Dans le Backlog revoir les US, il manque les priorités et la rédaction de la US.
+
+Différencier IOT et site WEB.
+
+Identifier les sprints.
+
+Identifier à quelle US se rattache une tâche.
+
+Release Ecommerce ?
+
+Rien sur les tests.
+
+==== Retour Sprint 4
+
+Documentations : J'ai un squelette vide, à compléter et versionner !
+
+Tests : ok
+
+Livrables : lien vers le site c'est bien, pensez à mettre un lien vers les codes sources versionnés. Je n'ai pas le lien pour IOT.
+
+Attention à partir de maintenant on ne fouille plus dans vos dépôts ! Il me manque donc les liens vers : les backlogs produits, les backlogs de sprint !!
+
+La numérotation des sprints suit ce que vous a dit M. Bruel on vient de terminer le sprint 4, on prévois le sprint 5. Pensez à garder une trace des sprints terminés dans Github !
+
+==== Retour Sprint 5
+
+Doc : pour le site Web faire 2 docs, une tech et une utilisateur versionnée, rien en IOT pour le moment.
+
+Il manque toujours le liens vers les backlog produits et sprint !!
+
+Test ok mais je n'ai pas de date de Mise à jour du document pour le site Web.
+
+J'ai pas de comits ... comment travaillez-vous depuis les vacances ???
+
+==== Retour Sprint 6
+
+Doc : Pensez au sommaire et à numéroter les paragraphes dans les docs.
+
+Manque IOT Release Web commenté OK.
+
+US : ok mais il manque encore les finalités pour certaines : en tant que .... je veux ... afin de .... Les US doivent être déclinées en tâches/Issues dans les spints.
+
+== Tests
+
+=== IoT
+
+Pour la partie Python les tests sont implémentés dans un autre script, se trouvant {baseURL}/blob/master/tests/python/main-test.py[ici], les tests sont expliqués dans la documentation technique, {baseURL}/blob/master/docs/python/python_tech.adoc#tests[ici].
+
+=== Site web
+
+Vous pouvez retrouver les tests du site web {baseURL}/blob/master/tests/php/tests-php.adoc[ici].
+
+=== Base de données
+
+Des scripts de test pour le trigger et la procédure sont disponible {baseURL}/blob/master/tests/bd/Procédure%20Commander.sql[ici] et {baseURL}/blob/master/tests/bd/Trigger%20t_i_quantite.sql[ici]

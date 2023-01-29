@@ -1,0 +1,123 @@
+.boite-contour{
+    width: 700px;
+    height: 325px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+}
+
+.texte-contour{
+    width:150px;
+    height: 22px;
+}
+
+form{
+    margin-top: 20px;
+    display: flex;
+}
+
+.gauche {
+    width: 350px;
+    margin-left: 60px;
+    
+}
+
+.gauche input{
+    width: 200px;
+    margin-top: 5px;
+}
+
+.droite {
+    width: 350px;
+    display: block;
+    float: right;
+}
+
+.ins-nom{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+.ins-prenom{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.ins-emailadress{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.ins-mdp{
+    display: flex;
+    flex-direction: column;
+}
+
+.ins-mdp input{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    width: 250px;
+}
+
+.ins-confirmMdp{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.ins-confirmMdp input{
+    margin-top: 5px;
+    width: 250px;
+}
+
+#check{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    margin-top: 15px;
+    height: 55px;
+}
+
+#check p{
+    display: flex;
+    margin-top: -4px;
+}
+
+#check input[type=checkbox]{
+    width: 22px;
+    height: 22px;
+    margin: 0px;
+}
+
+#check label{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+
+#bouton-jaune {
+    margin-top: 40px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.blabla{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.conditions{
+    border: solid 2px;
+    border-radius: 20px;;
+    margin: 3%;
+}
+
+#check-conditions{
+   display: inline-block;
+}

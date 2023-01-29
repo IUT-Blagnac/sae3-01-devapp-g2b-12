@@ -1,0 +1,71 @@
+.div-centree {
+	margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.consultation{
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 20px 50px;
+}
+
+.consultation img{
+    border-radius: 20px;
+    height: 400px;
+    width: 400px;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: 1px solid #fff0;
+}
+
+.description-produit{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+}
+
+#titreProduitConsultation{
+    font-size: 30px;
+}
+
+.consultation-bouttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.consultation-bouttons form{
+    align-items: center;
+}
+
+.consultation-bouttons form input{
+    margin: 5px;
+}
+
+.consultation-bouttons input[type=text]{
+    margin-right: 3%;
+}
+
+.consultation-bouttons input[type=button]{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #239e48;
+    color: white;
+    padding: 8px;
+    border-color: #239e48;
+    font-size: 18px;
+}
+/*.consultation-bouttons input[type=submit]{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #239e48;
+    color: white;
+    padding: 8px;
+    border-color: #239e48;
+    font-size: 18px;
+}*/

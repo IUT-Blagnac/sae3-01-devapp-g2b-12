@@ -1,0 +1,125 @@
+.boxInfos{
+    width: 600px;
+    height: 300px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    border-radius: 10px;
+    background-color: #edf4f2;
+    text-align: center;
+}
+
+#titreInfos{
+    display: block;
+    position: relative;
+    text-align: center;
+    font-family: calibri;
+    width: 250px;
+    height: 16px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -16px;
+    background: #fff;
+}
+
+#bouton-modifierCompte{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    height: 45px;
+    width: 255px;
+    font-size: 15px;
+    background-color: #f8a62c;
+    color: white;
+    padding: 8px;
+    border-color: #f8a62c;
+}
+
+#bouton-modifierCompte:hover {
+    background-color: #da9227;
+}
+
+#lien-modif{
+   text-decoration: none;
+}
+
+.nom-wrap{
+	display: flex;
+	margin-left: 75px;
+	margin-top: 30px;
+}
+
+#nomCompte{
+    display: block;
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+.prenom-wrap{
+	display: flex;
+	margin-left: 75px;
+	margin-top: 30px;
+}
+
+#prenomCompte{
+    display: block;
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+.email-wrap{
+	display: flex;
+	margin-left: 75px;
+	margin-top: 30px;
+}
+
+#emailCompte{
+    display: block;
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+#emailCompte label{
+    display: block;
+    margin-left: 75px;
+}
+
+#compteAgriculteur{
+    display: flex;
+    margin-left: 75px;
+    margin-top: 30px;
+}
+
+#bouton-consulter-produits {
+	display: block;
+	background-color: #13a527;
+    color: white;
+    border-width: 5px;
+    border-color: #13a527;
+    font-size: 15px;
+    width: 200px;
+    height: 50px;
+    padding: 10px 15px;
+    border-radius: 7px;
+    border-width: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    transition-duration: .20s;
+}
+
+#bouton-consulter-produits:hover {
+	background-color: #0b6116;
+}
+
+#lien-consult{
+	text-decoration: none;
+}
+
+.boutons {
+    margin-top: 30px;
+}

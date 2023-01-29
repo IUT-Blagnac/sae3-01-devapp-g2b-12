@@ -1,0 +1,141 @@
+= Tests du site web (dernière mise à jour le 14/01/23)
+:toc:
+:toc-title: Sommaire
+:numbered:
+
+== Introduction
+
+Tests rédigés par Ludovic Estival.
+Ces tests ont pour but de vérifier les fonctionnalités implémentées sur le site.
+
+
+== Test 1: connexion au site
+
+L'utilisateur entre son login (adresse-mail) et son mot de passe dans le formulaire de connexion.
+
+|=======
+|Test |Attendu |Résultat
+
+|Connexion avec compte client |Redirection vers accueil avec modification du header |Ok
+|Connexion avec compte agriculteur |Redirection vers accueil avec modification du header |Ok
+|Connexion avec compte inexistant |Redirection vers formulaire de connexion avec message d'erreur |Ok
+|=======
+
+== Test 2: déconnexion du site
+
+L'utilisateur appuie sur le bouton de déconnexion du header.
+
+|=======
+|Test |Attendu |Résultat
+
+|Déconnexion du site |Redirection vers accueil avec modification du header | Ok
+|=======
+
+== Test 3: inscription au site
+
+L'utilisateur entre différentes informations via un formulaire de création de compte.
+Les données entrées sont vérifiées par des expressions régulières pour valider ou non la création d'un compte.
+Ainsi, dans ce test, un compte peut être "correct" ou "incorrect".
+
+|=======
+|Test |Attendu |Résultat
+
+|Création compte client correct |Redirection vers accueil avec modification du header | Ok
+|Création compte agriculteur correct |Redirection vers accueil avec modification du header | Ok
+|Création compte incorrect |Redirection vers formulaire avec message d'erreur | Ok
+|=======
+
+== Test 4: rechercher un produit par son nom
+
+L'utilisateur entre le nom d'un produit dans la barre de recherche et appuie sur le bouton de recherche.
+
+|=======
+|Test |Attendu |Résultat
+
+|Saisie du nom d'un article présent dans la BD |Affichage page de résultat avec liste des produits correspondants| Ok
+|Saisie du nom d'un article non présent dans la BD |Affichage page de résultat vide| Ok
+|Aucune saisie de nom |Affichage page de résultat vide avec message| Ok
+|=======
+
+== Test 5: rechercher un produit avec des filtres de recherche
+
+Après la recherche par nom de produit, l'utilisateur peut filtrer les résultats de la recherche. Par exemple, il peut filtrer par sous-catégorie ou par région. Il peut utiliser ces filtres s'il a entré ou non un mot-clé dans la barre de recherche.
+
+|=======
+|Test |Attendu |Résultat
+
+|Recherche d'un produit existant puis filtre par région |Affichage des produits avec ce nom et dans cette région | Ok
+|Aucune saisie de nom puis filtre par région |Affichage de tous les produits dans cette région | Ok
+|Recherche d'un produit existant puis filtre par catégorie|Affichage des produits avec ce nom et la catégorie correspondante| Ok
+|Aucune saisie de nom puis filtre par catégorie |Affichage de tous les produits de cette catégorie | Ok
+|=======
+
+== Test 6: consulter la page d'un produit
+
+L'utilisateur peut accéder aux informations d'un produit en cliquant dessus.
+
+|=======
+|Test |Attendu |Résultat
+
+|Cliquer sur un produit|Ouverture de la page du produit|Ok
+|=======
+
+== Test 7: gestion et mise à jour du panier puis passage d'une commande
+
+L'utilisateur peut enregistrer plusieurs articles dans son panier. Il peut aussi supprimer des articles ou augmenter la quantité. Enfin il peut régler sa commande.
+
+|=======
+|Test |Attendu |Résultat
+
+|L'utilisateur consulte son panier|La page affiche les éléments du panier s'il y en a|Ok
+|Ajout d'un produit via le bouton "Ajouter au panier" depuis la page produit.php|Le produit est ajouté au panier et est visible |Ok
+|Modification de la quantité|Le panier est actualisé avec la nouvelle valeur de quantité |Ok
+|Suppression d'un produit|Le panier est actualisé. On ne voit plus le produit supprimé|Ok
+|L'utilisateur remplit son panier sans être connecté puis se connecte|Le panier doit être sauvegardé|Ok
+|Réglement d'une commande via un formulaire|La commande est réglée et enregistrée dans la base de données|Ok
+|=======
+
+== Test 8: mise à jour d'un compte
+
+Un utilisateur connecté, via un formulaire, peut modifier les informations de son compte.
+
+|=======
+|Test |Attendu |Résultat
+
+|Accès à la page de modification du compte depuis "Mon Compte"|Affichage du formulaire de modification du compte| Ok
+|Modifier les informations à l'aide du formulaire |Redirection vers la page "Mon Compte" avec session et BD mises à jour | Ok
+|Enregistrement avec des champs non remplis |Aucune redirection, indication du champ non remplit à l'utilisateur | Ok
+|=======
+
+== Test 9: un agriculteur peut ajouter ses produits sur le site
+
+Une fois connecté, un agriculteur peut remplir un formulaire pour ajouter ses produits sur le site.
+
+|=======
+|Test |Attendu |Résultat
+
+|Accès à la page en étant déconnecté|Redirection vers la page de connexion|OK
+|Accès à la page en étant connecté en tant que client basique|Redirection vers l'index|OK
+|Accès à la page en étant connecté en tant que agriculteur|Affichage de la page|OK
+|Remplir tout les champs correctement et appuyer sur le bouton de création|Redirection vers la page produit|OK
+|Remplir tout les champs avec des erreurs et appuyer sur le bouton de création|Affiche un message en rouge par rapport à l'erreur|OK
+|=======
+
+== Test 10: un agriculteur peut consulter et modifier les produits ajoutés
+
+Un agriculteur connecté peut accéder à la liste de ses produits et les modifier.
+
+|=======
+|Test |Attendu |Résultat
+
+|Accès à la page en étant déconnecté|Redirection vers la page de connexion|OK
+|Accès à la page en étant connecté en tant que client basique|Redirection vers l'index|OK
+|Accès à la page en étant connecté en tant que agriculteur|Affichage de la page|OK
+|La page liste tous les produits créés par l'agriculteur connecté|Affichage de la liste de tous les produits créés|OK
+|Création d'un nouveau produit|Le nouveau produit s'ajoute à la liste|OK
+|Appuie sur le bouton de suppression|Le produit est supprimé|OK
+|Appuie sur le bouton de suppression d'un produit commandé par des clients|Le produit n'est pas supprimé et un message s'affiche en rouge|OK
+|Appuie sur le bouton d'affichage d'un produit|La page du produit est affichée|OK
+|Appuie sur le bouton de modification d'un produit|L'agriculteur est redirigé vers une page de modification où il y a toutes les informations du produit affichées et il peut les modifier|OK
+|Accès à la page en ayant jamais créé de produit|La page indique que l'agriculteur n'a pas créé de produits|PAS OK
+|=======

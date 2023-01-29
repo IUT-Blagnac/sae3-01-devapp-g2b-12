@@ -1,0 +1,45 @@
+/* --- BASELINE --- */
+
+.baseline {
+    border-style: solid;
+    border-color: #bbbbbb;
+    border-radius: 20px;
+    background-image: url("../../uploads/img/baseline.jpg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 2.5vh 1vw;
+}
+
+.baseline h1 {
+    font-size: 1.8em;
+    margin: 5vh 3vw;
+    font-weight: bold;
+}
+
+.baseline p {
+    font-size: 1.4em;
+    margin: 5vh 3vw;
+}
+
+
+/* --- PRODUITS POPULAIRES --- */
+
+.populaire {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+/* --- PRODUITS DE SAISON --- */
+
+.titre {
+    font-size: 30px;
+    margin-top: .5em;
+    text-align: center;
+}
+
+.bouton-vert {
+    margin: 40px auto;
+}

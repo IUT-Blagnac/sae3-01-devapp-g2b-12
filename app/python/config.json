@@ -1,0 +1,18 @@
+{
+  "devices": [
+    "#"
+  ],
+  "data_wanted": [
+    "co2",
+    "temperature",
+    "humidity"
+  ],
+  "alert_values": [
+    0,
+    0,
+    0
+  ],
+  "frequency": 10,
+  "host": "chirpstack.iut-blagnac.fr",
+  "port": 1883
+}
