@@ -128,7 +128,7 @@ Sources de la version 7 : {baseURL}/tree/master/app/php/[ici]
 
 === Site web
 
-- Documentation utilisateur : {baseURL}/raw/master/docs/php/Documentation%20utilisateur.pdf[ici]
+- Documentation utilisateur finalisée : {baseURL}/raw/master/docs/php/Documentation%20utilisateur.pdf[ici]
 
 - Charte graphique : {baseURL}/raw/master/docs/php/Charte%20graphique.pdf[ici]
 
